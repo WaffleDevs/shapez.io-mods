@@ -1,0 +1,6 @@
+{
+    "name": "WackyEvents",
+    "description": "Uses RandomEventsLib to add several WaCkY eVeNtS.",
+    "version": "1.0.0",
+    "affectsSavegame": false
+}

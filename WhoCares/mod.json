@@ -1,0 +1,10 @@
+{
+    "name": "WhoCares",
+    "description": "Allows a savegame to load even if you are missing certain buildings.",
+    "version": "1.0.0",
+    "affectsSavegame": false,
+
+    "settings": {
+        "savedTruthyTables": {}
+    }
+}

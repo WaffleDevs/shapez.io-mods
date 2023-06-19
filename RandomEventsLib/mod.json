@@ -1,0 +1,15 @@
+{
+    "name": "RandomEventsLib",
+    "description": "A library allowing developers to add custom events to the game!",
+    "version": "1.0.0",
+    "affectsSavegame": false,
+
+    "settings": {
+        "seed": 0, 
+        "randomEventInterval": 30000, 
+        "stateEnterEventChance": 10, 
+        "closeGameChance": 1,
+        "disabledEvents": []
+    },
+    "extra": { "settingsState": "RELModExtrasSettingsState" }
+}

@@ -1,0 +1,6 @@
+{
+    "name": "AltF4",
+    "description": "Closes the game when you click Alt+F4.",
+    "version": "1.0.0",
+    "affectsSavegame": false
+}

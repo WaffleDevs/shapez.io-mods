@@ -1,0 +1,10 @@
+{
+    "name": "Tables",
+    "description": "Allows the user to make blocks that act on defined truthy tables.",
+    "version": "1.0.0",
+    "affectsSavegame": false,
+
+    "settings": {
+        "savedTruthyTables": {}
+    }
+}
