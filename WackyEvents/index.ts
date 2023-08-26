@@ -24,9 +24,7 @@ export default class RandomEvents extends Mod {
 
                 const wackyIRE = {
                     Roar: () => {
-                        const audio = new Audio(
-                            "https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
-                        );
+                        const audio = new Audio("https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3");
                         audio.volume = 0.2;
                         audio.play();
                     },

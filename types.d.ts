@@ -1,6 +1,7 @@
 declare module "core/polyfills" {
     export {};
 }
+
 declare module "core/signal" {
     export const STOP_PROPAGATION: "stop_propagation";
     export class Signal {
@@ -212,12 +213,7 @@ declare module "core/utils" {
      * Returns a platform name
      * @returns {"android" | "browser" | "ios" | "standalone" | "unknown"}
      */
-    export function getPlatformName():
-        | "android"
-        | "browser"
-        | "ios"
-        | "standalone"
-        | "unknown";
+    export function getPlatformName(): "android" | "browser" | "ios" | "standalone" | "unknown";
     /**
      * Makes a new 2D array with undefined contents
      * @param {number} w
@@ -317,10 +313,7 @@ declare module "core/utils" {
      * @param {string=} divider The divider for numbers like 50,000 (divider=',')
      * @returns {string}
      */
-    export function formatBigNumberFull(
-        num: number,
-        divider?: string | undefined
-    ): string;
+    export function formatBigNumberFull(num: number, divider?: string | undefined): string;
     /**
      * Waits two frames so the ui is updated
      * @returns {Promise<void>}
@@ -356,22 +349,14 @@ declare module "core/utils" {
      * @param {number=} minimum Default 0
      * @param {number=} maximum Default 1
      */
-    export function clamp(
-        v: number,
-        minimum?: number | undefined,
-        maximum?: number | undefined
-    ): number;
+    export function clamp(v: number, minimum?: number | undefined, maximum?: number | undefined): number;
     /**
      * Helper method to create a new div element
      * @param {string=} id
      * @param {Array<string>=} classes
      * @param {string=} innerHTML
      */
-    export function makeDivElement(
-        id?: string | undefined,
-        classes?: Array<string> | undefined,
-        innerHTML?: string | undefined
-    ): HTMLDivElement;
+    export function makeDivElement(id?: string | undefined, classes?: Array<string> | undefined, innerHTML?: string | undefined): HTMLDivElement;
     /**
      * Helper method to create a new div
      * @param {Element} parent
@@ -379,32 +364,20 @@ declare module "core/utils" {
      * @param {Array<string>=} classes
      * @param {string=} innerHTML
      */
-    export function makeDiv(
-        parent: Element,
-        id?: string | undefined,
-        classes?: Array<string> | undefined,
-        innerHTML?: string | undefined
-    ): HTMLDivElement;
+    export function makeDiv(parent: Element, id?: string | undefined, classes?: Array<string> | undefined, innerHTML?: string | undefined): HTMLDivElement;
     /**
      * Helper method to create a new button element
      * @param {Array<string>=} classes
      * @param {string=} innerHTML
      */
-    export function makeButtonElement(
-        classes?: Array<string> | undefined,
-        innerHTML?: string | undefined
-    ): HTMLButtonElement;
+    export function makeButtonElement(classes?: Array<string> | undefined, innerHTML?: string | undefined): HTMLButtonElement;
     /**
      * Helper method to create a new button
      * @param {Element} parent
      * @param {Array<string>=} classes
      * @param {string=} innerHTML
      */
-    export function makeButton(
-        parent: Element,
-        classes?: Array<string> | undefined,
-        innerHTML?: string | undefined
-    ): HTMLButtonElement;
+    export function makeButton(parent: Element, classes?: Array<string> | undefined, innerHTML?: string | undefined): HTMLButtonElement;
     /**
      * Removes all children of the given element
      * @param {Element} elem
@@ -431,21 +404,14 @@ declare module "core/utils" {
      * @param {number} speed
      * @param {string=} separator The decimal separator for numbers like 50.1 (separator='.')
      */
-    export function round1DigitLocalized(
-        speed: number,
-        separator?: string | undefined
-    ): string;
+    export function round1DigitLocalized(speed: number, separator?: string | undefined): string;
     /**
      * Formats a number like 2.51 to "2.51 items / s"
      * @param {number} speed
      * @param {boolean=} double
      * @param {string=} separator The decimal separator for numbers like 50.1 (separator='.')
      */
-    export function formatItemsPerSecond(
-        speed: number,
-        double?: boolean | undefined,
-        separator?: string | undefined
-    ): string;
+    export function formatItemsPerSecond(speed: number, double?: boolean | undefined, separator?: string | undefined): string;
     /**
      * Rotates a flat 3x3 matrix clockwise
      * Entries:
@@ -483,10 +449,7 @@ declare module "core/utils" {
      * @param {DirectionalObject} obj
      * @returns {DirectionalObject}
      */
-    export function rotateDirectionalObject(
-        obj: DirectionalObject,
-        rotation: any
-    ): DirectionalObject;
+    export function rotateDirectionalObject(obj: DirectionalObject, rotation: any): DirectionalObject;
     /**
      * Modulo which works for negative numbers
      * @param {number} n
@@ -525,11 +488,7 @@ declare module "core/utils" {
     /**
      * Returns the appropriate logo sprite path
      */
-    export function getLogoSprite():
-        | "logo_wegame.png"
-        | "logo_demo.png"
-        | "logo_cn.png"
-        | "logo.png";
+    export function getLogoSprite(): "logo_wegame.png" | "logo_demo.png" | "logo_cn.png" | "logo.png";
     /**
      * Rejects a promise after X ms
      * @param {Promise} promise
@@ -590,10 +549,7 @@ declare module "core/vector" {
          * @param {number} angle
          * @returns {enumDirection}
          */
-        static transformDirectionFromMultipleOf90(
-            direction: enumDirection,
-            angle: number
-        ): enumDirection;
+        static transformDirectionFromMultipleOf90(direction: enumDirection, angle: number): enumDirection;
         /**
          *
          * @param {number} i
@@ -954,12 +910,7 @@ declare module "savegame/serialization_data_types" {
          * @returns {string|void} String error code or null on success
          * @abstract
          */
-        deserialize(
-            value: any,
-            targetObject: object,
-            targetKey: string | number,
-            root: GameRoot
-        ): string | void;
+        deserialize(value: any, targetObject: object, targetKey: string | number, root: GameRoot): string | void;
         /**
          * Returns the json schema
          */
@@ -984,12 +935,7 @@ declare module "savegame/serialization_data_types" {
          * @param {string|number} targetKey
          * @returns {string|void} String error code or null on success
          */
-        deserializeWithVerify(
-            value: any,
-            targetObject: object,
-            targetKey: string | number,
-            root: GameRoot
-        ): string | void;
+        deserializeWithVerify(value: any, targetObject: object, targetKey: string | number, root: GameRoot): string | void;
         /**
          * Should return a cacheable key
          * @abstract
@@ -1020,10 +966,7 @@ declare module "savegame/serialization_data_types" {
          * @param {FactoryTemplate<*>} registry
          * @param {(GameRoot, object) => object} customResolver
          */
-        constructor(
-            registry: any,
-            customResolver?: (GameRoot: any, object: any) => object
-        );
+        constructor(registry: any, customResolver?: (GameRoot: any, object: any) => object);
         registry: any;
         customResolver: (GameRoot: any, object: any) => object;
     }
@@ -1116,7 +1059,7 @@ declare module "savegame/serialization_data_types" {
 declare module "core/explained_result" {
     export class ExplainedResult {
         static good(): ExplainedResult;
-        static bad(reason: any, additionalProps: any): ExplainedResult;
+        static bad(reason: any, additionalProps?: any): ExplainedResult;
         static requireAll(...args: any[]): any;
         constructor(result?: boolean, reason?: any, additionalProps?: {});
         /** @type {boolean} */
@@ -1136,12 +1079,7 @@ declare module "core/rectangle" {
          * @param {number} bottom
          * @param {number} left
          */
-        static fromTRBL(
-            top: number,
-            right: number,
-            bottom: number,
-            left: number
-        ): Rectangle;
+        static fromTRBL(top: number, right: number, bottom: number, left: number): Rectangle;
         /**
          * Constructs a new square rectangle
          * @param {number} x
@@ -1335,19 +1273,7 @@ declare module "core/draw_parameters" {
      * @typedef {import("./rectangle").Rectangle} Rectangle
      */
     export class DrawParameters {
-        constructor({
-            context,
-            visibleRect,
-            desiredAtlasScale,
-            zoomLevel,
-            root,
-        }: {
-            context: any;
-            visibleRect: any;
-            desiredAtlasScale: any;
-            zoomLevel: any;
-            root: any;
-        });
+        constructor({ context, visibleRect, desiredAtlasScale, zoomLevel, root }: { context: any; visibleRect: any; desiredAtlasScale: any; zoomLevel: any; root: any });
         /** @type {CanvasRenderingContext2D} */
         context: CanvasRenderingContext2D;
         /** @type {Rectangle} */
@@ -1625,10 +1551,7 @@ declare module "core/click_detector" {
          * Checks if the given event is relevant for this detector
          * @param {TouchEvent|MouseEvent} event
          */
-        internalEventPreHandler(
-            event: TouchEvent | MouseEvent,
-            expectedRemainingTouches?: number
-        ): boolean;
+        internalEventPreHandler(event: TouchEvent | MouseEvent, expectedRemainingTouches?: number): boolean;
         /**
          * Cacnels all ongoing events on this detector
          */
@@ -2127,19 +2050,7 @@ declare module "game/key_action_mapper" {
          * @param {boolean} param0.ctrl
          * @param {boolean=} param0.initial
          */
-        handleKeydown({
-            keyCode,
-            shift,
-            alt,
-            ctrl,
-            initial,
-        }: {
-            keyCode: number;
-            shift: boolean;
-            alt: boolean;
-            ctrl: boolean;
-            initial?: boolean | undefined;
-        }): string;
+        handleKeydown({ keyCode, shift, alt, ctrl, initial }: { keyCode: number; shift: boolean; alt: boolean; ctrl: boolean; initial?: boolean | undefined }): string;
         /**
          * Internal keyup handler
          * @param {object} param0
@@ -2147,15 +2058,7 @@ declare module "game/key_action_mapper" {
          * @param {boolean} param0.shift
          * @param {boolean} param0.alt
          */
-        handleKeyup({
-            keyCode,
-            shift,
-            alt,
-        }: {
-            keyCode: number;
-            shift: boolean;
-            alt: boolean;
-        }): void;
+        handleKeyup({ keyCode, shift, alt }: { keyCode: number; shift: boolean; alt: boolean }): void;
         /**
          * Returns a given keybinding
          * @param {{ keyCode: number }} binding
@@ -2241,13 +2144,7 @@ declare module "game/hud/base_hud_part" {
          * @param {import("../../core/click_detector").ClickDetectorConstructorArgs=} args Click detector arguments
          *
          */
-        trackClicks(
-            element: Element,
-            handler: Function,
-            args?:
-                | import("../../core/click_detector").ClickDetectorConstructorArgs
-                | undefined
-        ): void;
+        trackClicks(element: Element, handler: Function, args?: import("../../core/click_detector").ClickDetectorConstructorArgs | undefined): void;
         /**
          * Registers a new click detector
          * @param {ClickDetector} detector
@@ -2374,11 +2271,7 @@ declare module "core/game_state" {
          * @param {function():void} handler The handler to call
          * @param {import("./click_detector").ClickDetectorConstructorArgs=} args Click detector arguments
          */
-        trackClicks(
-            element: Element,
-            handler: () => void,
-            args?: import("./click_detector").ClickDetectorConstructorArgs | undefined
-        ): void;
+        trackClicks(element: Element, handler: () => void, args?: import("./click_detector").ClickDetectorConstructorArgs | undefined): void;
         /**
          * Cancels all promises on the api as well as our async channel
          */
@@ -2847,13 +2740,7 @@ declare module "core/sprites" {
          * @param {number} w
          * @param {number} h
          */
-        draw(
-            context: CanvasRenderingContext2D,
-            x: number,
-            y: number,
-            w: number,
-            h: number
-        ): void;
+        draw(context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number): void;
     }
     /**
      * Position of a sprite within an atlas
@@ -2923,13 +2810,7 @@ declare module "core/sprites" {
          * @param {number} size
          * @param {boolean=} clipping
          */
-        drawCachedCentered(
-            parameters: DrawParameters,
-            x: number,
-            y: number,
-            size: number,
-            clipping?: boolean | undefined
-        ): void;
+        drawCachedCentered(parameters: DrawParameters, x: number, y: number, size: number, clipping?: boolean | undefined): void;
         /**
          *
          * @param {CanvasRenderingContext2D} context
@@ -2937,12 +2818,7 @@ declare module "core/sprites" {
          * @param {number} y
          * @param {number} size
          */
-        drawCentered(
-            context: CanvasRenderingContext2D,
-            x: number,
-            y: number,
-            size: number
-        ): void;
+        drawCentered(context: CanvasRenderingContext2D, x: number, y: number, size: number): void;
         /**
          * Draws the sprite
          * @param {DrawParameters} parameters
@@ -2952,14 +2828,7 @@ declare module "core/sprites" {
          * @param {number} h
          * @param {boolean=} clipping Whether to perform culling
          */
-        drawCached(
-            parameters: DrawParameters,
-            x: number,
-            y: number,
-            w?: number,
-            h?: number,
-            clipping?: boolean | undefined
-        ): void;
+        drawCached(parameters: DrawParameters, x: number, y: number, w?: number, h?: number, clipping?: boolean | undefined): void;
         /**
          * Draws a subset of the sprite. Does NO culling
          * @param {DrawParameters} parameters
@@ -2969,14 +2838,7 @@ declare module "core/sprites" {
          * @param {number} h
          * @param {Rectangle=} clipRect The rectangle in local space (0 ... 1) to draw of the image
          */
-        drawCachedWithClipRect(
-            parameters: DrawParameters,
-            x: number,
-            y: number,
-            w?: number,
-            h?: number,
-            clipRect?: Rectangle | undefined
-        ): void;
+        drawCachedWithClipRect(parameters: DrawParameters, x: number, y: number, w?: number, h?: number, clipRect?: Rectangle | undefined): void;
         /**
          * Renders into an html element
          * @param {HTMLElement} element
@@ -3005,13 +2867,7 @@ declare module "core/sprites" {
          * @param {number} w
          * @param {number} h
          */
-        drawCentered(
-            context: CanvasRenderingContext2D,
-            x: number,
-            y: number,
-            w: number,
-            h: number
-        ): void;
+        drawCentered(context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number): void;
     }
     import { Rectangle } from "core/rectangle";
     import { DrawParameters } from "core/draw_parameters";
@@ -3149,30 +3005,21 @@ declare module "core/loader" {
          * @param {(progress: number) => void} progressHandler
          * @returns {Promise<HTMLImageElement|null>}
          */
-        internalPreloadImage(
-            key: string,
-            progressHandler: (progress: number) => void
-        ): Promise<HTMLImageElement | null>;
+        internalPreloadImage(key: string, progressHandler: (progress: number) => void): Promise<HTMLImageElement | null>;
         /**
          * Preloads a sprite
          * @param {string} key
          * @param {(progress: number) => void} progressHandler
          * @returns {Promise<void>}
          */
-        preloadCSSSprite(
-            key: string,
-            progressHandler: (progress: number) => void
-        ): Promise<void>;
+        preloadCSSSprite(key: string, progressHandler: (progress: number) => void): Promise<void>;
         /**
          * Preloads an atlas
          * @param {AtlasDefinition} atlas
          * @param {(progress: number) => void} progressHandler
          * @returns {Promise<void>}
          */
-        preloadAtlas(
-            atlas: AtlasDefinition,
-            progressHandler: (progress: number) => void
-        ): Promise<void>;
+        preloadAtlas(atlas: AtlasDefinition, progressHandler: (progress: number) => void): Promise<void>;
         /**
          *
          * @param {AtlasDefinition} atlas
@@ -3204,20 +3051,13 @@ declare module "game/building_codes" {
      * @param {string} variant
      * @param {number} rotationVariant
      */
-    export function registerBuildingVariant(
-        code: number | string,
-        meta: typeof MetaBuilding,
-        variant?: string,
-        rotationVariant?: number
-    ): void;
+    export function registerBuildingVariant(code: number | string, meta: typeof MetaBuilding, variant?: string, rotationVariant?: number): void;
     /**
      *
      * @param {string|number} code
      * @returns {BuildingVariantIdentifier}
      */
-    export function getBuildingDataFromCode(
-        code: string | number
-    ): BuildingVariantIdentifier;
+    export function getBuildingDataFromCode(code: string | number): BuildingVariantIdentifier;
     /**
      * Builds the cache for the codes
      */
@@ -3229,11 +3069,7 @@ declare module "game/building_codes" {
      * @param {number} rotationVariant
      * @returns {number|string}
      */
-    export function getCodeFromBuildingData(
-        metaBuilding: MetaBuilding,
-        variant: string,
-        rotationVariant: number
-    ): number | string;
+    export function getCodeFromBuildingData(metaBuilding: MetaBuilding, variant: string, rotationVariant: number): number | string;
     /**
      * @typedef {{
      *   metaClass: typeof MetaBuilding,
@@ -3425,12 +3261,7 @@ declare module "game/components/static_map_entity" {
          * @param {number=} extrudePixels How many pixels to extrude the sprite
          * @param {Vector=} overridePosition Whether to drwa the entity at a different location
          */
-        drawSpriteOnBoundsClipped(
-            parameters: DrawParameters,
-            sprite: AtlasSprite,
-            extrudePixels?: number | undefined,
-            overridePosition?: Vector | undefined
-        ): void;
+        drawSpriteOnBoundsClipped(parameters: DrawParameters, sprite: AtlasSprite, extrudePixels?: number | undefined, overridePosition?: Vector | undefined): void;
     }
     import { Component } from "game/component";
     import { Vector } from "core/vector";
@@ -3455,34 +3286,21 @@ declare module "core/dpi_manager" {
      * Prepares a context for hihg dpi rendering
      * @param {CanvasRenderingContext2D} context
      */
-    export function prepareHighDPIContext(
-        context: CanvasRenderingContext2D,
-        smooth?: boolean
-    ): void;
+    export function prepareHighDPIContext(context: CanvasRenderingContext2D, smooth?: boolean): void;
     /**
      * Resizes a high dpi canvas
      * @param {HTMLCanvasElement} canvas
      * @param {number} w
      * @param {number} h
      */
-    export function resizeHighDPICanvas(
-        canvas: HTMLCanvasElement,
-        w: number,
-        h: number,
-        smooth?: boolean
-    ): void;
+    export function resizeHighDPICanvas(canvas: HTMLCanvasElement, w: number, h: number, smooth?: boolean): void;
     /**
      * Resizes a canvas
      * @param {HTMLCanvasElement} canvas
      * @param {number} w
      * @param {number} h
      */
-    export function resizeCanvas(
-        canvas: HTMLCanvasElement,
-        w: number,
-        h: number,
-        setStyle?: boolean
-    ): void;
+    export function resizeCanvas(canvas: HTMLCanvasElement, w: number, h: number, setStyle?: boolean): void;
     /**
      * Resizes a canvas and makes sure its cleared
      * @param {HTMLCanvasElement} canvas
@@ -3490,12 +3308,7 @@ declare module "core/dpi_manager" {
      * @param {number} w
      * @param {number} h
      */
-    export function resizeCanvasAndClear(
-        canvas: HTMLCanvasElement,
-        context: CanvasRenderingContext2D,
-        w: number,
-        h: number
-    ): void;
+    export function resizeCanvasAndClear(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, w: number, h: number): void;
 }
 declare module "game/base_item" {
     /**
@@ -3539,12 +3352,7 @@ declare module "game/base_item" {
          * @param {DrawParameters} parameters
          * @param {number=} diameter
          */
-        drawItemCenteredClipped(
-            x: number,
-            y: number,
-            parameters: DrawParameters,
-            diameter?: number | undefined
-        ): void;
+        drawItemCenteredClipped(x: number, y: number, parameters: DrawParameters, diameter?: number | undefined): void;
         /**
          * INTERNAL
          * @param {number} x
@@ -3553,12 +3361,7 @@ declare module "game/base_item" {
          * @param {number=} diameter
          * @abstract
          */
-        drawItemCenteredImpl(
-            x: number,
-            y: number,
-            parameters: DrawParameters,
-            diameter?: number | undefined
-        ): void;
+        drawItemCenteredImpl(x: number, y: number, parameters: DrawParameters, diameter?: number | undefined): void;
         getBackgroundColorAsResource(): string;
     }
     import { BasicSerializableObject } from "savegame/serialization";
@@ -3727,12 +3530,7 @@ declare module "game/shape_definition" {
          * @param {DrawParameters} parameters
          * @param {number=} diameter
          */
-        drawCentered(
-            x: number,
-            y: number,
-            parameters: DrawParameters,
-            diameter?: number | undefined
-        ): void;
+        drawCentered(x: number, y: number, parameters: DrawParameters, diameter?: number | undefined): void;
         /**
          * Draws the item to a canvas
          * @param {CanvasRenderingContext2D} context
@@ -3752,13 +3550,7 @@ declare module "game/shape_definition" {
          * @param {number} h
          * @param {number} dpi
          */
-        internalGenerateShapeBuffer(
-            canvas: HTMLCanvasElement,
-            context: CanvasRenderingContext2D,
-            w: number,
-            h: number,
-            dpi: number
-        ): void;
+        internalGenerateShapeBuffer(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, w: number, h: number, dpi: number): void;
         /**
          * Returns a definition with only the given quadrants
          * @param {Array<number>} includeQuadrants
@@ -3794,9 +3586,7 @@ declare module "game/shape_definition" {
          * Clones the shape and colors everything in the given colors
          * @param {[enumColors, enumColors, enumColors, enumColors]} colors
          */
-        cloneAndPaintWith4Colors(
-            colors: [enumColors, enumColors, enumColors, enumColors]
-        ): ShapeDefinition;
+        cloneAndPaintWith4Colors(colors: [enumColors, enumColors, enumColors, enumColors]): ShapeDefinition;
     }
     export type SubShapeDrawOptions = {
         context: CanvasRenderingContext2D;
@@ -3971,10 +3761,7 @@ declare module "game/belt_path" {
          * @param {number} matchingSlotIndex
          * @returns {(item: BaseItem, slotIndex: number) => boolean | void}
          */
-        computePassOverFunctionWithoutBelts(
-            entity: Entity,
-            matchingSlotIndex: number
-        ): (item: BaseItem, slotIndex: number) => boolean | void;
+        computePassOverFunctionWithoutBelts(entity: Entity, matchingSlotIndex: number): (item: BaseItem, slotIndex: number) => boolean | void;
         /**
          * Helper to throw an error on mismatch
          * @param {string} change
@@ -4094,11 +3881,7 @@ declare module "game/belt_path" {
          * @param {Array<[Vector, BaseItem]>} stack
          * @param {DrawParameters} parameters
          */
-        drawDrawStack(
-            stack: Array<[Vector, BaseItem]>,
-            parameters: DrawParameters,
-            directionProp: any
-        ): void;
+        drawDrawStack(stack: Array<[Vector, BaseItem]>, parameters: DrawParameters, directionProp: any): void;
     }
     import { BasicSerializableObject } from "savegame/serialization";
     import { GameRoot } from "game/root";
@@ -4171,22 +3954,14 @@ declare module "game/components/item_acceptor" {
          * @param {BaseItem} item
          * @param {number} remainingProgress World space remaining progress, can be set to set the start position of the item
          */
-        onItemAccepted(
-            slotIndex: number,
-            direction: enumDirection,
-            item: BaseItem,
-            remainingProgress?: number
-        ): void;
+        onItemAccepted(slotIndex: number, direction: enumDirection, item: BaseItem, remainingProgress?: number): void;
         /**
          * Tries to find a slot which accepts the current item
          * @param {Vector} targetLocalTile
          * @param {enumDirection} fromLocalDirection
          * @returns {ItemAcceptorLocatedSlot|null}
          */
-        findMatchingSlot(
-            targetLocalTile: Vector,
-            fromLocalDirection: enumDirection
-        ): ItemAcceptorLocatedSlot | null;
+        findMatchingSlot(targetLocalTile: Vector, fromLocalDirection: enumDirection): ItemAcceptorLocatedSlot | null;
     }
     export type ItemAcceptorSlot = {
         pos: Vector;
@@ -4617,13 +4392,7 @@ declare module "game/components/underground_belt" {
          * @param {enumUndergroundBeltMode=} param0.mode As which type of belt the entity acts
          * @param {number=} param0.tier
          */
-        constructor({
-            mode,
-            tier,
-        }: {
-            mode?: enumUndergroundBeltMode | undefined;
-            tier?: number | undefined;
-        });
+        constructor({ mode, tier }: { mode?: enumUndergroundBeltMode | undefined; tier?: number | undefined });
         mode: string;
         tier: number;
         /**
@@ -4657,12 +4426,7 @@ declare module "game/components/underground_belt" {
          * @param {number} beltSpeed How fast this item travels
          * @param {number} now Current ingame time
          */
-        tryAcceptTunneledItem(
-            item: BaseItem,
-            travelDistance: number,
-            beltSpeed: number,
-            now: number
-        ): boolean;
+        tryAcceptTunneledItem(item: BaseItem, travelDistance: number, beltSpeed: number, now: number): boolean;
     }
     export type LinkedUndergroundBelt = {
         entity: Entity;
@@ -4681,15 +4445,7 @@ declare module "core/stale_area_detector" {
          * @param {string} param0.name The name for reference
          * @param {(Rectangle) => void} param0.recomputeMethod Method which recomputes the given area
          */
-        constructor({
-            root,
-            name,
-            recomputeMethod,
-        }: {
-            root: import("../game/root").GameRoot;
-            name: string;
-            recomputeMethod: (Rectangle: any) => void;
-        });
+        constructor({ root, name, recomputeMethod }: { root: import("../game/root").GameRoot; name: string; recomputeMethod: (Rectangle: any) => void });
         root: import("game/root").GameRoot;
         name: string;
         recomputeMethod: (Rectangle: any) => void;
@@ -4706,10 +4462,7 @@ declare module "core/stale_area_detector" {
          * @param {Array<typeof Component>} components
          * @param {number} tilesAround How many tiles arround to expand the area
          */
-        recomputeOnComponentsChanged(
-            components: Array<typeof Component>,
-            tilesAround: number
-        ): void;
+        recomputeOnComponentsChanged(components: Array<typeof Component>, tilesAround: number): void;
         /**
          * Updates the stale area
          */
@@ -4753,21 +4506,14 @@ declare module "game/production_analytics" {
          * @param {enumAnalyticsDataSource} dataSource
          * @param {ShapeDefinition} definition
          */
-        getCurrentShapeRateRaw(
-            dataSource: enumAnalyticsDataSource,
-            definition: ShapeDefinition
-        ): any;
+        getCurrentShapeRateRaw(dataSource: enumAnalyticsDataSource, definition: ShapeDefinition): any;
         /**
          * Returns the rate of a given shape, <historyOffset> frames ago
          * @param {enumAnalyticsDataSource} dataSource
          * @param {ShapeDefinition} definition
          * @param {number} historyOffset
          */
-        getPastShapeRate(
-            dataSource: enumAnalyticsDataSource,
-            definition: ShapeDefinition,
-            historyOffset: number
-        ): any;
+        getPastShapeRate(dataSource: enumAnalyticsDataSource, definition: ShapeDefinition, historyOffset: number): any;
         /**
          * Returns the rates of all shapes
          * @param {enumAnalyticsDataSource} dataSource
@@ -5031,13 +4777,7 @@ declare module "game/components/wire" {
          * @param {enumWireType=} param0.type
          * @param {enumWireVariant=} param0.variant
          */
-        constructor({
-            type,
-            variant,
-        }: {
-            type?: enumWireType | undefined;
-            variant?: enumWireVariant | undefined;
-        });
+        constructor({ type, variant }: { type?: enumWireType | undefined; variant?: enumWireVariant | undefined });
         type: string;
         /**
          * The variant of the wire, different variants do not connect
@@ -5334,45 +5074,28 @@ declare module "game/map_chunk" {
          * @param {number=} overrideX Override the X position of the patch
          * @param {number=} overrideY Override the Y position of the patch
          */
-        internalGeneratePatch(
-            rng: RandomNumberGenerator,
-            patchSize: number,
-            item: BaseItem,
-            overrideX?: number | undefined,
-            overrideY?: number | undefined
-        ): void;
+        internalGeneratePatch(rng: RandomNumberGenerator, patchSize: number, item: BaseItem, overrideX?: number | undefined, overrideY?: number | undefined): void;
         /**
          * Generates a color patch
          * @param {RandomNumberGenerator} rng
          * @param {number} colorPatchSize
          * @param {number} distanceToOriginInChunks
          */
-        internalGenerateColorPatch(
-            rng: RandomNumberGenerator,
-            colorPatchSize: number,
-            distanceToOriginInChunks: number
-        ): void;
+        internalGenerateColorPatch(rng: RandomNumberGenerator, colorPatchSize: number, distanceToOriginInChunks: number): void;
         /**
          * Generates a shape patch
          * @param {RandomNumberGenerator} rng
          * @param {number} shapePatchSize
          * @param {number} distanceToOriginInChunks
          */
-        internalGenerateShapePatch(
-            rng: RandomNumberGenerator,
-            shapePatchSize: number,
-            distanceToOriginInChunks: number
-        ): void;
+        internalGenerateShapePatch(rng: RandomNumberGenerator, shapePatchSize: number, distanceToOriginInChunks: number): void;
         /**
          * Chooses a random shape with the given weights
          * @param {RandomNumberGenerator} rng
          * @param {Object.<enumSubShape, number>} weights
          * @returns {enumSubShape}
          */
-        internalGenerateRandomSubShape(
-            rng: RandomNumberGenerator,
-            weights: any
-        ): enumSubShape;
+        internalGenerateRandomSubShape(rng: RandomNumberGenerator, weights: any): enumSubShape;
         /**
          * Generates the lower layer "terrain"
          */
@@ -5384,15 +5107,7 @@ declare module "game/map_chunk" {
          * @param {Vector} param0.chunkCenter
          * @param {number} param0.distanceToOriginInChunks
          */
-        generatePatches({
-            rng,
-            chunkCenter,
-            distanceToOriginInChunks,
-        }: {
-            rng: RandomNumberGenerator;
-            chunkCenter: Vector;
-            distanceToOriginInChunks: number;
-        }): void;
+        generatePatches({ rng, chunkCenter, distanceToOriginInChunks }: { rng: RandomNumberGenerator; chunkCenter: Vector; distanceToOriginInChunks: number }): void;
         /**
          * Checks if this chunk has predefined contents, and if so returns true and generates the
          * predefined contents
@@ -5406,10 +5121,7 @@ declare module "game/map_chunk" {
          * @param {number} worldY
          * @returns {BaseItem=}
          */
-        getLowerLayerFromWorldCoords(
-            worldX: number,
-            worldY: number
-        ): BaseItem | undefined;
+        getLowerLayerFromWorldCoords(worldX: number, worldY: number): BaseItem | undefined;
         /**
          * Returns the contents of this chunk from the given world space coordinates
          * @param {number} worldX
@@ -5424,21 +5136,14 @@ declare module "game/map_chunk" {
          * @param {Layer} layer
          * @returns {Entity=}
          */
-        getLayerContentFromWorldCoords(
-            worldX: number,
-            worldY: number,
-            layer: any
-        ): Entity | undefined;
+        getLayerContentFromWorldCoords(worldX: number, worldY: number, layer: any): Entity | undefined;
         /**
          * Returns the contents of this chunk from the given world space coordinates
          * @param {number} worldX
          * @param {number} worldY
          * @returns {Array<Entity>}
          */
-        getLayersContentsMultipleFromWorldCoords(
-            worldX: number,
-            worldY: number
-        ): Array<Entity>;
+        getLayersContentsMultipleFromWorldCoords(worldX: number, worldY: number): Array<Entity>;
         /**
          * Returns the chunks contents from the given local coordinates
          * @param {number} localX
@@ -5453,12 +5158,7 @@ declare module "game/map_chunk" {
          * @param {Entity} contents
          * @param {Layer} layer
          */
-        setLayerContentFromWorldCords(
-            tileX: number,
-            tileY: number,
-            contents: Entity,
-            layer: any
-        ): void;
+        setLayerContentFromWorldCords(tileX: number, tileY: number, contents: Entity, layer: any): void;
     }
     import { GameRoot } from "game/root";
     import { BaseItem } from "game/base_item";
@@ -5540,12 +5240,7 @@ declare module "game/map_chunk_view" {
          * @param {number} yoffs
          * @param {number} diameter
          */
-        drawOverlayPatches(
-            parameters: DrawParameters,
-            xoffs: number,
-            yoffs: number,
-            diameter: number
-        ): void;
+        drawOverlayPatches(parameters: DrawParameters, xoffs: number, yoffs: number, diameter: number): void;
         /**
          *
          * @param {CanvasRenderingContext2D} context
@@ -5554,13 +5249,7 @@ declare module "game/map_chunk_view" {
          * @param {number=} xoffs
          * @param {number=} yoffs
          */
-        generateOverlayBuffer(
-            context: CanvasRenderingContext2D,
-            w: number,
-            h: number,
-            xoffs?: number | undefined,
-            yoffs?: number | undefined
-        ): void;
+        generateOverlayBuffer(context: CanvasRenderingContext2D, w: number, h: number, xoffs?: number | undefined, yoffs?: number | undefined): void;
         /**
          * Draws the wires layer
          * @param {DrawParameters} parameters
@@ -5655,10 +5344,7 @@ declare module "game/systems/wire" {
          * @param {Entity} initialEntity
          * @param {import("../components/wired_pins").WirePinSlot} slot
          */
-        findNetworkForEjector(
-            initialEntity: Entity,
-            slot: import("../components/wired_pins").WirePinSlot
-        ): void;
+        findNetworkForEjector(initialEntity: Entity, slot: import("../components/wired_pins").WirePinSlot): void;
         /**
          * Finds surrounding entities which are not yet assigned to a network
          * @param {Vector} initialTile
@@ -5667,12 +5353,7 @@ declare module "game/systems/wire" {
          * @param {enumWireVariant=} variantMask Only accept connections to this mask
          * @returns {Array<any>}
          */
-        findSurroundingWireTargets(
-            initialTile: Vector,
-            directions: Array<enumDirection>,
-            network: WireNetwork,
-            variantMask?: enumWireVariant | undefined
-        ): Array<any>;
+        findSurroundingWireTargets(initialTile: Vector, directions: Array<enumDirection>, network: WireNetwork, variantMask?: enumWireVariant | undefined): Array<any>;
         /**
          * Returns the given tileset and opacity
          * @param {WireComponent} wireComp
@@ -5687,17 +5368,12 @@ declare module "game/systems/wire" {
          * @param {import("../../core/draw_utils").DrawParameters} parameters
          * @param {MapChunkView} chunk
          */
-        drawChunk(
-            parameters: import("../../core/draw_utils").DrawParameters,
-            chunk: MapChunkView
-        ): void;
+        drawChunk(parameters: import("../../core/draw_utils").DrawParameters, chunk: MapChunkView): void;
         /**
          * Returns whether this entity is relevant for the wires network
          * @param {Entity} entity
          */
-        isEntityRelevantForWires(
-            entity: Entity
-        ): WireComponent | WireTunnelComponent | WiredPinsComponent;
+        isEntityRelevantForWires(entity: Entity): WireComponent | WireTunnelComponent | WiredPinsComponent;
         /**
          *
          * @param {Entity} entity
@@ -5919,13 +5595,7 @@ declare module "game/components/goal_acceptor" {
          * @param {BaseItem=} param0.item
          * @param {number=} param0.rate
          */
-        constructor({
-            item,
-            rate,
-        }: {
-            item?: BaseItem | undefined;
-            rate?: number | undefined;
-        });
+        constructor({ item, rate }: { item?: BaseItem | undefined; rate?: number | undefined });
         /** @type {BaseItem | undefined} */
         item: BaseItem | undefined;
         /**
@@ -6145,12 +5815,7 @@ declare module "game/meta_building" {
          * @param {Entity} entity
          * @returns {Array<number>|null}
          */
-        getSpecialOverlayRenderMatrix(
-            rotation: number,
-            rotationVariant: number,
-            variant: string,
-            entity: Entity
-        ): Array<number> | null;
+        getSpecialOverlayRenderMatrix(rotation: number, rotationVariant: number, variant: string, entity: Entity): Array<number> | null;
         /**
          * Should return additional statistics about this building
          * @param {GameRoot} root
@@ -6400,11 +6065,7 @@ declare module "savegame/savegame_typedefs" {
             w: number;
             h: number;
         };
-        buildings: (
-            | PuzzleGameBuildingGoal
-            | PuzzleGameBuildingConstantProducer
-            | PuzzleGameBuildingBlock
-        )[];
+        buildings: (PuzzleGameBuildingGoal | PuzzleGameBuildingConstantProducer | PuzzleGameBuildingBlock)[];
         excludedBuildings: Array<string>;
     };
     export type PuzzleFullData = {
@@ -6417,9 +6078,7 @@ declare module "savegame/schemas/1001" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1000to1001(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1000to1001(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1000 } from "savegame/schemas/1000.js";
@@ -6429,9 +6088,7 @@ declare module "savegame/schemas/1002" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1001to1002(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1001to1002(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1001 } from "savegame/schemas/1001.js";
@@ -6441,9 +6098,7 @@ declare module "savegame/schemas/1003" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1002to1003(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1002to1003(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1002 } from "savegame/schemas/1002.js";
@@ -6453,9 +6108,7 @@ declare module "savegame/schemas/1004" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1003to1004(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1003to1004(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1003 } from "savegame/schemas/1003.js";
@@ -6465,9 +6118,7 @@ declare module "savegame/schemas/1005" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1004to1005(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1004to1005(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1004 } from "savegame/schemas/1004.js";
@@ -6658,9 +6309,7 @@ declare module "savegame/schemas/1006" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1005to1006(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1005to1006(data: import("../savegame_typedefs.js").SavegameData): boolean;
         /**
          *
          * @param {Entity} entity
@@ -6676,9 +6325,7 @@ declare module "savegame/schemas/1007" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1006to1007(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1006to1007(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1006 } from "savegame/schemas/1006.js";
@@ -6688,9 +6335,7 @@ declare module "savegame/schemas/1008" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1007to1008(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1007to1008(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1007 } from "savegame/schemas/1007.js";
@@ -6959,9 +6604,7 @@ declare module "game/hud/parts/base_toolbar" {
          * @param {Array<typeof MetaBuilding>} buildings
          * @returns {Array<typeof MetaBuilding>}
          */
-        filterBuildings(
-            buildings: Array<typeof MetaBuilding>
-        ): Array<typeof MetaBuilding>;
+        filterBuildings(buildings: Array<typeof MetaBuilding>): Array<typeof MetaBuilding>;
         /**
          * Returns all buildings
          * @returns {Array<typeof MetaBuilding>}
@@ -7635,15 +7278,7 @@ declare module "core/modal_dialog_forms" {
         setValue(value: any): void;
     }
     export class FormElementCheckbox extends FormElement {
-        constructor({
-            id,
-            label,
-            defaultValue,
-        }: {
-            id: any;
-            label: any;
-            defaultValue?: boolean;
-        });
+        constructor({ id, label, defaultValue }: { id: any; label: any; defaultValue?: boolean });
         defaultValue: boolean;
         value: boolean;
         element: any;
@@ -7657,15 +7292,7 @@ declare module "core/modal_dialog_forms" {
          * @param {string=} param0.label
          * @param {Array<BaseItem>} param0.items
          */
-        constructor({
-            id,
-            label,
-            items,
-        }: {
-            id: string;
-            label?: string | undefined;
-            items: Array<BaseItem>;
-        });
+        constructor({ id, label, items }: { id: string; label?: string | undefined; items: Array<BaseItem> });
         items: BaseItem[];
         element: any;
         /**
@@ -7736,17 +7363,7 @@ declare module "core/modal_dialog_elements" {
          * @param {boolean} param0.alt
          * @param {boolean} param0.ctrl
          */
-        handleKeydown({
-            keyCode,
-            shift,
-            alt,
-            ctrl,
-        }: {
-            keyCode: number;
-            shift: boolean;
-            alt: boolean;
-            ctrl: boolean;
-        }): string;
+        handleKeydown({ keyCode, shift, alt, ctrl }: { keyCode: number; shift: boolean; alt: boolean; ctrl: boolean }): string;
         internalButtonHandler(id: any, ...payload: any[]): void;
         createElement(): HTMLDivElement;
         dialogElem: HTMLDivElement;
@@ -7762,11 +7379,7 @@ declare module "core/modal_dialog_elements" {
          * @param {import("./click_detector").ClickDetectorConstructorArgs=} args
          * @returns {ClickDetector}
          */
-        trackClicks(
-            elem: Element,
-            handler: () => void,
-            args?: import("./click_detector").ClickDetectorConstructorArgs | undefined
-        ): ClickDetector;
+        trackClicks(elem: Element, handler: () => void, args?: import("./click_detector").ClickDetectorConstructorArgs | undefined): ClickDetector;
     }
     /**
      * Dialog which simply shows a loading spinner
@@ -7915,13 +7528,7 @@ declare module "game/hud/parts/waypoints" {
          * @param {Vector=} param0.worldPos Override the world pos, otherwise it is the camera position
          * @param {Waypoint=} param0.waypoint Waypoint to be edited. If omitted, create new
          */
-        requestSaveMarker({
-            worldPos,
-            waypoint,
-        }: {
-            worldPos?: Vector | undefined;
-            waypoint?: Waypoint | undefined;
-        }): void;
+        requestSaveMarker({ worldPos, waypoint }: { worldPos?: Vector | undefined; waypoint?: Waypoint | undefined }): void;
         /**
          * Adds a new waypoint at the given location with the given label
          * @param {string} label
@@ -8021,11 +7628,7 @@ declare module "game/hud/parts/statistics_handle" {
          * @param {ShapeDefinition} definition
          * @param {IntersectionObserver} intersectionObserver
          */
-        constructor(
-            root: GameRoot,
-            definition: ShapeDefinition,
-            intersectionObserver: IntersectionObserver
-        );
+        constructor(root: GameRoot, definition: ShapeDefinition, intersectionObserver: IntersectionObserver);
         definition: ShapeDefinition;
         root: GameRoot;
         intersectionObserver: IntersectionObserver;
@@ -8046,12 +7649,7 @@ declare module "game/hud/parts/statistics_handle" {
          * @param {string} unit
          * @param {boolean=} forced
          */
-        update(
-            displayMode: enumDisplayMode,
-            dataSource: enumAnalyticsDataSource,
-            unit: string,
-            forced?: boolean | undefined
-        ): void;
+        update(displayMode: enumDisplayMode, dataSource: enumAnalyticsDataSource, unit: string, forced?: boolean | undefined): void;
         graphCanvas: HTMLCanvasElement;
         graphContext: CanvasRenderingContext2D;
         /**
@@ -8150,10 +7748,7 @@ declare module "game/hud/parts/wire_info" {
          * @param {import("../../../core/draw_utils").DrawParameters} parameters
          * @param {WireNetwork} network
          */
-        drawHighlightedNetwork(
-            parameters: import("../../../core/draw_utils").DrawParameters,
-            network: WireNetwork
-        ): void;
+        drawHighlightedNetwork(parameters: import("../../../core/draw_utils").DrawParameters, network: WireNetwork): void;
     }
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { WireNetwork } from "game/systems/wire";
@@ -8360,11 +7955,7 @@ declare module "game/hud/parts/layer_preview" {
          * @param {Vector} worldPos
          * @param {number} scale 1 / zoomLevel
          */
-        renderPreview(
-            parameters: import("../../../core/draw_utils").DrawParameters,
-            worldPos: Vector,
-            scale: number
-        ): void;
+        renderPreview(parameters: import("../../../core/draw_utils").DrawParameters, worldPos: Vector, scale: number): void;
     }
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Vector } from "core/vector";
@@ -8688,9 +8279,7 @@ declare module "savegame/schemas/1009" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1008to1009(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): boolean;
+        static migrate1008to1009(data: import("../savegame_typedefs.js").SavegameData): boolean;
         constructor(data: any);
     }
     import { SavegameInterface_V1008 } from "savegame/schemas/1008.js";
@@ -8700,9 +8289,7 @@ declare module "savegame/schemas/1010" {
         /**
          * @param {import("../savegame_typedefs.js").SavegameData} data
          */
-        static migrate1009to1010(
-            data: import("../savegame_typedefs.js").SavegameData
-        ): void;
+        static migrate1009to1010(data: import("../savegame_typedefs.js").SavegameData): void;
         constructor(data: any);
     }
     import { SavegameInterface_V1009 } from "savegame/schemas/1009.js";
@@ -8948,14 +8535,7 @@ declare module "game/systems/map_resources" {
          * @param {number} h
          * @param {number} dpi
          */
-        generateChunkBackground(
-            chunk: MapChunkView,
-            canvas: HTMLCanvasElement,
-            context: CanvasRenderingContext2D,
-            w: number,
-            h: number,
-            dpi: number
-        ): void;
+        generateChunkBackground(chunk: MapChunkView, canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, w: number, h: number, dpi: number): void;
     }
     import { GameSystem } from "game/game_system";
     import { DrawParameters } from "core/draw_parameters";
@@ -9180,9 +8760,7 @@ declare module "game/systems/underground_belt" {
          * @param {Entity} entity
          * @returns {import("../components/underground_belt").LinkedUndergroundBelt}
          */
-        findRecieverForSender(
-            entity: Entity
-        ): import("../components/underground_belt").LinkedUndergroundBelt;
+        findRecieverForSender(entity: Entity): import("../components/underground_belt").LinkedUndergroundBelt;
         /**
          *
          * @param {Entity} entity
@@ -9212,13 +8790,7 @@ declare module "game/systems/hub" {
          * @param {number} h
          * @param {number} dpi
          */
-        redrawHubBaseTexture(
-            canvas: HTMLCanvasElement,
-            context: CanvasRenderingContext2D,
-            w: number,
-            h: number,
-            dpi: number
-        ): void;
+        redrawHubBaseTexture(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, w: number, h: number, dpi: number): void;
         /**
          * @param {DrawParameters} parameters
          * @param {Entity} entity
@@ -9356,10 +8928,7 @@ declare module "game/systems/belt_underlays" {
          * @param {import("../components/belt_underlays").BeltUnderlayTile} underlayTile
          * @returns {enumClippedBeltUnderlayType} The type of the underlay
          */
-        computeBeltUnderlayType(
-            entity: Entity,
-            underlayTile: import("../components/belt_underlays").BeltUnderlayTile
-        ): enumClippedBeltUnderlayType;
+        computeBeltUnderlayType(entity: Entity, underlayTile: import("../components/belt_underlays").BeltUnderlayTile): enumClippedBeltUnderlayType;
         /**
          * Draws a given chunk
          * @param {DrawParameters} parameters
@@ -9463,10 +9032,7 @@ declare module "game/systems/lever" {
          * @param {import("../../core/draw_utils").DrawParameters} parameters
          * @param {MapChunkView} chunk
          */
-        drawChunk(
-            parameters: import("../../core/draw_utils").DrawParameters,
-            chunk: MapChunkView
-        ): void;
+        drawChunk(parameters: import("../../core/draw_utils").DrawParameters, chunk: MapChunkView): void;
     }
     import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunkView } from "game/map_chunk_view";
@@ -9482,11 +9048,7 @@ declare module "game/systems/display" {
      * [x: string]: (parameters: import("../../core/draw_parameters").DrawParameters, entity: import("../entity").Entity, item: BaseItem) => BaseItem
      * }} */
     export const MODS_ADDITIONAL_DISPLAY_ITEM_DRAW: {
-        [x: string]: (
-            parameters: import("../../core/draw_parameters").DrawParameters,
-            entity: import("../entity").Entity,
-            item: BaseItem
-        ) => BaseItem;
+        [x: string]: (parameters: import("../../core/draw_parameters").DrawParameters, entity: import("../entity").Entity, item: BaseItem) => BaseItem;
     };
     export class DisplaySystem extends GameSystem {
         constructor(root: any);
@@ -9505,10 +9067,7 @@ declare module "game/systems/display" {
          * @param {import("../../core/draw_utils").DrawParameters} parameters
          * @param {MapChunkView} chunk
          */
-        drawChunk(
-            parameters: import("../../core/draw_utils").DrawParameters,
-            chunk: MapChunkView
-        ): any;
+        drawChunk(parameters: import("../../core/draw_utils").DrawParameters, chunk: MapChunkView): any;
     }
     import { BaseItem } from "game/base_item";
     import { GameSystem } from "game/game_system";
@@ -9527,19 +9086,13 @@ declare module "game/systems/item_processor_overlays" {
          * @param {import("../../core/draw_utils").DrawParameters} parameters
          * @param {MapChunkView} chunk
          */
-        drawChunk(
-            parameters: import("../../core/draw_utils").DrawParameters,
-            chunk: MapChunkView
-        ): void;
+        drawChunk(parameters: import("../../core/draw_utils").DrawParameters, chunk: MapChunkView): void;
         /**
          *
          * @param {import("../../core/draw_utils").DrawParameters} parameters
          * @param {Entity} entity
          */
-        drawReaderOverlays(
-            parameters: import("../../core/draw_utils").DrawParameters,
-            entity: Entity
-        ): void;
+        drawReaderOverlays(parameters: import("../../core/draw_utils").DrawParameters, entity: Entity): void;
         /**
          *
          * @param {import("../../core/draw_utils").DrawParameters} parameters
@@ -9867,9 +9420,7 @@ declare module "mods/mod_interface" {
             id: string;
             shortCode: string;
             weightComputation: (distanceToOriginInChunks: number) => number;
-            draw: (
-                options: import("../game/shape_definition").SubShapeDrawOptions
-            ) => void;
+            draw: (options: import("../game/shape_definition").SubShapeDrawOptions) => void;
         }): void;
         registerTranslations(language: any, translations: any): void;
         /**
@@ -9913,13 +9464,7 @@ declare module "mods/mod_interface" {
          * @param {typeof ModMetaBuilding} param0.metaClass
          * @param {string=} param0.buildingIconBase64
          */
-        registerNewBuilding({
-            metaClass,
-            buildingIconBase64,
-        }: {
-            metaClass: typeof ModMetaBuilding;
-            buildingIconBase64?: string | undefined;
-        }): void;
+        registerNewBuilding({ metaClass, buildingIconBase64 }: { metaClass: typeof ModMetaBuilding; buildingIconBase64?: string | undefined }): void;
         /**
          *
          * @param {Object} param0
@@ -9975,48 +9520,26 @@ declare module "mods/mod_interface" {
          * @param {*} variant
          * @param {*} imageBase64
          */
-        setBuildingTutorialImage(
-            buildingIdOrClass: string | (new () => MetaBuilding),
-            variant: any,
-            imageBase64: any
-        ): void;
+        setBuildingTutorialImage(buildingIdOrClass: string | (new () => MetaBuilding), variant: any, imageBase64: any): void;
         /**
          * @param {Object} param0
          * @param {string} param0.id
          * @param {string} param0.name
          * @param {Object} param0.theme
          */
-        registerGameTheme({
-            id,
-            name,
-            theme,
-        }: {
-            id: string;
-            name: string;
-            theme: any;
-        }): void;
+        registerGameTheme({ id, name, theme }: { id: string; name: string; theme: any }): void;
         /**
          * Registers a new state class, should be a GameState derived class
          * @param {typeof import("../core/game_state").GameState} stateClass
          */
-        registerGameState(
-            stateClass: typeof import("../core/game_state").GameState
-        ): void;
+        registerGameState(stateClass: typeof import("../core/game_state").GameState): void;
         /**
          * @param {object} param0
          * @param {"regular"|"wires"} param0.toolbar
          * @param {"primary"|"secondary"} param0.location
          * @param {typeof MetaBuilding} param0.metaClass
          */
-        addNewBuildingToToolbar({
-            toolbar,
-            location,
-            metaClass,
-        }: {
-            toolbar: "regular" | "wires";
-            location: "primary" | "secondary";
-            metaClass: typeof MetaBuilding;
-        }): void;
+        addNewBuildingToToolbar({ toolbar, location, metaClass }: { toolbar: "regular" | "wires"; location: "primary" | "secondary"; metaClass: typeof MetaBuilding }): void;
         /**
          * Patches a method on a given class
          * @template {constructable} C  the class
@@ -10035,15 +9558,7 @@ declare module "mods/mod_interface" {
             P extends C["prototype"],
             M extends keyof P,
             O extends (args_0: any, ...args_1: any[]) => ReturnType<P[M]>
-        >(
-            classHandle: C,
-            methodName: M,
-            override: (
-                this: InstanceType<C>,
-                args_0: P[M],
-                args_1: Parameters<O>
-            ) => ReturnType<O>
-        ): void;
+        >(classHandle: C, methodName: M, override: (this: InstanceType<C>, args_0: P[M], args_1: Parameters<O>) => ReturnType<O>): void;
         /**
          * Runs before a method on a given class
          * @template {constructable} C  the class
@@ -10062,14 +9577,7 @@ declare module "mods/mod_interface" {
             P_1 extends C_1["prototype"],
             M_1 extends keyof P_1,
             O_1 extends (args_0: any, ...args_1: any[]) => ReturnType<P_1[M_1]>
-        >(
-            classHandle: C_1,
-            methodName: M_1,
-            executeBefore: (
-                this: InstanceType<C_1>,
-                ...args: Parameters<O_1>
-            ) => ReturnType<O_1>
-        ): void;
+        >(classHandle: C_1, methodName: M_1, executeBefore: (this: InstanceType<C_1>, ...args: Parameters<O_1>) => ReturnType<O_1>): void;
         /**
          * Runs after a method on a given class
          * @template {constructable} C  the class
@@ -10088,41 +9596,25 @@ declare module "mods/mod_interface" {
             P_2 extends C_2["prototype"],
             M_2 extends keyof P_2,
             O_2 extends (args_0: any, ...args_1: any[]) => ReturnType<P_2[M_2]>
-        >(
-            classHandle: C_2,
-            methodName: M_2,
-            executeAfter: (
-                this: InstanceType<C_2>,
-                ...args: Parameters<O_2>
-            ) => ReturnType<O_2>
-        ): void;
+        >(classHandle: C_2, methodName: M_2, executeAfter: (this: InstanceType<C_2>, ...args: Parameters<O_2>) => ReturnType<O_2>): void;
         /**
          *
          * @param {Object} prototype
          * @param {({ $super, $old }) => any} extender
          */
-        extendObject(
-            prototype: any,
-            extender: ({ $super, $old }: { $super: any; $old: any }) => any
-        ): void;
+        extendObject(prototype: any, extender: ({ $super, $old }: { $super: any; $old: any }) => any): void;
         /**
          *
          * @param {Class} classHandle
          * @param {({ $super, $old }) => any} extender
          */
-        extendClass(
-            classHandle: any,
-            extender: ({ $super, $old }: { $super: any; $old: any }) => any
-        ): void;
+        extendClass(classHandle: any, extender: ({ $super, $old }: { $super: any; $old: any }) => any): void;
         /**
          *
          * @param {string} id
          * @param {new (...args) => BaseHUDPart} element
          */
-        registerHudElement(
-            id: string,
-            element: new (...args: any[]) => BaseHUDPart
-        ): void;
+        registerHudElement(id: string, element: new (...args: any[]) => BaseHUDPart): void;
         /**
          *
          * @param {string | (new () => MetaBuilding)} buildingIdOrClass
@@ -10198,25 +9690,13 @@ declare module "mods/mod_interface" {
         new (...args: any[]): any;
         prototype: any;
     };
-    export type bindThis<F extends (...args: any) => any, T extends unknown> = (
-        this: T,
-        ...args: Parameters<F>
-    ) => ReturnType<F>;
+    export type bindThis<F extends (...args: any) => any, T extends unknown> = (this: T, ...args: Parameters<F>) => ReturnType<F>;
     /**
      * IMPORTANT: this puts the original parameters into an array
      */
-    export type beforePrams<F extends (...args: any[]) => any, P> = (
-        args_0: P,
-        args_1: Parameters<F>
-    ) => ReturnType<F>;
-    export type afterPrams<F extends (...args: any[]) => any, P> = (
-        args_0: any,
-        args_1: P
-    ) => ReturnType<F>;
-    export type extendsPrams<F extends (...args: any[]) => any> = (
-        args_0: any,
-        ...args_1: any[]
-    ) => ReturnType<F>;
+    export type beforePrams<F extends (...args: any[]) => any, P> = (args_0: P, args_1: Parameters<F>) => ReturnType<F>;
+    export type afterPrams<F extends (...args: any[]) => any, P> = (args_0: any, args_1: P) => ReturnType<F>;
+    export type extendsPrams<F extends (...args: any[]) => any> = (args_0: any, ...args_1: any[]) => ReturnType<F>;
     import { ModLoader } from "mods/modloader";
     import { BaseItem } from "game/base_item";
     import { Component } from "game/component";
@@ -10282,9 +9762,7 @@ declare module "mods/modloader" {
          *
          * @param {import("../savegame/savegame_typedefs").SavegameStoredMods} originalMods
          */
-        computeModDifference(
-            originalMods: import("../savegame/savegame_typedefs").SavegameStoredMods
-        ): {
+        computeModDifference(originalMods: import("../savegame/savegame_typedefs").SavegameStoredMods): {
             missing: {
                 id: string;
                 version: string;
@@ -10532,14 +10010,7 @@ declare module "core/buffer_maintainer" {
             w: number;
             h: number;
             dpi: number;
-            redrawMethod: (
-                arg0: HTMLCanvasElement,
-                arg1: CanvasRenderingContext2D,
-                arg2: number,
-                arg3: number,
-                arg4: number,
-                arg5: object | null
-            ) => void;
+            redrawMethod: (arg0: HTMLCanvasElement, arg1: CanvasRenderingContext2D, arg2: number, arg3: number, arg4: number, arg5: object | null) => void;
             additionalParams?: object | undefined;
         }): HTMLCanvasElement;
         /**
@@ -10549,13 +10020,7 @@ declare module "core/buffer_maintainer" {
          * @returns {HTMLCanvasElement?}
          *
          */
-        getForKeyOrNullNoUpdate({
-            key,
-            subKey,
-        }: {
-            key: string;
-            subKey: string;
-        }): HTMLCanvasElement | null;
+        getForKeyOrNullNoUpdate({ key, subKey }: { key: string; subKey: string }): HTMLCanvasElement | null;
     }
     export type CacheEntry = {
         canvas: HTMLCanvasElement;
@@ -10828,10 +10293,7 @@ declare module "game/hub_goals" {
          * Picks random colors which are close to each other
          * @param {RandomNumberGenerator} rng
          */
-        generateRandomColorSet(
-            rng: RandomNumberGenerator,
-            allowUncolored?: boolean
-        ): string[];
+        generateRandomColorSet(rng: RandomNumberGenerator, allowUncolored?: boolean): string[];
         /**
          * Creates a (seeded) random shape
          * @param {number} level
@@ -11183,11 +10645,7 @@ declare module "game/hud/parts/building_placer" {
          * @param {Vector[]=} ignorePositions
          * @returns
          */
-        checkForObstales(
-            from: Vector,
-            to: Vector,
-            ignorePositions?: Vector[] | undefined
-        ): boolean;
+        checkForObstales(from: Vector, to: Vector, ignorePositions?: Vector[] | undefined): boolean;
         /**
          * @param {DrawParameters} parameters
          */
@@ -11244,12 +10702,7 @@ declare module "game/hud/parts/debug_changes" {
          * @param {string} fillColor Color to display (Hex)
          * @param {number=} timeToDisplay How long to display the change
          */
-        renderChange(
-            label: string,
-            area: Rectangle,
-            fillColor: string,
-            timeToDisplay?: number | undefined
-        ): void;
+        renderChange(label: string, area: Rectangle, fillColor: string, timeToDisplay?: number | undefined): void;
     }
     export type DebugChange = {
         label: string;
@@ -11329,12 +10782,7 @@ declare module "game/hud/parts/entity_debugger" {
          * @param {number} indent
          * @param {Array} recursion
          */
-        propertyToHTML(
-            name: string,
-            val: any,
-            indent?: number,
-            recursion?: any[]
-        ): string;
+        propertyToHTML(name: string, val: any, indent?: number, recursion?: any[]): string;
         /**
          * Rerenders the whole container
          * @param {Entity} entity
@@ -11438,6 +10886,7 @@ declare module "game/hud/hud" {
             unlockNotificationFinished: any;
         };
         parts: {
+            waypoints: any;
             truthyBlockEdit: HUDTruthyTableEdit;
             buildingsToolbar: HUDBuildingsToolbar;
             blueprintPlacer: HUDBlueprintPlacer;
@@ -11448,6 +10897,7 @@ declare module "game/hud/hud" {
             dialogs: HUDModalDialogs;
             /** @type {HUDChangesDebugger} */
             changesDebugger: HUDChangesDebugger;
+            pinnedShapes: any;
         };
         trailerMaker: TrailerMaker;
         /**
@@ -11611,15 +11061,7 @@ declare module "game/logic" {
          * @param {Vector} param0.tile The tile to check at
          * @param {enumDirection} param0.edge The edge to check for
          */
-        computeWireEdgeStatus({
-            wireVariant,
-            tile,
-            edge,
-        }: {
-            wireVariant: enumWireVariant;
-            tile: Vector;
-            edge: enumDirection;
-        }): boolean;
+        computeWireEdgeStatus({ wireVariant, tile, edge }: { wireVariant: enumWireVariant; tile: Vector; edge: enumDirection }): boolean;
         /**
          * Returns all wire networks this entity participates in on the given tile
          * @param {Entity} entity
@@ -11718,13 +11160,7 @@ declare module "game/map_chunk_aggregate" {
          * @param {number} h
          * @param {number} dpi
          */
-        generateOverlayBuffer(
-            canvas: HTMLCanvasElement,
-            context: CanvasRenderingContext2D,
-            w: number,
-            h: number,
-            dpi: number
-        ): void;
+        generateOverlayBuffer(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, w: number, h: number, dpi: number): void;
         /**
          * Overlay
          * @param {DrawParameters} parameters
@@ -11760,31 +11196,19 @@ declare module "game/map" {
          * @param {number} chunkX
          * @param {number} chunkY
          */
-        getChunk(
-            chunkX: number,
-            chunkY: number,
-            createIfNotExistent?: boolean
-        ): MapChunkView;
+        getChunk(chunkX: number, chunkY: number, createIfNotExistent?: boolean): MapChunkView;
         /**
          * Returns the chunk aggregate containing a given chunk
          * @param {number} chunkX
          * @param {number} chunkY
          */
-        getAggregateForChunk(
-            chunkX: number,
-            chunkY: number,
-            createIfNotExistent?: boolean
-        ): MapChunkAggregate;
+        getAggregateForChunk(chunkX: number, chunkY: number, createIfNotExistent?: boolean): MapChunkAggregate;
         /**
          * Returns the given chunk aggregate by index
          * @param {number} aggX
          * @param {number} aggY
          */
-        getAggregate(
-            aggX: number,
-            aggY: number,
-            createIfNotExistent?: boolean
-        ): MapChunkAggregate;
+        getAggregate(aggX: number, aggY: number, createIfNotExistent?: boolean): MapChunkAggregate;
         /**
          * Gets or creates a new chunk if not existent for the given tile
          * @param {number} tileX
@@ -12003,17 +11427,13 @@ declare module "game/shape_definition_manager" {
          * @param {ShapeDefinition} definition
          * @returns {[ShapeDefinition, ShapeDefinition]}
          */
-        shapeActionCutHalf(
-            definition: ShapeDefinition
-        ): [ShapeDefinition, ShapeDefinition];
+        shapeActionCutHalf(definition: ShapeDefinition): [ShapeDefinition, ShapeDefinition];
         /**
          * Generates a definition for splitting a shape definition in four quads
          * @param {ShapeDefinition} definition
          * @returns {[ShapeDefinition, ShapeDefinition, ShapeDefinition, ShapeDefinition]}
          */
-        shapeActionCutQuad(
-            definition: ShapeDefinition
-        ): [ShapeDefinition, ShapeDefinition, ShapeDefinition, ShapeDefinition];
+        shapeActionCutQuad(definition: ShapeDefinition): [ShapeDefinition, ShapeDefinition, ShapeDefinition, ShapeDefinition];
         /**
          * Generates a definition for rotating a shape clockwise
          * @param {ShapeDefinition} definition
@@ -12038,30 +11458,21 @@ declare module "game/shape_definition_manager" {
          * @param {ShapeDefinition} upperDefinition
          * @returns {ShapeDefinition}
          */
-        shapeActionStack(
-            lowerDefinition: ShapeDefinition,
-            upperDefinition: ShapeDefinition
-        ): ShapeDefinition;
+        shapeActionStack(lowerDefinition: ShapeDefinition, upperDefinition: ShapeDefinition): ShapeDefinition;
         /**
          * Generates a definition for painting it with the given color
          * @param {ShapeDefinition} definition
          * @param {enumColors} color
          * @returns {ShapeDefinition}
          */
-        shapeActionPaintWith(
-            definition: ShapeDefinition,
-            color: enumColors
-        ): ShapeDefinition;
+        shapeActionPaintWith(definition: ShapeDefinition, color: enumColors): ShapeDefinition;
         /**
          * Generates a definition for painting it with the 4 colors
          * @param {ShapeDefinition} definition
          * @param {[enumColors, enumColors, enumColors, enumColors]} colors
          * @returns {ShapeDefinition}
          */
-        shapeActionPaintWith4Colors(
-            definition: ShapeDefinition,
-            colors: [enumColors, enumColors, enumColors, enumColors]
-        ): ShapeDefinition;
+        shapeActionPaintWith4Colors(definition: ShapeDefinition, colors: [enumColors, enumColors, enumColors, enumColors]): ShapeDefinition;
         /**
          * Checks if we already have cached this definition, and if so throws it away and returns the already
          * cached variant
@@ -12073,10 +11484,7 @@ declare module "game/shape_definition_manager" {
          * @param {[enumSubShape, enumSubShape, enumSubShape, enumSubShape]} subShapes
          * @returns {ShapeDefinition}
          */
-        getDefinitionFromSimpleShapes(
-            subShapes: [enumSubShape, enumSubShape, enumSubShape, enumSubShape],
-            color?: string
-        ): ShapeDefinition;
+        getDefinitionFromSimpleShapes(subShapes: [enumSubShape, enumSubShape, enumSubShape, enumSubShape], color?: string): ShapeDefinition;
     }
     import { BasicSerializableObject } from "savegame/serialization";
     import { GameRoot } from "game/root";
@@ -12176,11 +11584,7 @@ declare module "game/core" {
          * @param {import("../states/ingame").InGameState} parentState
          * @param {Savegame} savegame
          */
-        initializeRoot(
-            parentState: import("../states/ingame").InGameState,
-            savegame: Savegame,
-            gameModeId: any
-        ): void;
+        initializeRoot(parentState: import("../states/ingame").InGameState, savegame: Savegame, gameModeId: any): void;
         /**
          * Initializes a new game, this means creating a new map and centering on the
          * playerbase
@@ -12410,10 +11814,7 @@ declare module "savegame/savegame_serializer" {
          * @param {boolean=} sanityChecks Whether to check for validity
          * @returns {object}
          */
-        generateDumpFromGameRoot(
-            root: GameRoot,
-            sanityChecks?: boolean | undefined
-        ): object;
+        generateDumpFromGameRoot(root: GameRoot, sanityChecks?: boolean | undefined): object;
         /**
          * Verifies if there are logical errors in the savegame
          * @param {SerializedGame} savegame
@@ -12456,11 +11857,7 @@ declare module "savegame/serialization" {
      * @param {object=} mergeWith Any additional properties to merge with the schema, useful for super calls
      * @returns {object} Serialized data object
      */
-    export function serializeSchema(
-        obj: object,
-        schema: Schema,
-        mergeWith?: object | undefined
-    ): object;
+    export function serializeSchema(obj: object, schema: Schema, mergeWith?: object | undefined): object;
     /**
      * Deserializes data into an object
      * @param {object} obj The object to store the deserialized data into
@@ -12515,10 +11912,7 @@ declare module "savegame/serialization" {
          * @param {BaseDataType} valueType
          * @param {boolean=} includeEmptyValues
          */
-        keyValueMap(
-            valueType: BaseDataType,
-            includeEmptyValues?: boolean | undefined
-        ): TypeKeyValueMap;
+        keyValueMap(valueType: BaseDataType, includeEmptyValues?: boolean | undefined): TypeKeyValueMap;
         /**
          * @param {Object<string, any>} values
          */
@@ -12561,10 +11955,7 @@ declare module "savegame/serialization" {
          * @param {typeof BasicSerializableObject} classHandle
          * @param {SingletonFactoryTemplate<*>} registry
          */
-        classWithMetaclass(
-            classHandle: typeof BasicSerializableObject,
-            registry: any
-        ): TypeClassFromMetaclass;
+        classWithMetaclass(classHandle: typeof BasicSerializableObject, registry: any): TypeClassFromMetaclass;
     };
     export class BasicSerializableObject {
         static getId(): void;
@@ -12583,16 +11974,13 @@ declare module "savegame/serialization" {
          */
         constructor(...args: any[]);
         /** @returns {object | string | number} */
-        serialize(): object | string | number;
+        serialize(): object;
         /**
          * @param {any} data
          * @param {import("./savegame_serializer").GameRoot} root
          * @returns {string|void}
          */
-        deserialize(
-            data: any,
-            root?: import("./savegame_serializer").GameRoot
-        ): string | void;
+        deserialize(data: any, root?: import("./savegame_serializer").GameRoot): string | void;
     }
     /**
      * A full schema declaration
@@ -12897,13 +12285,13 @@ declare module "core/global_registries" {
         [x: string]: Array<any>;
     };
     /** @type {FactoryTemplate<Component>} */
-    export let gComponentRegistry: any;
+    export let gComponentRegistry: Factory<Component>;
     /** @type {FactoryTemplate<GameMode>} */
-    export let gGameModeRegistry: any;
+    export let gGameModeRegistry: Factory<GameMode>;
     /** @type {FactoryTemplate<BaseGameSpeed>} */
-    export let gGameSpeedRegistry: any;
+    export let gGameSpeedRegistry: Factory<BaseGameSpeed>;
     /** @type {FactoryTemplate<BaseItem>} */
-    export let gItemRegistry: any;
+    export let gItemRegistry: Factory<BaseItem>;
     export type BaseGameSpeed = import("game/time/base_game_speed").BaseGameSpeed;
     export type Component = import("game/component").Component;
     export type BaseItem = import("game/base_item").BaseItem;
@@ -12948,17 +12336,7 @@ declare module "core/background_resources_loader" {
          * @param {AtlasDefinition[]} param0.atlas
          * @param {string[]} param0.css
          */
-        loadAssets({
-            sprites,
-            sounds,
-            atlas,
-            css,
-        }: {
-            sprites: string[];
-            sounds: string[];
-            atlas: AtlasDefinition[];
-            css: string[];
-        }): Promise<void>;
+        loadAssets({ sprites, sounds, atlas, css }: { sprites: string[]; sounds: string[]; atlas: AtlasDefinition[]; css: string[] }): Promise<void>;
         /**
          * Shows an error when a resource failed to load and allows to reload the game
          */
@@ -13330,12 +12708,7 @@ declare module "profile/setting_types" {
          * @param {function(Application, any):void} changeCb
          * @param {function(Application) : boolean=} enabledCb
          */
-        constructor(
-            id: string,
-            categoryId: string,
-            changeCb: (arg0: Application, arg1: any) => void,
-            enabledCb?: ((arg0: Application) => boolean) | undefined
-        );
+        constructor(id: string, categoryId: string, changeCb: (arg0: Application, arg1: any) => void, enabledCb?: ((arg0: Application) => boolean) | undefined);
         id: string;
         categoryId: string;
         changeCb: (arg0: Application, arg1: any) => void;
@@ -13424,16 +12797,7 @@ declare module "profile/setting_types" {
         constructor(id: any, category: any, changeCb?: any, enabledCb?: any);
     }
     export class RangeSetting extends BaseSetting {
-        constructor(
-            id: any,
-            category: any,
-            changeCb?: any,
-            defaultValue?: number,
-            minValue?: number,
-            maxValue?: number,
-            stepSize?: number,
-            enabledCb?: any
-        );
+        constructor(id: any, category: any, changeCb?: any, defaultValue?: number, minValue?: number, maxValue?: number, stepSize?: number, enabledCb?: any);
         defaultValue: number;
         minValue: number;
         maxValue: number;
@@ -13886,14 +13250,7 @@ declare module "platform/browser/game_analytics" {
     export class ShapezGameAnalytics extends GameAnalyticsInterface {
         constructor(app: any);
         abtVariant: string;
-        get environment():
-            | "steam-demo"
-            | "prod"
-            | "dev"
-            | "steam"
-            | "prod-full"
-            | "alpha"
-            | "beta";
+        get environment(): "steam-demo" | "prod" | "dev" | "steam" | "prod-full" | "alpha" | "beta";
         fetchABVariant(): Promise<void>;
         note(action: any): void;
         noteMinor(action: any, payload?: string): void;
@@ -14006,23 +13363,17 @@ declare module "states/puzzle_menu" {
          *
          * @param {import("../savegame/savegame_typedefs").PuzzleMetadata[]} puzzles
          */
-        renderPuzzles(
-            puzzles: import("../savegame/savegame_typedefs").PuzzleMetadata[]
-        ): void;
+        renderPuzzles(puzzles: import("../savegame/savegame_typedefs").PuzzleMetadata[]): void;
         /**
          * @param {import("../savegame/savegame_typedefs").PuzzleMetadata} puzzle
          */
-        tryDeletePuzzle(
-            puzzle: import("../savegame/savegame_typedefs").PuzzleMetadata
-        ): void;
+        tryDeletePuzzle(puzzle: import("../savegame/savegame_typedefs").PuzzleMetadata): void;
         /**
          *
          * @param {*} category
          * @returns {Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>}
          */
-        getPuzzlesForCategory(
-            category: any
-        ): Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>;
+        getPuzzlesForCategory(category: any): Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>;
         /**
          *
          * @param {number} puzzleId
@@ -14034,10 +13385,7 @@ declare module "states/puzzle_menu" {
          * @param {import("../savegame/savegame_typedefs").PuzzleFullData} puzzle
          * @param {Array<number>=} nextPuzzles
          */
-        startLoadedPuzzle(
-            puzzle: import("../savegame/savegame_typedefs").PuzzleFullData,
-            nextPuzzles?: Array<number> | undefined
-        ): void;
+        startLoadedPuzzle(puzzle: import("../savegame/savegame_typedefs").PuzzleFullData, nextPuzzles?: Array<number> | undefined): void;
         loadPuzzle(): void;
         createNewPuzzle(force?: boolean): void;
     }
@@ -14056,10 +13404,7 @@ declare module "platform/api" {
          * @type {string|null}
          */
         token: string | null;
-        getEndpoint():
-            | "http://localhost:15001"
-            | "https://api-staging.shapez.io"
-            | "https://api.shapez.io";
+        getEndpoint(): "http://localhost:15001" | "https://api-staging.shapez.io" | "https://api.shapez.io";
         isLoggedIn(): boolean;
         /**
          *
@@ -14086,39 +13431,27 @@ declare module "platform/api" {
          * @param {"new"|"top-rated"|"mine"} category
          * @returns {Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>}
          */
-        apiListPuzzles(
-            category: "new" | "top-rated" | "mine"
-        ): Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>;
+        apiListPuzzles(category: "new" | "top-rated" | "mine"): Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>;
         /**
          * @param {{ searchTerm: string; difficulty: string; duration: string }} searchOptions
          * @returns {Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>}
          */
-        apiSearchPuzzles(searchOptions: {
-            searchTerm: string;
-            difficulty: string;
-            duration: string;
-        }): Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>;
+        apiSearchPuzzles(searchOptions: { searchTerm: string; difficulty: string; duration: string }): Promise<import("../savegame/savegame_typedefs").PuzzleMetadata[]>;
         /**
          * @param {number} puzzleId
          * @returns {Promise<import("../savegame/savegame_typedefs").PuzzleFullData>}
          */
-        apiDownloadPuzzle(
-            puzzleId: number
-        ): Promise<import("../savegame/savegame_typedefs").PuzzleFullData>;
+        apiDownloadPuzzle(puzzleId: number): Promise<import("../savegame/savegame_typedefs").PuzzleFullData>;
         /**
          * @param {number} puzzleId
          * @returns {Promise<import("../savegame/savegame_typedefs").PuzzleFullData>}
          */
-        apiDeletePuzzle(
-            puzzleId: number
-        ): Promise<import("../savegame/savegame_typedefs").PuzzleFullData>;
+        apiDeletePuzzle(puzzleId: number): Promise<import("../savegame/savegame_typedefs").PuzzleFullData>;
         /**
          * @param {string} shortKey
          * @returns {Promise<import("../savegame/savegame_typedefs").PuzzleFullData>}
          */
-        apiDownloadPuzzleByKey(
-            shortKey: string
-        ): Promise<import("../savegame/savegame_typedefs").PuzzleFullData>;
+        apiDownloadPuzzleByKey(shortKey: string): Promise<import("../savegame/savegame_typedefs").PuzzleFullData>;
         /**
          * @param {number} puzzleId
          * @returns {Promise<void>}
@@ -14147,11 +13480,7 @@ declare module "platform/api" {
          * @param {import("../savegame/savegame_typedefs").PuzzleGameData} payload.data
          * @returns {Promise<{ success: true }>}
          */
-        apiSubmitPuzzle(payload: {
-            title: string;
-            shortKey: string;
-            data: import("../savegame/savegame_typedefs").PuzzleGameData;
-        }): Promise<{
+        apiSubmitPuzzle(payload: { title: string; shortKey: string; data: import("../savegame/savegame_typedefs").PuzzleGameData }): Promise<{
             success: true;
         }>;
     }
@@ -14303,8 +13632,7 @@ declare module "application" {
          */
         updateAfterUiScaleChanged(): void;
     }
-    export type AchievementProviderInterface =
-        import("platform/achievement_provider").AchievementProviderInterface;
+    export type AchievementProviderInterface = import("platform/achievement_provider").AchievementProviderInterface;
     export type SoundInterface = import("platform/sound").SoundInterface;
     export type StorageInterface = import("platform/storage").StorageInterface;
     import { ApplicationSettings } from "profile/application_settings";
@@ -14444,9 +13772,7 @@ declare module "savegame/puzzle_serializer" {
          * @param {GameRoot} root
          * @returns {import("./savegame_typedefs").PuzzleGameData}
          */
-        generateDumpFromGameRoot(
-            root: GameRoot
-        ): import("./savegame_typedefs").PuzzleGameData;
+        generateDumpFromGameRoot(root: GameRoot): import("./savegame_typedefs").PuzzleGameData;
         /**
          * Tries to parse a signal code
          * @param {GameRoot} root
@@ -14458,10 +13784,7 @@ declare module "savegame/puzzle_serializer" {
          * @param {GameRoot} root
          * @param {import("./savegame_typedefs").PuzzleGameData} puzzle
          */
-        deserializePuzzle(
-            root: GameRoot,
-            puzzle: import("./savegame_typedefs").PuzzleGameData
-        ): string;
+        deserializePuzzle(root: GameRoot, puzzle: import("./savegame_typedefs").PuzzleGameData): string;
     }
     import { GameRoot } from "game/root";
     import { BaseItem } from "game/base_item";
@@ -14650,3 +13973,4 @@ declare module "game/game_speed_registry" {
 declare module "main" {
     export {};
 }
+declare function assert(condition: any, ...failureMessage: any): void;

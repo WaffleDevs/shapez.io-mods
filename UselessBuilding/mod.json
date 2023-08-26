@@ -1,0 +1,10 @@
+{
+    "name": "UselessBuilding",
+    "description": "Adds a useless building.",
+    "version": "1.0.0",
+    "affectsSavegame": true,
+
+    "settings": {
+        "enable": true
+    }
+}

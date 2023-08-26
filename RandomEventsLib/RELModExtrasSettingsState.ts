@@ -54,7 +54,8 @@ export class RELModExtrasSettingsState extends TextualGameState {
 
         // @ts-ignore
         if (
-            Object.keys(this.mod.stateEnterEvents).length == 0 ||
+            // @ts-ignore
+            Object.keys(this.mod.stateEnterEvents).length == 0 || // @ts-ignore
             Object.keys(this.mod.ingameRandomEvents).length == 0
         )
             return;

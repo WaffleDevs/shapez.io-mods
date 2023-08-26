@@ -1,0 +1,10 @@
+[
+  {
+    "version": "1.0.0",
+    "title": "Release",
+    "changelog": [
+      "Added dialog to set save seed when creating new save.",
+      "Added save stat to display seed."
+    ]
+  }
+]

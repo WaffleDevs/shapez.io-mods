@@ -1,10 +1,11 @@
 {
     "name": "WhoCares",
-    "description": "Allows a savegame to load even if you are missing certain buildings.",
+    "description": "Bypasses most issues when loading a savegame.",
     "version": "1.0.0",
-    "affectsSavegame": false,
-
+    "affectsSavegame": true,
     "settings": {
-        "savedTruthyTables": {}
+        "savedEntities": {},
+        "seenSmSNotice": false,
+        "latestChangelogSeen": ""
     }
 }

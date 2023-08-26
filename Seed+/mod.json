@@ -1,0 +1,6 @@
+{
+    "name": "SeedPlus",
+    "description": "Allows you to view a save's seed, and create saves with custom seeds.",
+    "version": "1.0.0",
+    "affectsSavegame": false
+}
