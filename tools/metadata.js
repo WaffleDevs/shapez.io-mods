@@ -1,7 +1,8 @@
 import * as path from "path";
 import { readFile } from "fs/promises";
 import { formatAsBanner, modFilePathToId, modFileToMetadataPath } from "./util.js";
-import { existsSync } from "fs";
+import { existsSync, readFileSync } from "fs";
+import json from "@rollup/plugin-json";
 
 /** @type {{ [k: string]: { name: string, email?: string, icon?: string } }} */
 const authors = JSON.parse(await readFile("./authors.json", "utf-8"));
@@ -23,7 +24,7 @@ function resolveAuthor(id) {
  *     version: string,
  *     authors?: string[],
  *     affectsSavegame?: boolean,
- *     extra: { authors?: { name: string, email?: string, icon?: string }[] }
+ *     extra: { authors?: { name: string, email?: string, icon?: string }[], updateURL?: string }
  *     [k: string]: any
  * }} metadata
  */
@@ -39,6 +40,9 @@ function expandBasicMetadata(id, metadata) {
     const affectsSavegame = metadata.affectsSavegame ?? true;
     metadata.doesNotAffectSavegame = !affectsSavegame;
     delete metadata.affectsSavegame;
+
+    metadata.website = `https://skimnerphi.net/mods/${id}`
+    metadata.extra.updateURL = `https://skimnerphi.net/api/v1/latest/${id}`
 
     return metadata;
 }
@@ -65,6 +69,7 @@ function resolveMetadata(id, json) {
 
     if (hasChangelog) {
         code = `import c from "./changelog.json";${code}metadata.extra.changelog = c;`;
+        MEChangelogToSkimnetVerions(id, result)
     }
 
     if (hasIcon) {
@@ -82,7 +87,7 @@ function resolveMetadata(id, json) {
 export function shapezMetadata() {
     return {
         name: "shapez-metadata",
-        buildStart() {},
+        buildStart() { },
         async banner(chunk) {
             if (!chunk.isEntry || !chunk.facadeModuleId) {
                 return "";
@@ -117,4 +122,32 @@ export function shapezMetadata() {
             };
         },
     };
+}
+
+
+/**
+ * Resolves the author, adds a website polyfill etc. but DOES NOT
+ * add icon, README or changelog.
+ * @param {string} id
+ * @param {{
+*     name: string,
+*     description: string,
+*     version: string,
+*     authors?: string[],
+*     affectsSavegame?: boolean,
+*     extra: { authors?: { name: string, email?: string, icon?: string }[], updateURL?: string }
+*     [k: string]: any
+* }} metadata
+*/
+export async function MEChangelogToSkimnetVerions(id, metadata) {
+    /** 
+    *  @type {[]}
+    */
+    const changelog = JSON.parse(await readFile(path.join(id, "changelog.json"), 'utf-8'))
+    const result = Object.entries(changelog).map(([key, val]) => {
+        return {
+            "version": key,
+            "changelog": val
+        }
+    })
 }
