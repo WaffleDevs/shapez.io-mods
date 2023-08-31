@@ -5,8 +5,7 @@ import { GameRoot } from "game/root";
 import { type SerializedGame } from "savegame/savegame";
 import WhoCares from "..";
 import { createLogger } from "core/logging";
-import { getSettings, setSettings } from "../settings";
-import { StaticMapEntityComponent } from "game/components/static_map_entity";
+import { runPossibleFixed } from "../ModSpecificFixes/handler";
 const logger = createLogger("forceload/serint");
 
 export const SerializerInternalExt = ({ $super, $old }) => ({
@@ -21,65 +20,29 @@ export const SerializerInternalExt = ({ $super, $old }) => ({
         return serialized;
     },
 
-    deserializeEntityArray(root: GameRoot, array: Entity[], savegame: SerializedGame) {
-        let result;
+    deserializeEntityArray(root: GameRoot, array: Entity[]) {
         for (let i = 0; i < array.length; ++i) {
-            result = result || this.deserializeEntity(root, array[i], savegame);
+            this.deserializeEntity(root, array[i]);
         }
-        if (result) return result;
     },
 
-    deserializeEntity(root: GameRoot, payload: Entity, savegame: SerializedGame) {
-        const forceLoad = WhoCares.prototype.forceLoad;
-
+    deserializeEntity(root: GameRoot, payload: Entity) {
         const staticData = payload.components.StaticMapEntity;
         assert(staticData, "entity has no static data");
         let code = staticData.code;
         let data = getBuildingDataFromCode(code);
+        console.log(`log ${payload.uid}`);
         if (data == undefined) {
-            if (!forceLoad) return "Unregistered Building";
-            else {
-                root.savegame.getCurrentDump().entities.splice(root.savegame.getCurrentDump().entities.indexOf(payload));
-
-                const buildingData = getSettings("savedEntities", payload.uid);
-                if (!buildingData) return;
-                code = `Missing${buildingData.tileSize.x}x${buildingData.tileSize.y}Building`;
-                data = getBuildingDataFromCode(code);
-                data.rotationVariant = buildingData.rotationVariant;
-                data.variant = buildingData.variant;
-            }
+            if (WhoCares.prototype.forceLoad) {
+                return;
+                // console.log(`Debug - file: SerializerInternal.ts:37 - deserializeEntity - hoCares.prototype.forceLoa:`, WhoCares.prototype.forceLoad);
+                // WhoCares.prototype.removedEntityUids.push(payload.uid);
+                // root.savegame.getCurrentDump().entities.splice(root.savegame.getCurrentDump().entities.indexOf(payload));
+                // return;
+            } else throw new Error(); //return "Unregistered Building";
         }
-        if (!forceLoad)
-            setSettings(
-                "savedEntities",
-                0,
-                {
-                    tileSize: data.tileSize,
-                    rotationVariant: data.rotationVariant,
-                    variant: data.variant,
-                },
-                payload.uid
-            );
 
         const metaBuilding = data.metaInstance;
-        metaBuilding.createEntity = function ({ root, origin, rotation, originalRotation, rotationVariant, variant }) {
-            const entity = new Entity(root);
-            entity.layer = this.getLayer();
-            entity.addComponent(
-                new StaticMapEntityComponent({
-                    origin: new Vector(origin.x, origin.y),
-                    rotation,
-                    originalRotation,
-                    tileSize: this.getDimensions(variant).copy(),
-                    code: code,
-                })
-            );
-            entity.components.StaticMapEntity.code = code;
-            this.setupEntityComponents(entity, root);
-            this.updateVariants(entity, rotationVariant, variant);
-
-            return entity;
-        };
 
         const entity = metaBuilding.createEntity({
             root,
@@ -91,12 +54,17 @@ export const SerializerInternalExt = ({ $super, $old }) => ({
         });
 
         entity.uid = payload.uid;
-
         this.deserializeComponents(root, entity, payload.components);
-        entity.components.StaticMapEntity.code = code;
-        entity.uid = payload.uid;
-        console.log(entity.uid);
+        if (WhoCares.prototype.forceLoad) {
+            const fixes = runPossibleFixed("preEntityPlaceDeserialize");
+            const preEntityPlaceDeserialize = fixes[0],
+                ids = fixes[1];
+            for (let i = 0; i < ids.length; i++) {
+                eval(preEntityPlaceDeserialize[ids[i]] + `fix${ids[i]}()`);
+            }
+        }
         root.entityMgr.registerEntity(entity, payload.uid);
+        console.log(entity);
         root.map.placeStaticEntity(entity);
     },
 

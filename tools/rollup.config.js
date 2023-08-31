@@ -11,8 +11,12 @@ import { modSources, resolveModEntry } from "./mod_resolver.js";
 import { shapez } from "./shapez_plugin.js";
 import { resolveShapezModule, shapezExternal } from "./util.js";
 import { marked } from "./marked.js";
-
+import skimnet from "./skimnet.js";
+import image from "@rollup/plugin-image";
+import pug from "rollup-plugin-pug";
 const plugins = [
+    // @ts-ignore invalid typings
+    image(),
     // @ts-ignore invalid typings
     typescript(),
     // @ts-ignore invalid typings
@@ -20,9 +24,14 @@ const plugins = [
     // @ts-ignore invalid typings
     json({ exclude: "**/mod.json" }),
     sass(),
+
+    pug({
+        staticPattern: /\.(?:pug|jade)$/
+    }),
     marked(),
     shapezMetadata(),
     shapez(),
+    skimnet(),
     // @ts-ignore invalid typings
     terser(),
     // @ts-ignore invalid typings

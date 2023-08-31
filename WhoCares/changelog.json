@@ -1,36 +1,15 @@
 {
-    "0.3.0": [
-        "New APIs for requirements and type checking"
+    "0.1.5": [
+        "Started Work on mod specific fixed. Added failsafe for CCT and possibly fixed Wrexcavator errors.",
+        "Added dialog disabling forceload when there are mod differences.",
+        "Added button to forceload without failing save first.",
+        "Set mod's warning buttons to timeout."
     ],
-    "0.2.2": [
-        "Limit image width in \"About this mod\" to avoid overflow"
-    ],
-    "0.2.1": [
-        "Switched to new mod build system"
-    ],
-    "0.2.0": [
-        "Initial support for mod settings",
-        "\"Filtered List\" re-usable component",
-        "Switched to filtered list component for mod list",
-        "Fixed mod.io link opening incorrectly"
-    ],
-    "0.1.2": [
-        "Optimized assets to reduce bundle size"
-    ],
-    "0.1.2-rc1": [
-        "Initial version of \"About this mod\" for Mod Extras",
-        "Internal metadata refactor",
-        "Focus filter input field when opening mod list"
-    ],
-    "0.1.2-beta2": [
-        "Helper attribute to display images based on current theme in \"About this mod\"",
-        "Fixed header alignment in \"About this mod\" tables",
-        "Use custom storage system to fix changelog issues",
-        "Fixed incorrect handling of changelogs for new mods"
-    ],
-    "0.1.2-beta1": [
-        "Changelog support",
-        "Mention whether mods affect savegames",
-        "Small \"About this mod\" fixes"
+    "0.1.0": [
+        "Combined Save My Save code into Who Cares",
+        "Added information dialog about Save My Save",
+        "Added missing and corrupt building removal",
+        "Added dialog for confirming forceloading",
+        "Fixed missing mod screen bug that errors on loading save"
     ]
 }

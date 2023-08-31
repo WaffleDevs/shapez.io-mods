@@ -1,6 +1,6 @@
 {
-    "name": "UsaaessBuilding",
-    "description": "Adds a useless building.",
+    "name": "DevTools",
+    "description": "Adds 1 dev tool atm.",
     "version": "1.0.0",
     "affectsSavegame": true,
     "settings": {

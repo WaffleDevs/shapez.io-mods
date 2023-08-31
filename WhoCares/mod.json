@@ -1,11 +1,12 @@
 {
     "name": "WhoCares",
     "description": "Bypasses most issues when loading a savegame.",
-    "version": "1.0.0",
-    "affectsSavegame": true,
+    "version": "0.1.5",
+    "affectsSavegame": false,
     "settings": {
         "savedEntities": {},
         "seenSmSNotice": false,
         "latestChangelogSeen": ""
-    }
+    },
+    "extra": {}
 }

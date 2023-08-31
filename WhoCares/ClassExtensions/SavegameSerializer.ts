@@ -6,6 +6,10 @@ import { MOD_SIGNALS } from "mods/mod_signals";
 import { SerializedGame } from "savegame/savegame_typedefs";
 import { createLogger } from "core/logging";
 import WhoCares from "..";
+import { Camera } from "game/camera";
+import { GameTime } from "game/time/game_time";
+import { ProductionAnalytics } from "game/production_analytics";
+import { RegularGameSpeed } from "game/time/regular_game_speed";
 const logger = createLogger("forceload/savser");
 
 export const SavegameSerializerExt = ({ $super, $old }) => ({
@@ -46,6 +50,7 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
             return ExplainedResult.bad("Savegame has no entities");
         }
         const forceLoad = WhoCares.prototype.forceLoad;
+
         const seenUids = new Set();
 
         // Check for duplicate UIDS
@@ -103,21 +108,36 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
      * @returns {ExplainedResult}
      */
     deserialize(savegame: SerializedGame, root: GameRoot): ExplainedResult {
-        const forceLoad = WhoCares.prototype.forceLoad;
+        WhoCares.prototype.removedEntityUids = [];
         const verifyResult = this.verifyLogicalErrors(root, savegame);
         if (!verifyResult.result) {
             return ExplainedResult.bad(verifyResult.reason);
         }
         let errorReason = null;
 
-        errorReason = errorReason || root.entityMgr.deserialize(savegame.entityMgr);
-        errorReason = errorReason || root.time.deserialize(savegame.time);
-        errorReason = errorReason || root.camera.deserialize(savegame.camera);
-        errorReason = errorReason || root.map.deserialize(savegame.map);
-        errorReason = errorReason || root.gameMode.deserialize(savegame.gameMode);
-        errorReason = errorReason || root.hubGoals.deserialize(savegame.hubGoals, root);
-        errorReason = errorReason || this.internal.deserializeEntityArray(root, savegame.entities, forceLoad);
-        errorReason = errorReason || root.systemMgr.systems.belt.deserializePaths(savegame.beltPaths);
+        errorReason = errorReason || root.entityMgr.deserialize(savegame.entityMgr); // Havent had issues
+
+        try {
+            if (typeof root.time.deserialize(savegame.time) == "string" && WhoCares.prototype.forceLoad) {
+                const { timeSeconds, realtimeSeconds, speed } = new GameTime(root);
+                savegame.time.timeSeconds = timeSeconds;
+                savegame.time.realtimeSeconds = realtimeSeconds;
+                savegame.time.speed = { $: speed.getId(), data: {} };
+            }
+        } catch (error) {}
+
+        errorReason = errorReason || root.time.deserialize(savegame.time); // What
+
+        try {
+            if (typeof root.camera.deserialize(savegame.camera) == "string" && WhoCares.prototype.forceLoad) savegame.camera.prototype = new Camera(root);
+        } catch (error) {}
+
+        errorReason = errorReason || root.camera.deserialize(savegame.camera); // Unimportant to bypass. Doing it anyway 👍
+        errorReason = errorReason || root.map.deserialize(savegame.map); // Unimportant to bypass.
+        errorReason = errorReason || root.gameMode.deserialize(savegame.gameMode); // Not going to fix until someone actually breaks this 👍
+        errorReason = errorReason || root.hubGoals.deserialize(savegame.hubGoals, root); // Fixed via WhoCares root/PrePostFixes/Post.MainMenuState.onEnter.ts
+        errorReason = errorReason || this.internal.deserializeEntityArray(root, savegame.entities); // Fixed via WhoCares root/ClassExtensions/SerializerInternal.ts
+        errorReason = errorReason || root.systemMgr.systems.belt.deserializePaths(savegame.beltPaths); // Fixed via WhoCares root/MethodReplacements/BeltSystem.deserializePaths.ts
 
         if (root.hud.parts.pinnedShapes) {
             errorReason = errorReason || root.hud.parts.pinnedShapes.deserialize(savegame.pinnedShapes);

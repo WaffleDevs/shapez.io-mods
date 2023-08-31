@@ -1,0 +1,6 @@
+{
+    "1.0.0": [
+        "Added dialog to New Save for inputting custom seed.",
+        "Added savegame stat to display seed."
+    ]
+}

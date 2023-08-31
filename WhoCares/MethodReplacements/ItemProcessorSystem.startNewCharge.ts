@@ -1,5 +1,6 @@
+import { createLogger } from "core/logging";
 import { forceLoadExeptionLogger } from "..";
-
+const logger = createLogger("forceload/startCharge");
 export function startNewChargeRep($original, [entity]) {
     try {
         const processorComp = entity.components.ItemProcessor;
@@ -44,7 +45,6 @@ export function startNewChargeRep($original, [entity]) {
         processorComp.inputSlots.clear();
         processorComp.inputCount = 0;
     } catch (e) {
-        forceLoadExeptionLogger.error("ForceLoad error. ItemProcessorSystem.startNewCharge.ts");
-        forceLoadExeptionLogger.error(e);
+        logger.log("Forceloading past startNewCharge error.");
     }
 }

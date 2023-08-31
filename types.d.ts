@@ -8409,7 +8409,7 @@ declare module "game/systems/belt" {
          * Deserializes all belt paths
          * @param {Array<any>} data
          */
-        deserializePaths(data: Array<any>): string;
+        deserializePaths(data: Array<any>): string | void;
         /**
          * Updates the belt placement after an entity has been added / deleted
          * @param {Entity} entity
