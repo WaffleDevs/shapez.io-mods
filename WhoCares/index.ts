@@ -7,7 +7,6 @@ import { createLogger } from "core/logging";
 import { BeltSystem } from "game/systems/belt";
 import { Mod } from "mods/mod";
 import { SavegameSerializer } from "savegame/savegame_serializer";
-import { SerializedGame } from "savegame/savegame_typedefs";
 import { SerializerInternal } from "savegame/serializer_internal";
 import { InGameState } from "states/ingame";
 import { MainMenuState } from "states/main_menu";
@@ -20,27 +19,26 @@ import { onEnterPost } from "./PrePostFixes/Post.MainMenuState.onEnter";
 import { moveToStatePre } from "./PrePostFixes/Pre.GameState.moveToState";
 import { initializeSettings } from "./settings";
 
-import { fixCCT } from "./ModSpecificFixes/CCT";
-import { registerModFix, runPossibleFixed } from "./ModSpecificFixes/handler";
-import style from "./style.scss";
-import { fixWrexcavator } from "./ModSpecificFixes/Wrexcavator";
-//@ts-expect-error
-import index from "C:/Users/Heather/OneDrive/Documents/Shapez.io/DengrNewEnv/WhoCares/index.pug";
+import { globalConfig } from "core/config";
 import { ItemProcessorSystem } from "game/systems/item_processor";
 import { startNewChargeRep } from "./MethodReplacements/ItemProcessorSystem.startNewCharge";
+import { fixCCT } from "./ModSpecificFixes/CCT";
+import { fixWrexcavator } from "./ModSpecificFixes/Wrexcavator";
+import { registerModFix, runPossibleFixed } from "./ModSpecificFixes/handler";
+import style from "./style.scss";
+//@ts-expect-error
+import index from "C:/Users/Heather/OneDrive/Documents/Shapez.io/DengrNewEnv/WhoCares/index.pug";
 
 const logger = createLogger("forceload/core");
 export const forceLoadExeptionLogger = createLogger("forceload/error");
 
 export default class WhoCares extends Mod {
-    public latestSavegame: SerializedGame;
-    public forceLoad: boolean = false;
-    public hasAllMods: boolean = false;
-    public removedEntityUids: number[] = [];
-    public WhoCaresSavegameData: Object = {
-        savedEntities: {},
-    };
     override init() {
+        globalConfig["forceload"] = false;
+        globalConfig["latestSavegame"] = undefined;
+        globalConfig["hasAllMods"] = false;
+        globalConfig["removedEntityUids"] = [];
+
         if (false) {
             this.settings = {};
             this.saveSettings();
@@ -82,7 +80,7 @@ export default class WhoCares extends Mod {
                     this.settings.seenSmSNotice = true;
                     this.saveSettings();
                 }
-                if (this.forceLoad) {
+                if (globalConfig["forceload"]) {
                     const fixes = runPossibleFixed("MainMenuState");
                     const preEntityPlaceDeserialize = fixes[0],
                         ids = fixes[1];

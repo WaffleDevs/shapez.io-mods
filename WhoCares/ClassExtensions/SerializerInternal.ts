@@ -1,10 +1,9 @@
+import { globalConfig } from "core/config";
+import { createLogger } from "core/logging";
 import { Vector } from "core/vector";
-import { getBuildingDataFromCode, getCodeFromBuildingData } from "game/building_codes";
+import { getBuildingDataFromCode } from "game/building_codes";
 import { Entity } from "game/entity";
 import { GameRoot } from "game/root";
-import { type SerializedGame } from "savegame/savegame";
-import WhoCares from "..";
-import { createLogger } from "core/logging";
 import { runPossibleFixed } from "../ModSpecificFixes/handler";
 const logger = createLogger("forceload/serint");
 
@@ -33,10 +32,10 @@ export const SerializerInternalExt = ({ $super, $old }) => ({
         let data = getBuildingDataFromCode(code);
         console.log(`log ${payload.uid}`);
         if (data == undefined) {
-            if (WhoCares.prototype.forceLoad) {
+            if (globalConfig["forceload"]) {
                 return;
-                // console.log(`Debug - file: SerializerInternal.ts:37 - deserializeEntity - hoCares.prototype.forceLoa:`, WhoCares.prototype.forceLoad);
-                // WhoCares.prototype.removedEntityUids.push(payload.uid);
+                // console.log(`Debug - file: SerializerInternal.ts:37 - deserializeEntity - hoCares.prototype.forceLoa:`, globalConfig["forceload"]);
+                // globalConfig["removedEntityUids"].push(payload.uid);
                 // root.savegame.getCurrentDump().entities.splice(root.savegame.getCurrentDump().entities.indexOf(payload));
                 // return;
             } else throw new Error(); //return "Unregistered Building";
@@ -55,7 +54,7 @@ export const SerializerInternalExt = ({ $super, $old }) => ({
 
         entity.uid = payload.uid;
         this.deserializeComponents(root, entity, payload.components);
-        if (WhoCares.prototype.forceLoad) {
+        if (globalConfig["forceload"]) {
             const fixes = runPossibleFixed("preEntityPlaceDeserialize");
             const preEntityPlaceDeserialize = fixes[0],
                 ids = fixes[1];

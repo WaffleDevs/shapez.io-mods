@@ -24,7 +24,6 @@ const plugins = [
     // @ts-ignore invalid typings
     json({ exclude: "**/mod.json" }),
     sass(),
-
     pug({
         staticPattern: /\.(?:pug|jade)$/
     }),

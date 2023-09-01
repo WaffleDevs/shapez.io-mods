@@ -7,28 +7,27 @@
     https://mod.io/g/shapez/m/save-my-save
 */
 
-import { ShapeDefinition } from "game/shape_definition";
-import WhoCares from "..";
-import { MainMenuState } from "states/main_menu";
+import { globalConfig } from "core/config";
 import { createLogger } from "core/logging";
+import { ShapeDefinition } from "game/shape_definition";
 
 const logger = createLogger("forceload/oneEnter");
 
 export function onEnterPost(payload) {
     if (!payload.loadError) return;
     this.dialogs.close();
-    if (WhoCares.prototype.forceLoad) {
+    if (globalConfig["forceload"]) {
         const { ok } = this.dialogs.showWarning(
             "Failed",
             "WhoCares was unable to forceload your savegame. Please DM 'WaffleDevs' on discord and send them the save game for additional help.",
             ["ok:good:timeout"]
         );
         ok.add(() => {
-            WhoCares.prototype.forceLoad = false;
+            globalConfig["forceload"] = false;
         });
         return;
     }
-    if (WhoCares.prototype.hasAllMods) {
+    if (globalConfig["hasAllMods"]) {
         const { forceload } = this.dialogs.showWarning(
             "Force Load?",
             "Savegame failed to load. Forceloading may remove any errors and load anyway. This will destroy any data that is invalid. Create a backup before clicking continue.",
@@ -36,7 +35,7 @@ export function onEnterPost(payload) {
         );
         forceload.add(() => {
             // Save My Save
-            const dump = WhoCares.prototype.latestSavegame;
+            const dump = globalConfig["latestSavegame"];
             if (dump.hubGoals != undefined) {
                 for (const key of Object.keys(dump.hubGoals.storedShapes)) {
                     try {
@@ -48,7 +47,7 @@ export function onEnterPost(payload) {
                 }
             }
             // End Save My Save
-            WhoCares.prototype.forceLoad = true;
+            globalConfig["forceload"] = true;
             this.moveToState("InGameState", {
                 savegame: dump,
             });
@@ -61,7 +60,7 @@ export function onEnterPost(payload) {
         );
         next.add(() => {
             this.dialogs.close();
-            this.checkForModDifferences(WhoCares.prototype.latestSavegame);
+            this.checkForModDifferences(globalConfig["latestSavegame"]);
         });
         return;
     }

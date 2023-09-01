@@ -1,17 +1,17 @@
+import { globalConfig } from "core/config";
 import { MODS } from "mods/modloader";
 import { T } from "translations";
-import WhoCares from "..";
 
 export function checkForModDifferencesRep($original, [savegame]) {
     const difference = MODS.computeModDifference(savegame.currentData.mods);
 
     if (difference.missing.length === 0 && difference.extra.length === 0) {
-        WhoCares.prototype.hasAllMods = true;
+        globalConfig["hasAllMods"] = true;
         return Promise.resolve();
     }
-    WhoCares.prototype.hasAllMods = false;
+    globalConfig["hasAllMods"] = false;
 
-    console.log(`Debug - file: MainMenuState.checkForModDifferences.ts:10 - checkForModDifferencesRep - hasAllMods:`, WhoCares.prototype.hasAllMods);
+    console.log(`Debug - file: MainMenuState.checkForModDifferences.ts:10 - checkForModDifferencesRep - hasAllMods:`, globalConfig["hasAllMods"]);
 
     let dialogHtml = T.dialogs.modsDifference.desc;
 

@@ -1,6 +1,6 @@
-import { makeDiv, formatSecondsToTimeAgo } from "core/utils";
+import { globalConfig } from "core/config";
+import { formatSecondsToTimeAgo, makeDiv } from "core/utils";
 import { T } from "translations";
-import WhoCares from "..";
 
 export function renderSavegamesRep($original, []) {
     const oldContainer = this.htmlElement.querySelector(".mainContainer .savegames");
@@ -51,7 +51,7 @@ export function renderSavegamesRep($original, []) {
                     ["cancel:good", "forceload:bad:timeout"]
                 );
                 forceload.add(() => {
-                    WhoCares.prototype.forceLoad = true;
+                    globalConfig["forceload"] = true;
                     this.resumeGame(games[i]);
                 });
             });

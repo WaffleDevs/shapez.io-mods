@@ -7,8 +7,7 @@
     https://mod.io/g/shapez/m/save-my-save
 */
 
-import { itemResolverSingleton } from "game/item_resolver";
-import WhoCares from "..";
+import { globalConfig } from "core/config";
 import { createLogger } from "core/logging";
 import { BeltPath } from "game/belt_path";
 /**if (data[i].items) {
@@ -26,17 +25,17 @@ import { BeltPath } from "game/belt_path";
 const logger = createLogger("forceload/desSerPath");
 
 export function deserializePathsRep($original, [data]) {
-    console.log(WhoCares.prototype.forceLoad + " BELT DESER");
-    if (WhoCares.prototype.forceLoad) {
+    console.log(globalConfig["forceload"] + " BELT DESER");
+    if (globalConfig["forceload"]) {
         if (!Array.isArray(data)) {
             return "Belt paths are not an array: " + typeof data;
         }
 
         for (let i = 0; i < data.length; ++i) {
-            for (let i = 0; i < WhoCares.prototype.removedEntityUids.length; ++i) {
-                console.log(WhoCares.prototype.removedEntityUids[i]);
+            for (let i = 0; i < globalConfig["removedEntityUids"].length; ++i) {
+                console.log(globalConfig["removedEntityUids"][i]);
                 console.log(data[i].entityPath);
-                if (data[i].entityPath.includes(WhoCares.prototype.removedEntityUids[i])) console.log(data[i]);
+                if (data[i].entityPath.includes(globalConfig["removedEntityUids"][i])) console.log(data[i]);
             }
             const path = BeltPath.fromSerialized(this.root, data[i]);
             // If path is a string, that means its an error

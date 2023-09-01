@@ -1,15 +1,13 @@
+import { globalConfig } from "core/config";
 import { GameRoot } from "core/draw_parameters";
 import { ExplainedResult } from "core/explained_result";
 import { gComponentRegistry } from "core/global_registries";
+import { createLogger } from "core/logging";
+import { Camera } from "game/camera";
 import { Entity } from "game/entity";
+import { GameTime } from "game/time/game_time";
 import { MOD_SIGNALS } from "mods/mod_signals";
 import { SerializedGame } from "savegame/savegame_typedefs";
-import { createLogger } from "core/logging";
-import WhoCares from "..";
-import { Camera } from "game/camera";
-import { GameTime } from "game/time/game_time";
-import { ProductionAnalytics } from "game/production_analytics";
-import { RegularGameSpeed } from "game/time/regular_game_speed";
 const logger = createLogger("forceload/savser");
 
 export const SavegameSerializerExt = ({ $super, $old }) => ({
@@ -49,7 +47,7 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
         if (!savegame.entities) {
             return ExplainedResult.bad("Savegame has no entities");
         }
-        const forceLoad = WhoCares.prototype.forceLoad;
+        const forceLoad = globalConfig["forceload"];
 
         const seenUids = new Set();
 
@@ -108,7 +106,7 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
      * @returns {ExplainedResult}
      */
     deserialize(savegame: SerializedGame, root: GameRoot): ExplainedResult {
-        WhoCares.prototype.removedEntityUids = [];
+        globalConfig["removedEntityUids"] = [];
         const verifyResult = this.verifyLogicalErrors(root, savegame);
         if (!verifyResult.result) {
             return ExplainedResult.bad(verifyResult.reason);
@@ -118,7 +116,7 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
         errorReason = errorReason || root.entityMgr.deserialize(savegame.entityMgr); // Havent had issues
 
         try {
-            if (typeof root.time.deserialize(savegame.time) == "string" && WhoCares.prototype.forceLoad) {
+            if (typeof root.time.deserialize(savegame.time) == "string" && globalConfig["forceload"]) {
                 const { timeSeconds, realtimeSeconds, speed } = new GameTime(root);
                 savegame.time.timeSeconds = timeSeconds;
                 savegame.time.realtimeSeconds = realtimeSeconds;
@@ -129,7 +127,7 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
         errorReason = errorReason || root.time.deserialize(savegame.time); // What
 
         try {
-            if (typeof root.camera.deserialize(savegame.camera) == "string" && WhoCares.prototype.forceLoad) savegame.camera.prototype = new Camera(root);
+            if (typeof root.camera.deserialize(savegame.camera) == "string" && globalConfig["forceload"]) savegame.camera.prototype = new Camera(root);
         } catch (error) {}
 
         errorReason = errorReason || root.camera.deserialize(savegame.camera); // Unimportant to bypass. Doing it anyway 👍
