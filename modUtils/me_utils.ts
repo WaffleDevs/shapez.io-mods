@@ -10,7 +10,7 @@ const GET_MOD_EXTRAS_URL = "https://skimnerphi.net/mods/mod_extras/";
 
 declare global {
     interface Window {
-        ModExtras:any;
+        ModExtras: any;
     }
 }
 
@@ -21,8 +21,10 @@ function getMEVersion(): string | null {
 function showMissingDialog(mod: Mod, optional: boolean = false) {
     const { getModExtras }: { [k: string]: Signal } = mod.dialogs.showWarning(
         "Mod Extras Missing",
-        optional ? `Mod "${mod.metadata.name}" recommends an up-to-date
-        version of Mod Extras to function properly.` : `Mod "${mod.metadata.name}" requires an up-to-date
+        optional
+            ? `Mod "${mod.metadata.name}" recommends an up-to-date
+        version of Mod Extras to function properly.`
+            : `Mod "${mod.metadata.name}" requires an up-to-date
         version of Mod Extras to function properly.`,
         ["later:bad", "getModExtras:good"]
     );

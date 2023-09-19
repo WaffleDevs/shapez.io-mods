@@ -45,10 +45,14 @@ export function renderSavegamesRep($original, []) {
             this.trackClicks(downloadButton, () => this.downloadGame(games[i]));
             this.trackClicks(resumeButton, () => this.resumeGame(games[i]));
             this.trackClicks(forceLoadbutton, () => {
+                if (globalConfig["WhoCaresDevMode"]) {
+                    globalConfig["forceload"] = true;
+                    this.resumeGame(games[i]);
+                }
                 const { forceload } = this.dialogs.showWarning(
                     "Force Load?",
                     "Savegame failed to load. Forceloading may remove any errors and load anyway. This will destroy any data that is invalid. Create a backup before clicking continue.",
-                    ["cancel:good", "forceload:bad:timeout"]
+                    ["cancel:good", `forceload:bad${globalConfig["WhoCaresDevMode"] ? "" : ":timeout"}`]
                 );
                 forceload.add(() => {
                     globalConfig["forceload"] = true;

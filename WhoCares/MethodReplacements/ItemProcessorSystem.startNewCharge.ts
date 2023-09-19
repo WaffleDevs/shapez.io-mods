@@ -1,5 +1,4 @@
-import { createLogger } from "core/logging";
-const logger = createLogger("forceload/startCharge");
+import { registerError } from "../ErrorViewer/errorViewer";
 export function startNewChargeRep($original, [entity]) {
     try {
         const processorComp = entity.components.ItemProcessor;
@@ -44,6 +43,7 @@ export function startNewChargeRep($original, [entity]) {
         processorComp.inputSlots.clear();
         processorComp.inputCount = 0;
     } catch (e) {
-        logger.log("Forceloading past startNewCharge error.");
+        //forceLoadBypassLogger.log("Forceloading past startNewCharge error.");
+        registerError(e, entity);
     }
 }

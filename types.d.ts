@@ -1590,8 +1590,8 @@ declare module "core/click_detector" {
         clickSound?: string;
         preventClick?: boolean;
     };
-    import { Vector } from "core/vector";
     import { Signal } from "core/signal";
+    import { Vector } from "core/vector";
 }
 declare module "core/input_receiver" {
     export class InputReceiver {
@@ -2073,9 +2073,9 @@ declare module "game/key_action_mapper" {
         getBindingById(id: string): Keybinding;
     }
     import { Application } from "application";
+    import { InputReceiver } from "core/input_receiver";
     import { Signal } from "core/signal";
     import { GameRoot } from "game/root";
-    import { InputReceiver } from "core/input_receiver";
 }
 declare module "game/hud/base_hud_part" {
     export class BaseHUDPart {
@@ -2169,10 +2169,10 @@ declare module "game/hud/base_hud_part" {
          */
         forwardMapMovementKeybindings(sourceMapper: KeyActionMapper): void;
     }
-    import { GameRoot } from "game/root";
     import { ClickDetector } from "core/click_detector";
     import { DrawParameters } from "core/draw_parameters";
     import { KeyActionMapper } from "game/key_action_mapper";
+    import { GameRoot } from "game/root";
 }
 declare module "core/state_manager" {
     /**
@@ -2401,11 +2401,11 @@ declare module "core/game_state" {
          */
         internalGetFadeInOutTime(): number;
     }
-    import { StateManager } from "core/state_manager";
     import { Application } from "application";
     import { ClickDetector } from "core/click_detector";
     import { InputReceiver } from "core/input_receiver";
     import { RequestChannel } from "core/request_channel";
+    import { StateManager } from "core/state_manager";
 }
 declare module "game/game_loading_overlay" {
     export class GameLoadingOverlay {
@@ -2869,8 +2869,8 @@ declare module "core/sprites" {
          */
         drawCentered(context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number): void;
     }
-    import { Rectangle } from "core/rectangle";
     import { DrawParameters } from "core/draw_parameters";
+    import { Rectangle } from "core/rectangle";
 }
 declare module "core/cachebust" {
     /**
@@ -3038,9 +3038,7 @@ declare module "core/loader" {
         makeSpriteNotFoundCanvas(): void;
         spriteNotFoundSprite: AtlasSprite;
     }
-    import { BaseSprite } from "core/sprites";
-    import { AtlasSprite } from "core/sprites";
-    import { RegularSprite } from "core/sprites";
+    import { AtlasSprite, BaseSprite, RegularSprite } from "core/sprites";
     export {};
 }
 declare module "game/building_codes" {
@@ -3097,9 +3095,9 @@ declare module "game/building_codes" {
         blueprintSprite?: AtlasSprite;
         silhouetteColor?: string;
     };
-    import { MetaBuilding } from "game/meta_building";
-    import { Vector } from "core/vector";
     import { AtlasSprite } from "core/sprites";
+    import { Vector } from "core/vector";
+    import { MetaBuilding } from "game/meta_building";
 }
 declare module "game/component" {
     export class Component extends BasicSerializableObject {
@@ -3263,12 +3261,11 @@ declare module "game/components/static_map_entity" {
          */
         drawSpriteOnBoundsClipped(parameters: DrawParameters, sprite: AtlasSprite, extrudePixels?: number | undefined, overridePosition?: Vector | undefined): void;
     }
-    import { Component } from "game/component";
-    import { Vector } from "core/vector";
-    import { AtlasSprite } from "core/sprites";
-    import { Rectangle } from "core/rectangle";
-    import { enumDirection } from "core/vector";
     import { DrawParameters } from "core/draw_parameters";
+    import { Rectangle } from "core/rectangle";
+    import { AtlasSprite } from "core/sprites";
+    import { Vector, enumDirection } from "core/vector";
+    import { Component } from "game/component";
 }
 declare module "core/dpi_manager" {
     /**
@@ -3364,8 +3361,8 @@ declare module "game/base_item" {
         drawItemCenteredImpl(x: number, y: number, parameters: DrawParameters, diameter?: number | undefined): void;
         getBackgroundColorAsResource(): string;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
     import { DrawParameters } from "core/draw_parameters";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/items/boolean_item" {
     /**
@@ -3618,9 +3615,9 @@ declare module "game/shape_definition" {
             color: enumColors;
         }
     ];
-    import { BasicSerializableObject } from "savegame/serialization";
     import { DrawParameters } from "core/draw_parameters";
     import { enumColors } from "game/colors";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/items/shape_item" {
     export class ShapeItem extends BaseItem {
@@ -3883,13 +3880,13 @@ declare module "game/belt_path" {
          */
         drawDrawStack(stack: Array<[Vector, BaseItem]>, parameters: DrawParameters, directionProp: any): void;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
-    import { GameRoot } from "game/root";
-    import { Entity } from "game/entity";
-    import { BaseItem } from "game/base_item";
+    import { DrawParameters } from "core/draw_parameters";
     import { Rectangle } from "core/rectangle";
     import { Vector } from "core/vector";
-    import { DrawParameters } from "core/draw_parameters";
+    import { BaseItem } from "game/base_item";
+    import { Entity } from "game/entity";
+    import { GameRoot } from "game/root";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/components/item_acceptor" {
     /**
@@ -3980,10 +3977,9 @@ declare module "game/components/item_acceptor" {
         direction: enumDirection;
         filter?: any;
     };
-    import { Component } from "game/component";
+    import { Vector, enumDirection } from "core/vector";
     import { BaseItem } from "game/base_item";
-    import { enumDirection } from "core/vector";
-    import { Vector } from "core/vector";
+    import { Component } from "game/component";
 }
 declare module "game/components/item_ejector" {
     /**
@@ -4078,11 +4074,10 @@ declare module "game/components/item_ejector" {
         cachedBeltPath?: BeltPath;
         cachedTargetEntity?: Entity;
     };
-    import { Component } from "game/component";
-    import { Vector } from "core/vector";
-    import { enumDirection } from "core/vector";
+    import { Vector, enumDirection } from "core/vector";
     import { BaseItem } from "game/base_item";
     import { BeltPath } from "game/belt_path";
+    import { Component } from "game/component";
     import { Entity } from "game/entity";
 }
 declare module "game/components/belt" {
@@ -4127,10 +4122,9 @@ declare module "game/components/belt" {
          */
         transformBeltToLocalSpace(progress: number): Vector;
     }
-    import { Component } from "game/component";
+    import { Vector, enumDirection } from "core/vector";
     import { BeltPath } from "game/belt_path";
-    import { Vector } from "core/vector";
-    import { enumDirection } from "core/vector";
+    import { Component } from "game/component";
 }
 declare module "game/components/belt_underlays" {
     /**
@@ -4172,9 +4166,8 @@ declare module "game/components/belt_underlays" {
         direction: enumDirection;
         cachedType?: enumClippedBeltUnderlayType;
     };
+    import { Vector, enumDirection } from "core/vector";
     import { Component } from "game/component";
-    import { Vector } from "core/vector";
-    import { enumDirection } from "core/vector";
 }
 declare module "game/components/hub" {
     export class HubComponent extends Component {
@@ -4283,8 +4276,8 @@ declare module "game/components/item_processor" {
         remainingTime: number;
         items: Array<EjectorItemToEject>;
     };
-    import { Component } from "game/component";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
 }
 declare module "game/components/miner" {
     export class MinerComponent extends Component {
@@ -4317,8 +4310,8 @@ declare module "game/components/miner" {
          */
         tryAcceptChainedItem(item: BaseItem): boolean;
     }
-    import { Component } from "game/component";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
     import { Entity } from "game/entity";
 }
 declare module "game/components/storage" {
@@ -4432,8 +4425,8 @@ declare module "game/components/underground_belt" {
         entity: Entity;
         distance: number;
     };
-    import { Component } from "game/component";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
     import { Entity } from "game/entity";
 }
 declare module "core/stale_area_detector" {
@@ -4521,10 +4514,10 @@ declare module "game/production_analytics" {
         getCurrentShapeRatesRaw(dataSource: enumAnalyticsDataSource): any;
         update(): void;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
+    import { BaseItem } from "game/base_item";
     import { GameRoot } from "game/root";
     import { ShapeDefinition } from "game/shape_definition";
-    import { BaseItem } from "game/base_item";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "platform/achievement_provider" {
     export namespace ACHIEVEMENTS {
@@ -4753,9 +4746,9 @@ declare module "platform/achievement_provider" {
         isTrash1000Valid(count: number): boolean;
     }
     import { Application } from "application";
-    import { GameRoot } from "game/root";
-    import { ShapeItem } from "game/items/shape_item";
     import { Entity } from "game/entity";
+    import { ShapeItem } from "game/items/shape_item";
+    import { GameRoot } from "game/root";
     import { ShapeDefinition } from "game/shape_definition";
 }
 declare module "game/components/wire" {
@@ -4954,8 +4947,8 @@ declare module "game/game_system" {
          */
         startDraw(parameters: DrawParameters): void;
     }
-    import { GameRoot } from "game/root";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameRoot } from "game/root";
 }
 declare module "game/game_system_with_filter" {
     export class GameSystemWithFilter extends GameSystem {
@@ -5002,9 +4995,9 @@ declare module "game/game_system_with_filter" {
          */
         internalPopEntityIfMatching(entity: Entity): void;
     }
-    import { GameSystem } from "game/game_system";
     import { Component } from "game/component";
     import { Entity } from "game/entity";
+    import { GameSystem } from "game/game_system";
     import { GameRoot } from "game/root";
 }
 declare module "game/map_chunk" {
@@ -5160,12 +5153,12 @@ declare module "game/map_chunk" {
          */
         setLayerContentFromWorldCords(tileX: number, tileY: number, contents: Entity, layer: any): void;
     }
-    import { GameRoot } from "game/root";
+    import { Rectangle } from "core/rectangle";
+    import { RandomNumberGenerator } from "core/rng";
+    import { Vector } from "core/vector";
     import { BaseItem } from "game/base_item";
     import { Entity } from "game/entity";
-    import { Rectangle } from "core/rectangle";
-    import { Vector } from "core/vector";
-    import { RandomNumberGenerator } from "core/rng";
+    import { GameRoot } from "game/root";
     import { enumSubShape } from "game/shape_definition";
 }
 declare module "game/map_chunk_view" {
@@ -5256,9 +5249,9 @@ declare module "game/map_chunk_view" {
          */
         drawWiresForegroundLayer(parameters: DrawParameters): void;
     }
-    import { MapChunk } from "game/map_chunk";
     import { DrawParameters } from "core/draw_parameters";
     import { Entity } from "game/entity";
+    import { MapChunk } from "game/map_chunk";
     import { GameRoot } from "game/root";
 }
 declare module "game/systems/wire" {
@@ -5385,18 +5378,16 @@ declare module "game/systems/wire" {
          */
         updateSurroundingWirePlacement(affectedArea: Rectangle): void;
     }
-    import { Entity } from "game/entity";
-    import { BaseItem } from "game/base_item";
-    import { GameSystem } from "game/game_system";
+    import { Rectangle } from "core/rectangle";
     import { StaleAreaDetector } from "core/stale_area_detector";
-    import { Vector } from "core/vector";
-    import { enumDirection } from "core/vector";
-    import { enumWireVariant } from "game/components/wire";
-    import { WireComponent } from "game/components/wire";
-    import { MapChunkView } from "game/map_chunk_view";
+    import { Vector, enumDirection } from "core/vector";
+    import { BaseItem } from "game/base_item";
+    import { WireComponent, enumWireVariant } from "game/components/wire";
     import { WireTunnelComponent } from "game/components/wire_tunnel";
     import { WiredPinsComponent } from "game/components/wired_pins";
-    import { Rectangle } from "core/rectangle";
+    import { Entity } from "game/entity";
+    import { GameSystem } from "game/game_system";
+    import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/components/wired_pins" {
     export type enumPinSlotType = string;
@@ -5446,10 +5437,9 @@ declare module "game/components/wired_pins" {
         value: BaseItem;
         linkedNetwork: import("../systems/wire").WireNetwork;
     };
-    import { Component } from "game/component";
-    import { Vector } from "core/vector";
-    import { enumDirection } from "core/vector";
+    import { Vector, enumDirection } from "core/vector";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
 }
 declare module "game/components/constant_signal" {
     export class ConstantSignalComponent extends Component {
@@ -5464,8 +5454,8 @@ declare module "game/components/constant_signal" {
         constructor({ signal }: { signal?: BaseItem | undefined });
         signal: BaseItem;
     }
-    import { Component } from "game/component";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
 }
 declare module "game/components/logic_gate" {
     export type enumLogicGateType = string;
@@ -5545,8 +5535,8 @@ declare module "game/components/belt_reader" {
          */
         lastThroughputComputation: number;
     }
-    import { Component } from "game/component";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
 }
 declare module "game/components/filter" {
     /**
@@ -5576,8 +5566,8 @@ declare module "game/components/filter" {
         item: BaseItem;
         progress: number;
     };
-    import { Component } from "game/component";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
 }
 declare module "game/components/item_producer" {
     export class ItemProducerComponent extends Component {
@@ -5613,8 +5603,8 @@ declare module "game/components/goal_acceptor" {
         clearItems(): void;
         getRequiredSecondsPerItem(): number;
     }
-    import { Component } from "game/component";
     import { BaseItem } from "game/base_item";
+    import { Component } from "game/component";
 }
 declare module "game/entity_components" {
     /**
@@ -5666,27 +5656,27 @@ declare module "game/entity_components" {
         GoalAcceptor: GoalAcceptorComponent;
         TruthyBlock: TruthyTableComponent;
     }
-    import { StaticMapEntityComponent } from "game/components/static_map_entity";
     import { BeltComponent } from "game/components/belt";
-    import { ItemEjectorComponent } from "game/components/item_ejector";
-    import { ItemAcceptorComponent } from "game/components/item_acceptor";
-    import { MinerComponent } from "game/components/miner";
-    import { ItemProcessorComponent } from "game/components/item_processor";
-    import { UndergroundBeltComponent } from "game/components/underground_belt";
-    import { HubComponent } from "game/components/hub";
-    import { StorageComponent } from "game/components/storage";
-    import { WiredPinsComponent } from "game/components/wired_pins";
-    import { BeltUnderlaysComponent } from "game/components/belt_underlays";
-    import { WireComponent } from "game/components/wire";
-    import { ConstantSignalComponent } from "game/components/constant_signal";
-    import { LogicGateComponent } from "game/components/logic_gate";
-    import { LeverComponent } from "game/components/lever";
-    import { WireTunnelComponent } from "game/components/wire_tunnel";
-    import { DisplayComponent } from "game/components/display";
     import { BeltReaderComponent } from "game/components/belt_reader";
+    import { BeltUnderlaysComponent } from "game/components/belt_underlays";
+    import { ConstantSignalComponent } from "game/components/constant_signal";
+    import { DisplayComponent } from "game/components/display";
     import { FilterComponent } from "game/components/filter";
-    import { ItemProducerComponent } from "game/components/item_producer";
     import { GoalAcceptorComponent } from "game/components/goal_acceptor";
+    import { HubComponent } from "game/components/hub";
+    import { ItemAcceptorComponent } from "game/components/item_acceptor";
+    import { ItemEjectorComponent } from "game/components/item_ejector";
+    import { ItemProcessorComponent } from "game/components/item_processor";
+    import { ItemProducerComponent } from "game/components/item_producer";
+    import { LeverComponent } from "game/components/lever";
+    import { LogicGateComponent } from "game/components/logic_gate";
+    import { MinerComponent } from "game/components/miner";
+    import { StaticMapEntityComponent } from "game/components/static_map_entity";
+    import { StorageComponent } from "game/components/storage";
+    import { UndergroundBeltComponent } from "game/components/underground_belt";
+    import { WireComponent } from "game/components/wire";
+    import { WireTunnelComponent } from "game/components/wire_tunnel";
+    import { WiredPinsComponent } from "game/components/wired_pins";
 }
 declare module "game/entity" {
     export class Entity extends BasicSerializableObject {
@@ -5759,11 +5749,11 @@ declare module "game/entity" {
          */
         drawImpl(parameters: DrawParameters): void;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
-    import { GameRoot } from "game/root";
-    import { EntityComponentStorage } from "game/entity_components";
-    import { Component } from "game/component";
     import { DrawParameters } from "core/draw_parameters";
+    import { Component } from "game/component";
+    import { EntityComponentStorage } from "game/entity_components";
+    import { GameRoot } from "game/root";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/meta_building" {
     export const defaultBuildingVariant: "default";
@@ -5963,10 +5953,10 @@ declare module "game/meta_building" {
          */
         setupEntityComponents(entity: Entity, root: GameRoot): void;
     }
+    import { AtlasSprite } from "core/sprites";
     import { Vector } from "core/vector";
     import { Entity } from "game/entity";
     import { GameRoot } from "game/root";
-    import { AtlasSprite } from "core/sprites";
 }
 declare module "savegame/savegame_typedefs" {
     var _default: {};
@@ -6275,7 +6265,6 @@ declare module "game/buildings/underground_belt" {
             rotationVariant: number;
         }[];
     }
-    import { defaultBuildingVariant } from "game/meta_building";
     import { MetaBuilding } from "game/meta_building";
 }
 declare module "savegame/schemas/1006" {
@@ -6317,8 +6306,8 @@ declare module "savegame/schemas/1006" {
         static migrateStaticComp1005to1006(entity: Entity): void;
         constructor(data: any);
     }
-    import { SavegameInterface_V1005 } from "savegame/schemas/1005.js";
     import { Entity } from "game/entity.js";
+    import { SavegameInterface_V1005 } from "savegame/schemas/1005.js";
 }
 declare module "savegame/schemas/1007" {
     export class SavegameInterface_V1007 extends SavegameInterface_V1006 {
@@ -6455,11 +6444,11 @@ declare module "game/game_mode" {
         /** @returns {string} */
         getBlueprintShapeKey(): string;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
-    import { GameRoot } from "game/root";
+    import { Rectangle } from "core/rectangle";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { MetaBuilding } from "game/meta_building";
-    import { Rectangle } from "core/rectangle";
+    import { GameRoot } from "game/root";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/buildings/block" {
     export class MetaBlockBuilding extends MetaBuilding {
@@ -6546,8 +6535,8 @@ declare module "game/hud/dynamic_dom_attach" {
          */
         update(isVisible: boolean): void;
     }
-    import { GameRoot } from "game/root";
     import { TrackedState } from "core/tracked_state";
+    import { GameRoot } from "game/root";
 }
 declare module "game/hud/parts/base_toolbar" {
     export class HUDBaseToolbar extends BaseHUDPart {
@@ -6636,8 +6625,8 @@ declare module "game/hud/parts/base_toolbar" {
         inRequiredBuildings(metaBuilding: MetaBuilding): boolean;
     }
     import { BaseHUDPart } from "game/hud/base_hud_part";
-    import { MetaBuilding } from "game/meta_building";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
+    import { MetaBuilding } from "game/meta_building";
     import { GameRoot } from "game/root";
 }
 declare module "game/buildings/constant_signal" {
@@ -6824,9 +6813,9 @@ declare module "game/hud/parts/unlock_notification" {
         showForLevel(level: number, reward: enumHubGoalRewards): void;
         requestClose(): void;
     }
+    import { InputReceiver } from "core/input_receiver";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { InputReceiver } from "core/input_receiver";
     import { enumHubGoalRewards } from "game/tutorial_goals";
 }
 declare module "game/blueprint" {
@@ -6881,10 +6870,10 @@ declare module "game/blueprint" {
          */
         tryPlace(root: GameRoot, tile: Vector): any;
     }
-    import { Entity } from "game/entity";
     import { DrawParameters } from "core/draw_parameters";
-    import { GameRoot } from "game/root";
     import { Vector } from "core/vector";
+    import { Entity } from "game/entity";
+    import { GameRoot } from "game/root";
 }
 declare module "game/camera" {
     export const USER_INTERACT_MOVE: "move";
@@ -7166,11 +7155,11 @@ declare module "game/camera" {
          */
         internalUpdateKeyboardForce(now: number, dt: number): void;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
-    import { GameRoot } from "game/root";
-    import { Vector } from "core/vector";
-    import { Signal } from "core/signal";
     import { Rectangle } from "core/rectangle";
+    import { Signal } from "core/signal";
+    import { Vector } from "core/vector";
+    import { GameRoot } from "game/root";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/hud/parts/mass_selector" {
     export class HUDMassSelector extends BaseHUDPart {
@@ -7211,10 +7200,10 @@ declare module "game/hud/parts/mass_selector" {
         onMouseMove(pos: Vector): void;
         onMouseUp(): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Vector } from "core/vector";
-    import { Entity } from "game/entity";
     import { enumMouseButton } from "game/camera";
+    import { Entity } from "game/entity";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/shop" {
     export class HUDShop extends BaseHUDPart {
@@ -7234,9 +7223,9 @@ declare module "game/hud/parts/shop" {
         visible: boolean;
         tryUnlockNextTier(upgradeId: any): void;
     }
+    import { InputReceiver } from "core/input_receiver";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { InputReceiver } from "core/input_receiver";
     import { KeyActionMapper } from "game/key_action_mapper";
 }
 declare module "core/modal_dialog_forms" {
@@ -7429,10 +7418,10 @@ declare module "core/modal_dialog_elements" {
         hasAnyInvalid(): boolean;
     }
     import { Application } from "application";
-    import { Signal } from "core/signal";
-    import { InputReceiver } from "core/input_receiver";
     import { ClickDetector } from "core/click_detector";
+    import { InputReceiver } from "core/input_receiver";
     import { FormElement } from "core/modal_dialog_forms";
+    import { Signal } from "core/signal";
 }
 declare module "game/hud/parts/waypoints" {
     export class HUDWaypoints extends BaseHUDPart {
@@ -7599,12 +7588,12 @@ declare module "game/hud/parts/waypoints" {
         zoomLevel: number;
         layer: any;
     };
-    import { BaseHUDPart } from "game/hud/base_hud_part";
-    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { Vector } from "core/vector";
     import { Rectangle } from "core/rectangle";
+    import { Vector } from "core/vector";
     import { BaseItem } from "game/base_item";
     import { enumMouseButton } from "game/camera";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
+    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
 }
 declare module "game/hud/parts/statistics_handle" {
     export type enumDisplayMode = string;
@@ -7670,9 +7659,9 @@ declare module "game/hud/parts/statistics_handle" {
          */
         destroy(): void;
     }
-    import { ShapeDefinition } from "game/shape_definition";
-    import { GameRoot } from "game/root";
     import { enumAnalyticsDataSource } from "game/production_analytics";
+    import { GameRoot } from "game/root";
+    import { ShapeDefinition } from "game/shape_definition";
 }
 declare module "game/hud/parts/statistics" {
     export class HUDStatistics extends BaseHUDPart {
@@ -7729,13 +7718,12 @@ declare module "game/hud/parts/statistics" {
          */
         rerenderFull(): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
-    import { enumAnalyticsDataSource } from "game/production_analytics";
-    import { enumDisplayMode } from "game/hud/parts/statistics_handle";
-    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
     import { InputReceiver } from "core/input_receiver";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
+    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
+    import { HUDShapeStatisticsHandle, enumDisplayMode } from "game/hud/parts/statistics_handle";
     import { KeyActionMapper } from "game/key_action_mapper";
-    import { HUDShapeStatisticsHandle } from "game/hud/parts/statistics_handle";
+    import { enumAnalyticsDataSource } from "game/production_analytics";
 }
 declare module "game/hud/parts/wire_info" {
     export class HUDWireInfo extends BaseHUDPart {
@@ -7762,9 +7750,9 @@ declare module "game/hud/parts/lever_toggle" {
          */
         downPreHandler(pos: Vector, button: enumMouseButton): string;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Vector } from "core/vector";
     import { enumMouseButton } from "game/camera";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/pinned_shapes" {
     /**
@@ -7863,9 +7851,9 @@ declare module "game/hud/parts/pinned_shapes" {
          */
         pinNewShape(definition: ShapeDefinition): void;
     }
+    import { ClickDetector } from "core/click_detector";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { ShapeDefinition } from "game/shape_definition";
-    import { ClickDetector } from "core/click_detector";
 }
 declare module "game/hud/parts/screenshot_exporter" {
     export class HUDScreenshotExporter extends BaseHUDPart {
@@ -7922,9 +7910,9 @@ declare module "game/hud/parts/shape_viewer" {
          */
         renderForShape(definition: ShapeDefinition): void;
     }
+    import { InputReceiver } from "core/input_receiver";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { InputReceiver } from "core/input_receiver";
     import { KeyActionMapper } from "game/key_action_mapper";
     import { ShapeDefinition } from "game/shape_definition";
 }
@@ -7957,8 +7945,8 @@ declare module "game/hud/parts/layer_preview" {
          */
         renderPreview(parameters: import("../../../core/draw_utils").DrawParameters, worldPos: Vector, scale: number): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Vector } from "core/vector";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/tutorial_video_offer" {
     /**
@@ -7980,8 +7968,8 @@ declare module "game/hud/parts/miner_highlight" {
          */
         findConnectedMiners(entity: Entity, seenUids?: Set<number>): Array<Entity>;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Entity } from "game/entity";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/game_menu" {
     export class HUDGameMenu extends BaseHUDPart {
@@ -8021,10 +8009,10 @@ declare module "game/hud/parts/game_menu" {
         startSave(): void;
         openSettings(): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
-    import { enumNotificationType } from "game/hud/parts/notifications";
-    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
     import { TrackedState } from "core/tracked_state";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
+    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
+    import { enumNotificationType } from "game/hud/parts/notifications";
 }
 declare module "game/hud/parts/constant_signal_edit" {
     /** @type {{
@@ -8062,11 +8050,11 @@ declare module "game/hud/parts/constant_signal_edit" {
          */
         parseSignalCode(entity: Entity, code: string): BaseItem;
     }
-    import { Entity } from "game/entity";
-    import { BaseItem } from "game/base_item";
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Vector } from "core/vector";
+    import { BaseItem } from "game/base_item";
     import { enumMouseButton } from "game/camera";
+    import { Entity } from "game/entity";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/keybinding_overlay" {
     /**
@@ -8172,9 +8160,9 @@ declare module "game/hud/parts/standalone_advantages" {
         visible: boolean;
         final: boolean;
     }
+    import { InputReceiver } from "core/input_receiver";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { InputReceiver } from "core/input_receiver";
 }
 declare module "game/hud/parts/tutorial_hints" {
     export class HUDPartTutorialHints extends BaseHUDPart {
@@ -8191,11 +8179,11 @@ declare module "game/hud/parts/tutorial_hints" {
         show(): void;
         toggleHintEnlarged(): void;
     }
+    import { InputReceiver } from "core/input_receiver";
+    import { TrackedState } from "core/tracked_state";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { InputReceiver } from "core/input_receiver";
     import { KeyActionMapper } from "game/key_action_mapper";
-    import { TrackedState } from "core/tracked_state";
 }
 declare module "game/hud/parts/interactive_tutorial" {
     export class HUDInteractiveTutorial extends BaseHUDPart {
@@ -8207,9 +8195,9 @@ declare module "game/hud/parts/interactive_tutorial" {
         currentHintId: TrackedState;
         onHintChanged(hintId: any): void;
     }
+    import { TrackedState } from "core/tracked_state";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { TrackedState } from "core/tracked_state";
     import { GameRoot } from "game/root";
 }
 declare module "game/modes/levels" {
@@ -8473,10 +8461,10 @@ declare module "game/systems/belt" {
          */
         drawBeltPathDebug(parameters: DrawParameters): void;
     }
-    import { GameSystem } from "game/game_system";
+    import { DrawParameters } from "core/draw_parameters";
     import { BeltPath } from "game/belt_path";
     import { Entity } from "game/entity";
-    import { DrawParameters } from "core/draw_parameters";
+    import { GameSystem } from "game/game_system";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/item_ejector" {
@@ -8509,12 +8497,12 @@ declare module "game/systems/item_ejector" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
-    import { StaleAreaDetector } from "core/stale_area_detector";
-    import { Rectangle } from "core/rectangle";
-    import { Entity } from "game/entity";
-    import { BaseItem } from "game/base_item";
     import { DrawParameters } from "core/draw_parameters";
+    import { Rectangle } from "core/rectangle";
+    import { StaleAreaDetector } from "core/stale_area_detector";
+    import { BaseItem } from "game/base_item";
+    import { Entity } from "game/entity";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/map_resources" {
@@ -8537,8 +8525,8 @@ declare module "game/systems/map_resources" {
          */
         generateChunkBackground(chunk: MapChunkView, canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, w: number, h: number, dpi: number): void;
     }
-    import { GameSystem } from "game/game_system";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameSystem } from "game/game_system";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/miner" {
@@ -8569,10 +8557,10 @@ declare module "game/systems/miner" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
-    import { Entity } from "game/entity";
-    import { BaseItem } from "game/base_item";
     import { DrawParameters } from "core/draw_parameters";
+    import { BaseItem } from "game/base_item";
+    import { Entity } from "game/entity";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/item_processor" {
@@ -8734,9 +8722,9 @@ declare module "game/systems/item_processor" {
         item: BaseItem;
         slotIndex: number;
     };
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
-    import { Entity } from "game/entity";
     import { BaseItem } from "game/base_item";
+    import { Entity } from "game/entity";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
 }
 declare module "game/systems/underground_belt" {
     export class UndergroundBeltSystem extends GameSystemWithFilter {
@@ -8773,10 +8761,10 @@ declare module "game/systems/underground_belt" {
          */
         handleReceiver(entity: Entity, now: number): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
+    import { Rectangle } from "core/rectangle";
     import { StaleAreaDetector } from "core/stale_area_detector";
     import { Entity } from "game/entity";
-    import { Rectangle } from "core/rectangle";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
 }
 declare module "game/systems/hub" {
     export class HubSystem extends GameSystemWithFilter {
@@ -8797,9 +8785,9 @@ declare module "game/systems/hub" {
          */
         drawEntity(parameters: DrawParameters, entity: Entity): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { DrawParameters } from "core/draw_parameters";
     import { Entity } from "game/entity";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
 }
 declare module "game/systems/static_map_entity" {
     export class StaticMapEntitySystem extends GameSystem {
@@ -8823,8 +8811,8 @@ declare module "game/systems/static_map_entity" {
          */
         drawWiresChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystem } from "game/game_system";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameSystem } from "game/game_system";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/item_acceptor" {
@@ -8837,8 +8825,8 @@ declare module "game/systems/item_acceptor" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/storage" {
@@ -8857,8 +8845,8 @@ declare module "game/systems/storage" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/wired_pins" {
@@ -8892,10 +8880,10 @@ declare module "game/systems/wired_pins" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
-    import { Entity } from "game/entity";
-    import { Vector } from "core/vector";
     import { DrawParameters } from "core/draw_parameters";
+    import { Vector } from "core/vector";
+    import { Entity } from "game/entity";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/belt_underlays" {
@@ -8936,14 +8924,13 @@ declare module "game/systems/belt_underlays" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystem } from "game/game_system";
-    import { StaleAreaDetector } from "core/stale_area_detector";
-    import { Rectangle } from "core/rectangle";
-    import { Vector } from "core/vector";
-    import { enumDirection } from "core/vector";
-    import { Entity } from "game/entity";
-    import { enumClippedBeltUnderlayType } from "game/components/belt_underlays";
     import { DrawParameters } from "core/draw_parameters";
+    import { Rectangle } from "core/rectangle";
+    import { StaleAreaDetector } from "core/stale_area_detector";
+    import { Vector, enumDirection } from "core/vector";
+    import { enumClippedBeltUnderlayType } from "game/components/belt_underlays";
+    import { Entity } from "game/entity";
+    import { GameSystem } from "game/game_system";
     import { MapChunkView } from "game/map_chunk_view";
 }
 declare module "game/systems/constant_signal" {
@@ -9019,8 +9006,8 @@ declare module "game/systems/logic_gate" {
          */
         compute_COMPARE(parameters: Array<BaseItem | null>): BaseItem;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { BaseItem } from "game/base_item";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
 }
 declare module "game/systems/lever" {
     export class LeverSystem extends GameSystemWithFilter {
@@ -9110,9 +9097,9 @@ declare module "game/systems/item_processor_overlays" {
             }
         ): void;
     }
+    import { Entity } from "game/entity";
     import { GameSystem } from "game/game_system";
     import { MapChunkView } from "game/map_chunk_view";
-    import { Entity } from "game/entity";
 }
 declare module "game/systems/belt_reader" {
     export class BeltReaderSystem extends GameSystemWithFilter {
@@ -9131,9 +9118,9 @@ declare module "game/systems/filter" {
          */
         tryAcceptItem(entity: Entity, slot: number, item: BaseItem): boolean;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
-    import { Entity } from "game/entity";
     import { BaseItem } from "game/base_item";
+    import { Entity } from "game/entity";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
 }
 declare module "game/systems/item_producer" {
     export class ItemProducerSystem extends GameSystemWithFilter {
@@ -9153,8 +9140,8 @@ declare module "game/systems/constant_producer" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunk): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunk } from "game/map_chunk";
 }
 declare module "game/systems/goal_acceptor" {
@@ -9169,8 +9156,8 @@ declare module "game/systems/goal_acceptor" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunk): void;
     }
-    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameSystemWithFilter } from "game/game_system_with_filter";
     import { MapChunk } from "game/map_chunk";
 }
 declare module "game/systems/zone" {
@@ -9192,10 +9179,10 @@ declare module "game/systems/zone" {
          */
         drawChunk(parameters: DrawParameters, chunk: MapChunkView): void;
     }
-    import { GameSystem } from "game/game_system";
-    import { Entity } from "game/entity";
-    import { Vector } from "core/vector";
     import { DrawParameters } from "core/draw_parameters";
+    import { Vector } from "core/vector";
+    import { Entity } from "game/entity";
+    import { GameSystem } from "game/game_system";
     import { MapChunkView } from "game/map_chunk_view";
     import { GameRoot } from "game/root";
 }
@@ -9280,28 +9267,28 @@ declare module "game/game_system_manager" {
     import { GameSystem } from "game/game_system";
     import { GameRoot } from "game/root";
     import { BeltSystem } from "game/systems/belt";
+    import { BeltReaderSystem } from "game/systems/belt_reader";
+    import { BeltUnderlaysSystem } from "game/systems/belt_underlays";
+    import { ConstantProducerSystem } from "game/systems/constant_producer";
+    import { ConstantSignalSystem } from "game/systems/constant_signal";
+    import { DisplaySystem } from "game/systems/display";
+    import { FilterSystem } from "game/systems/filter";
+    import { GoalAcceptorSystem } from "game/systems/goal_acceptor";
+    import { HubSystem } from "game/systems/hub";
+    import { ItemAcceptorSystem } from "game/systems/item_acceptor";
     import { ItemEjectorSystem } from "game/systems/item_ejector";
+    import { ItemProcessorSystem } from "game/systems/item_processor";
+    import { ItemProcessorOverlaysSystem } from "game/systems/item_processor_overlays";
+    import { ItemProducerSystem } from "game/systems/item_producer";
+    import { LeverSystem } from "game/systems/lever";
+    import { LogicGateSystem } from "game/systems/logic_gate";
     import { MapResourcesSystem } from "game/systems/map_resources";
     import { MinerSystem } from "game/systems/miner";
-    import { ItemProcessorSystem } from "game/systems/item_processor";
-    import { UndergroundBeltSystem } from "game/systems/underground_belt";
-    import { HubSystem } from "game/systems/hub";
     import { StaticMapEntitySystem } from "game/systems/static_map_entity";
-    import { ItemAcceptorSystem } from "game/systems/item_acceptor";
     import { StorageSystem } from "game/systems/storage";
-    import { WiredPinsSystem } from "game/systems/wired_pins";
-    import { BeltUnderlaysSystem } from "game/systems/belt_underlays";
+    import { UndergroundBeltSystem } from "game/systems/underground_belt";
     import { WireSystem } from "game/systems/wire";
-    import { ConstantSignalSystem } from "game/systems/constant_signal";
-    import { LogicGateSystem } from "game/systems/logic_gate";
-    import { LeverSystem } from "game/systems/lever";
-    import { DisplaySystem } from "game/systems/display";
-    import { ItemProcessorOverlaysSystem } from "game/systems/item_processor_overlays";
-    import { BeltReaderSystem } from "game/systems/belt_reader";
-    import { FilterSystem } from "game/systems/filter";
-    import { ItemProducerSystem } from "game/systems/item_producer";
-    import { ConstantProducerSystem } from "game/systems/constant_producer";
-    import { GoalAcceptorSystem } from "game/systems/goal_acceptor";
+    import { WiredPinsSystem } from "game/systems/wired_pins";
     import { ZoneSystem } from "game/systems/zone";
 }
 declare module "game/hud/parts/modal_dialogs" {
@@ -9335,8 +9322,8 @@ declare module "game/hud/parts/modal_dialogs" {
         internalShowDialog(dialog: any): void;
         closeDialog(dialog: any): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Application } from "application";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
 }
 declare module "mods/mod_meta_building" {
@@ -9697,16 +9684,16 @@ declare module "mods/mod_interface" {
     export type beforePrams<F extends (...args: any[]) => any, P> = (args_0: P, args_1: Parameters<F>) => ReturnType<F>;
     export type afterPrams<F extends (...args: any[]) => any, P> = (args_0: any, args_1: P) => ReturnType<F>;
     export type extendsPrams<F extends (...args: any[]) => any> = (args_0: any, ...args_1: any[]) => ReturnType<F>;
-    import { ModLoader } from "mods/modloader";
+    import { Vector } from "core/vector";
     import { BaseItem } from "game/base_item";
     import { Component } from "game/component";
     import { GameSystem } from "game/game_system";
-    import { ModMetaBuilding } from "mods/mod_meta_building";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { HUDModalDialogs } from "game/hud/parts/modal_dialogs";
     import { MetaBuilding } from "game/meta_building";
-    import { BaseHUDPart } from "game/hud/base_hud_part";
-    import { Vector } from "core/vector";
     import { GameRoot } from "game/root";
+    import { ModMetaBuilding } from "mods/mod_meta_building";
+    import { ModLoader } from "mods/modloader";
 }
 declare module "mods/modloader" {
     /**
@@ -10164,10 +10151,10 @@ declare module "game/entity_manager" {
          */
         destroyEntity(entity: Entity): void;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
-    import { GameRoot } from "game/root";
-    import { Entity } from "game/entity";
     import { Component } from "game/component";
+    import { Entity } from "game/entity";
+    import { GameRoot } from "game/root";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/hub_goals" {
     export const MOD_ITEM_PROCESSOR_SPEEDS: {};
@@ -10322,12 +10309,12 @@ declare module "game/hub_goals" {
          */
         getProcessorBaseSpeed(processorType: enumItemProcessorTypes): number;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
+    import { RandomNumberGenerator } from "core/rng";
+    import { enumItemProcessorTypes } from "game/components/item_processor";
     import { GameRoot } from "game/root";
     import { ShapeDefinition } from "game/shape_definition";
     import { enumHubGoalRewards } from "game/tutorial_goals";
-    import { RandomNumberGenerator } from "core/rng";
-    import { enumItemProcessorTypes } from "game/components/item_processor";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/hud/parts/beta_overlay" {
     export class HUDBetaOverlay extends BaseHUDPart {
@@ -10388,12 +10375,12 @@ declare module "game/hud/parts/blueprint_placer" {
          */
         pasteBlueprint(): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
-    import { Blueprint } from "game/blueprint";
-    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
     import { TrackedState } from "core/tracked_state";
     import { Vector } from "core/vector";
+    import { Blueprint } from "game/blueprint";
     import { enumMouseButton } from "game/camera";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
+    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
 }
 declare module "game/hud/parts/buildings_toolbar" {
     export class HUDBuildingsToolbar extends HUDBaseToolbar {
@@ -10590,12 +10577,12 @@ declare module "game/hud/parts/building_placer_logic" {
          */
         onMouseUp(): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
-    import { Entity } from "game/entity";
     import { Signal } from "core/signal";
     import { Vector } from "core/vector";
-    import { MetaBuilding } from "game/meta_building";
     import { enumMouseButton } from "game/camera";
+    import { Entity } from "game/entity";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
+    import { MetaBuilding } from "game/meta_building";
 }
 declare module "game/hud/parts/building_placer" {
     export class HUDBuildingPlacer extends HUDBuildingPlacerLogic {
@@ -10655,11 +10642,11 @@ declare module "game/hud/parts/building_placer" {
          */
         drawMatchingAcceptorsAndEjectors(parameters: DrawParameters): void;
     }
-    import { HUDBuildingPlacerLogic } from "game/hud/parts/building_placer_logic";
-    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { Vector } from "core/vector";
     import { ClickDetector } from "core/click_detector";
     import { DrawParameters } from "core/draw_parameters";
+    import { Vector } from "core/vector";
+    import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
+    import { HUDBuildingPlacerLogic } from "game/hud/parts/building_placer_logic";
 }
 declare module "game/hud/parts/color_blind_helper" {
     export class HUDColorBlindHelper extends BaseHUDPart {
@@ -10677,9 +10664,9 @@ declare module "game/hud/parts/color_blind_helper" {
          */
         computeColorBelowTile(): enumColors;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { TrackedState } from "core/tracked_state";
     import { enumColors } from "game/colors";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/debug_changes" {
     /**
@@ -10710,8 +10697,8 @@ declare module "game/hud/parts/debug_changes" {
         hideAt: number;
         fillColor: string;
     };
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Rectangle } from "core/rectangle";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/debug_info" {
     export class HUDDebugInfo extends BaseHUDPart {
@@ -10749,8 +10736,8 @@ declare module "game/hud/parts/debug_info" {
      * Specifies which mode follows after which mode
      */
     export type enumDebugOverlayModeNext = string;
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { TrackedState } from "core/tracked_state";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
     namespace enumDebugOverlayMode {
         export const disabled: string;
@@ -10789,8 +10776,8 @@ declare module "game/hud/parts/entity_debugger" {
          */
         rerenderFull(entity: Entity): void;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Entity } from "game/entity";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
 }
 declare module "game/hud/parts/settings_menu" {
@@ -10808,9 +10795,9 @@ declare module "game/hud/parts/settings_menu" {
         show(): void;
         visible: boolean;
     }
+    import { InputReceiver } from "core/input_receiver";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { InputReceiver } from "core/input_receiver";
     import { KeyActionMapper } from "game/key_action_mapper";
 }
 declare module "game/hud/parts/shape_tooltip" {
@@ -10823,9 +10810,9 @@ declare module "game/hud/parts/shape_tooltip" {
         isPlacingBuilding: any;
         isActive(): boolean;
     }
-    import { BaseHUDPart } from "game/hud/base_hud_part";
     import { Vector } from "core/vector";
     import { Entity } from "game/entity";
+    import { BaseHUDPart } from "game/hud/base_hud_part";
 }
 declare module "game/hud/parts/vignette_overlay" {
     export class HUDVignetteOverlay extends BaseHUDPart {
@@ -10860,8 +10847,8 @@ declare module "game/hud/trailer_maker" {
         currentPlaybackZoom: any;
         update(): void;
     }
-    import { GameRoot } from "game/root";
     import { Vector } from "core/vector";
+    import { GameRoot } from "game/root";
 }
 declare module "game/hud/hud" {
     export class GameHUD {
@@ -10939,17 +10926,17 @@ declare module "game/hud/hud" {
          */
         cleanup(): void;
     }
-    import { GameRoot } from "game/root";
-    import { HUDBuildingsToolbar } from "game/hud/parts/buildings_toolbar";
+    import { DrawParameters } from "core/draw_parameters";
     import { HUDBlueprintPlacer } from "game/hud/parts/blueprint_placer";
     import { HUDBuildingPlacer } from "game/hud/parts/building_placer";
-    import { HUDShapeTooltip } from "game/hud/parts/shape_tooltip";
-    import { HUDSettingsMenu } from "game/hud/parts/settings_menu";
+    import { HUDBuildingsToolbar } from "game/hud/parts/buildings_toolbar";
+    import { HUDChangesDebugger } from "game/hud/parts/debug_changes";
     import { HUDDebugInfo } from "game/hud/parts/debug_info";
     import { HUDModalDialogs } from "game/hud/parts/modal_dialogs";
-    import { HUDChangesDebugger } from "game/hud/parts/debug_changes";
+    import { HUDSettingsMenu } from "game/hud/parts/settings_menu";
+    import { HUDShapeTooltip } from "game/hud/parts/shape_tooltip";
     import { TrailerMaker } from "game/hud/trailer_maker";
-    import { DrawParameters } from "core/draw_parameters";
+    import { GameRoot } from "game/root";
 }
 declare module "game/logic" {
     /**
@@ -11118,12 +11105,11 @@ declare module "game/logic" {
             toDirection: enumDirection;
         }[];
     };
-    import { GameRoot } from "game/root";
-    import { Entity } from "game/entity";
-    import { Vector } from "core/vector";
-    import { MetaBuilding } from "game/meta_building";
+    import { Vector, enumDirection } from "core/vector";
     import { enumWireVariant } from "game/components/wire";
-    import { enumDirection } from "core/vector";
+    import { Entity } from "game/entity";
+    import { MetaBuilding } from "game/meta_building";
+    import { GameRoot } from "game/root";
     import { WireNetwork } from "game/systems/wire";
 }
 declare module "game/map_chunk_aggregate" {
@@ -11167,8 +11153,8 @@ declare module "game/map_chunk_aggregate" {
          */
         drawOverlay(parameters: DrawParameters): void;
     }
-    import { GameRoot } from "game/root";
     import { DrawParameters } from "core/draw_parameters";
+    import { GameRoot } from "game/root";
 }
 declare module "game/map" {
     export class BaseMap extends BasicSerializableObject {
@@ -11295,13 +11281,13 @@ declare module "game/map" {
          */
         internalCheckTile(tile: Vector): void;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
-    import { GameRoot } from "game/root";
-    import { MapChunkView } from "game/map_chunk_view";
-    import { MapChunkAggregate } from "game/map_chunk_aggregate";
     import { Vector } from "core/vector";
-    import { Entity } from "game/entity";
     import { BaseItem } from "game/base_item";
+    import { Entity } from "game/entity";
+    import { MapChunkAggregate } from "game/map_chunk_aggregate";
+    import { MapChunkView } from "game/map_chunk_view";
+    import { GameRoot } from "game/root";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/map_view" {
     /**
@@ -11371,9 +11357,9 @@ declare module "game/map_view" {
          */
         drawBackground(parameters: DrawParameters): void;
     }
-    import { BaseMap } from "game/map";
-    import { Entity } from "game/entity";
     import { DrawParameters } from "core/draw_parameters";
+    import { Entity } from "game/entity";
+    import { BaseMap } from "game/map";
 }
 declare module "game/shape_definition_manager" {
     export class ShapeDefinitionManager extends BasicSerializableObject {
@@ -11486,12 +11472,11 @@ declare module "game/shape_definition_manager" {
          */
         getDefinitionFromSimpleShapes(subShapes: [enumSubShape, enumSubShape, enumSubShape, enumSubShape], color?: string): ShapeDefinition;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
-    import { GameRoot } from "game/root";
-    import { ShapeDefinition } from "game/shape_definition";
-    import { ShapeItem } from "game/items/shape_item";
     import { enumColors } from "game/colors";
-    import { enumSubShape } from "game/shape_definition";
+    import { ShapeItem } from "game/items/shape_item";
+    import { GameRoot } from "game/root";
+    import { ShapeDefinition, enumSubShape } from "game/shape_definition";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/achievement_proxy" {
     export class AchievementProxy {
@@ -11516,8 +11501,8 @@ declare module "game/achievement_proxy" {
         onStoryGoalCompleted(level: number): void;
         onMamFailure(): void;
     }
-    import { GameRoot } from "game/root";
     import { Entity } from "game/entity";
+    import { GameRoot } from "game/root";
 }
 declare module "game/sound_proxy" {
     export class SoundProxy {
@@ -11552,8 +11537,8 @@ declare module "game/sound_proxy" {
          */
         internalUpdateOngoingSounds(): void;
     }
-    import { GameRoot } from "game/root";
     import { Vector } from "core/vector";
+    import { GameRoot } from "game/root";
 }
 declare module "game/core" {
     /**
@@ -11740,12 +11725,12 @@ declare module "states/ingame" {
          */
         doSave(): any;
     }
-    import { Savegame } from "savegame/savegame";
     import { GameState } from "core/game_state";
     import { GameCore } from "game/core";
-    import { KeyActionMapper } from "game/key_action_mapper";
     import { GameLoadingOverlay } from "game/game_loading_overlay";
     import { HUDModalDialogs } from "game/hud/parts/modal_dialogs";
+    import { KeyActionMapper } from "game/key_action_mapper";
+    import { Savegame } from "savegame/savegame";
 }
 declare module "mods/mod_signals" {
     export namespace MOD_SIGNALS {
@@ -11846,8 +11831,8 @@ declare module "savegame/savegame_serializer" {
         beltPaths: any[];
         modExtraData: any;
     };
-    import { SerializerInternal } from "savegame/serializer_internal";
     import { ExplainedResult } from "core/explained_result";
+    import { SerializerInternal } from "savegame/serializer_internal";
 }
 declare module "savegame/serialization" {
     /**
@@ -11986,29 +11971,31 @@ declare module "savegame/serialization" {
      * A full schema declaration
      */
     export type Schema = any;
-    import { TypeInteger } from "savegame/serialization_data_types";
-    import { TypePositiveInteger } from "savegame/serialization_data_types";
-    import { TypeNumber } from "savegame/serialization_data_types";
-    import { TypePositiveNumber } from "savegame/serialization_data_types";
-    import { TypeString } from "savegame/serialization_data_types";
-    import { TypeEntity } from "savegame/serialization_data_types";
-    import { TypeEntityWeakref } from "savegame/serialization_data_types";
-    import { TypeVector } from "savegame/serialization_data_types";
-    import { TypeBoolean } from "savegame/serialization_data_types";
-    import { TypePositiveIntegerOrString } from "savegame/serialization_data_types";
-    import { BaseDataType } from "savegame/serialization_data_types";
-    import { TypeNullable } from "savegame/serialization_data_types";
-    import { TypeClassId } from "savegame/serialization_data_types";
-    import { TypeKeyValueMap } from "savegame/serialization_data_types";
-    import { TypeEnum } from "savegame/serialization_data_types";
-    import { TypeClass } from "savegame/serialization_data_types";
-    import { TypeClassData } from "savegame/serialization_data_types";
-    import { TypeFixedClass } from "savegame/serialization_data_types";
-    import { TypeArray } from "savegame/serialization_data_types";
-    import { TypeMetaClass } from "savegame/serialization_data_types";
-    import { TypeStructuredObject } from "savegame/serialization_data_types";
-    import { TypePair } from "savegame/serialization_data_types";
-    import { TypeClassFromMetaclass } from "savegame/serialization_data_types";
+    import {
+        BaseDataType,
+        TypeArray,
+        TypeBoolean,
+        TypeClass,
+        TypeClassData,
+        TypeClassFromMetaclass,
+        TypeClassId,
+        TypeEntity,
+        TypeEntityWeakref,
+        TypeEnum,
+        TypeFixedClass,
+        TypeInteger,
+        TypeKeyValueMap,
+        TypeMetaClass,
+        TypeNullable,
+        TypeNumber,
+        TypePair,
+        TypePositiveInteger,
+        TypePositiveIntegerOrString,
+        TypePositiveNumber,
+        TypeString,
+        TypeStructuredObject,
+        TypeVector,
+    } from "savegame/serialization_data_types";
 }
 declare module "game/time/regular_game_speed" {
     export class RegularGameSpeed extends BaseGameSpeed {
@@ -12089,9 +12076,9 @@ declare module "game/time/game_time" {
         getSpeed(): BaseGameSpeed;
         setSpeed(speed: any): void;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
     import { GameRoot } from "game/root";
     import { BaseGameSpeed } from "game/time/base_game_speed";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "game/root" {
     /** @type {Array<Layer>} */
@@ -12215,27 +12202,27 @@ declare module "game/root" {
         reset(): void;
     }
     import { Application } from "application";
+    import { BufferMaintainer } from "core/buffer_maintainer";
+    import { RandomNumberGenerator } from "core/rng";
+    import { Signal } from "core/signal";
+    import { AchievementProxy } from "game/achievement_proxy";
+    import { AutomaticSave } from "game/automatic_save";
+    import { Camera } from "game/camera";
+    import { DynamicTickrate } from "game/dynamic_tickrate";
+    import { EntityManager } from "game/entity_manager";
+    import { GameMode } from "game/game_mode";
+    import { GameSystemManager } from "game/game_system_manager";
+    import { HubGoals } from "game/hub_goals";
+    import { GameHUD } from "game/hud/hud";
+    import { KeyActionMapper } from "game/key_action_mapper";
+    import { GameLogic } from "game/logic";
+    import { MapView } from "game/map_view";
+    import { ProductionAnalytics } from "game/production_analytics";
+    import { ShapeDefinitionManager } from "game/shape_definition_manager";
+    import { SoundProxy } from "game/sound_proxy";
+    import { GameTime } from "game/time/game_time";
     import { Savegame } from "savegame/savegame";
     import { InGameState } from "states/ingame";
-    import { KeyActionMapper } from "game/key_action_mapper";
-    import { Camera } from "game/camera";
-    import { MapView } from "game/map_view";
-    import { GameLogic } from "game/logic";
-    import { EntityManager } from "game/entity_manager";
-    import { GameHUD } from "game/hud/hud";
-    import { GameSystemManager } from "game/game_system_manager";
-    import { GameTime } from "game/time/game_time";
-    import { HubGoals } from "game/hub_goals";
-    import { BufferMaintainer } from "core/buffer_maintainer";
-    import { AutomaticSave } from "game/automatic_save";
-    import { SoundProxy } from "game/sound_proxy";
-    import { AchievementProxy } from "game/achievement_proxy";
-    import { ShapeDefinitionManager } from "game/shape_definition_manager";
-    import { ProductionAnalytics } from "game/production_analytics";
-    import { DynamicTickrate } from "game/dynamic_tickrate";
-    import { GameMode } from "game/game_mode";
-    import { Signal } from "core/signal";
-    import { RandomNumberGenerator } from "core/rng";
 }
 declare module "game/time/base_game_speed" {
     export class BaseGameSpeed extends BasicSerializableObject {
@@ -12260,8 +12247,8 @@ declare module "game/time/base_game_speed" {
         /** @returns {BaseGameSpeed} */
         newSpeed(instance: any): BaseGameSpeed;
     }
-    import { BasicSerializableObject } from "savegame/serialization";
     import { GameRoot } from "game/root";
+    import { BasicSerializableObject } from "savegame/serialization";
 }
 declare module "core/global_registries" {
     /**
@@ -12345,8 +12332,8 @@ declare module "core/background_resources_loader" {
         internalPreloadCss(src: any, progressHandler: any): Promise<void>;
     }
     import { Application } from "application";
-    import { Signal } from "core/signal";
     import { AtlasDefinition } from "core/atlas_definitions";
+    import { Signal } from "core/signal";
 }
 declare module "core/input_distributor" {
     export class InputDistributor {
@@ -12567,8 +12554,8 @@ declare module "platform/ad_providers/gamedistribution" {
          */
         lastVideoAdShowTime: number;
     }
-    import { AdProviderInterface } from "platform/ad_provider";
     import { Application } from "application";
+    import { AdProviderInterface } from "platform/ad_provider";
 }
 declare module "platform/electron/steam_achievement_provider" {
     export class SteamAchievementProvider extends AchievementProviderInterface {
@@ -12577,9 +12564,9 @@ declare module "platform/electron/steam_achievement_provider" {
         initialized: boolean;
         root: GameRoot;
     }
-    import { AchievementProviderInterface } from "platform/achievement_provider";
-    import { GameRoot } from "game/root";
     import { Application } from "application";
+    import { GameRoot } from "game/root";
+    import { AchievementProviderInterface } from "platform/achievement_provider";
 }
 declare module "platform/wrapper" {
     export class PlatformWrapperInterface {
@@ -12683,8 +12670,8 @@ declare module "platform/browser/wrapper" {
         detectAdblock(): Promise<boolean>;
         initializeAchievementProvider(): Promise<void>;
     }
-    import { PlatformWrapperInterface } from "platform/wrapper";
     import { NoAdProvider } from "platform/ad_providers/no_ad_provider";
+    import { PlatformWrapperInterface } from "platform/wrapper";
 }
 declare module "platform/electron/wrapper" {
     export class PlatformWrapperImplElectron extends PlatformWrapperImplBrowser {
@@ -13288,8 +13275,8 @@ declare module "platform/browser/game_analytics" {
             buildings: number;
         };
     }
-    import { GameAnalyticsInterface } from "platform/game_analytics";
     import { GameRoot } from "game/root";
+    import { GameAnalyticsInterface } from "platform/game_analytics";
 }
 declare module "core/restriction_manager" {
     export class RestrictionManager extends ReadWriteProxy {
@@ -13339,8 +13326,8 @@ declare module "core/restriction_manager" {
          */
         getHasExtendedLevelsAndFreeplay(): boolean;
     }
-    import { ReadWriteProxy } from "core/read_write_proxy";
     import { Application } from "application";
+    import { ReadWriteProxy } from "core/read_write_proxy";
 }
 declare module "states/puzzle_menu" {
     export class PuzzleMenuState extends TextualGameState {
@@ -13635,19 +13622,19 @@ declare module "application" {
     export type AchievementProviderInterface = import("platform/achievement_provider").AchievementProviderInterface;
     export type SoundInterface = import("platform/sound").SoundInterface;
     export type StorageInterface = import("platform/storage").StorageInterface;
-    import { ApplicationSettings } from "profile/application_settings";
     import { AnimationFrame } from "core/animation_frame";
-    import { StateManager } from "core/state_manager";
-    import { SavegameManager } from "savegame/savegame_manager";
-    import { InputDistributor } from "core/input_distributor";
     import { BackgroundResourcesLoader } from "core/background_resources_loader";
-    import { ClientAPI } from "platform/api";
+    import { InputDistributor } from "core/input_distributor";
     import { RestrictionManager } from "core/restriction_manager";
-    import { PlatformWrapperInterface } from "platform/wrapper";
+    import { StateManager } from "core/state_manager";
+    import { Vector } from "core/vector";
     import { AdProviderInterface } from "platform/ad_provider";
     import { AnalyticsInterface } from "platform/analytics";
+    import { ClientAPI } from "platform/api";
     import { ShapezGameAnalytics } from "platform/browser/game_analytics";
-    import { Vector } from "core/vector";
+    import { PlatformWrapperInterface } from "platform/wrapper";
+    import { ApplicationSettings } from "profile/application_settings";
+    import { SavegameManager } from "savegame/savegame_manager";
 }
 declare module "core/config.local" {
     var _default: {};
@@ -13679,6 +13666,9 @@ declare module "core/config" {
         export const modBrowser: string;
     }
     export namespace globalConfig {
+        export let foundErrors: {
+            [key: string]: { error: Error; entity: import("game/entity").Entity };
+        };
         export const minerSpeedItemsPerSecond: number;
         export const mapChunkWorldSize: number;
         export const mapChunkOverviewMinZoom: number;
@@ -13786,8 +13776,8 @@ declare module "savegame/puzzle_serializer" {
          */
         deserializePuzzle(root: GameRoot, puzzle: import("./savegame_typedefs").PuzzleGameData): string;
     }
-    import { GameRoot } from "game/root";
     import { BaseItem } from "game/base_item";
+    import { GameRoot } from "game/root";
 }
 declare module "game/hud/parts/puzzle_editor_review" {
     export class HUDPuzzleEditorReview extends BaseHUDPart {
@@ -13856,9 +13846,9 @@ declare module "game/hud/parts/puzzle_complete_notification" {
         show(): void;
         nextPuzzle(): void;
     }
+    import { InputReceiver } from "core/input_receiver";
     import { BaseHUDPart } from "game/hud/base_hud_part";
     import { DynamicDomAttach } from "game/hud/dynamic_dom_attach";
-    import { InputReceiver } from "core/input_receiver";
 }
 declare module "game/hud/parts/puzzle_play_settings" {
     export class HUDPuzzlePlaySettings extends BaseHUDPart {

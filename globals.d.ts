@@ -1,5 +1,5 @@
 declare module "shapez-env" {
-    export function getMod(): Mod;
+    export function getMod(id: string | void): Mod;
 }
 
 declare module "*.scss" {

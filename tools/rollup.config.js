@@ -1,19 +1,18 @@
+import commonjs from "@rollup/plugin-commonjs";
+import image from "@rollup/plugin-image";
+import json from "@rollup/plugin-json";
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
+import pug from "rollup-plugin-pug";
 import sass from "rollup-plugin-sass";
-import json from "@rollup/plugin-json";
-import postcss from "rollup-plugin-postcss";
-import commonjs from "@rollup/plugin-commonjs";
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { marked } from "./marked.js";
 import { shapezMetadata } from "./metadata.js";
 import { modSources, resolveModEntry } from "./mod_resolver.js";
 import { shapez } from "./shapez_plugin.js";
-import { resolveShapezModule, shapezExternal } from "./util.js";
-import { marked } from "./marked.js";
 import skimnet from "./skimnet.js";
-import image from "@rollup/plugin-image";
-import pug from "rollup-plugin-pug";
+import { resolveShapezModule, shapezExternal } from "./util.js";
 const plugins = [
     // @ts-ignore invalid typings
     image(),

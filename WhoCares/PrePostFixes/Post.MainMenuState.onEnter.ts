@@ -8,10 +8,8 @@
 */
 
 import { globalConfig } from "core/config";
-import { createLogger } from "core/logging";
 import { ShapeDefinition } from "game/shape_definition";
-
-const logger = createLogger("forceload/oneEnter");
+import { forceLoadBypassLogger } from "..";
 
 export function onEnterPost(payload) {
     if (!payload.loadError) return;
@@ -20,18 +18,18 @@ export function onEnterPost(payload) {
         const { ok } = this.dialogs.showWarning(
             "Failed",
             "WhoCares was unable to forceload your savegame. Please DM 'WaffleDevs' on discord and send them the save game for additional help.",
-            ["ok:good:timeout"]
+            [`ok:good${globalConfig["WhoCaresDevMode"] ? "" : ":timeout"}`]
         );
         ok.add(() => {
             globalConfig["forceload"] = false;
         });
         return;
     }
-    if (globalConfig["hasAllMods"]) {
+    if (globalConfig["hasAllMods"] || globalConfig["WhoCaresDevMode"]) {
         const { forceload } = this.dialogs.showWarning(
             "Force Load?",
             "Savegame failed to load. Forceloading may remove any errors and load anyway. This will destroy any data that is invalid. Create a backup before clicking continue.",
-            ["cancel:good", "forceload:bad:timeout"]
+            ["cancel:good", `forceload:bad${globalConfig["WhoCaresDevMode"] ? "" : ":timeout"}`]
         );
         forceload.add(() => {
             // Save My Save
@@ -41,7 +39,7 @@ export function onEnterPost(payload) {
                     try {
                         ShapeDefinition.fromShortKey(key);
                     } catch (e) {
-                        logger.log(`Forceloader removing errored shape ${key}.`);
+                        forceLoadBypassLogger.log(`Forceloader removing errored shape ${key}.`);
                         delete dump.hubGoals.storedShapes[key];
                     }
                 }

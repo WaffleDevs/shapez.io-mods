@@ -2,13 +2,12 @@ import { globalConfig } from "core/config";
 import { GameRoot } from "core/draw_parameters";
 import { ExplainedResult } from "core/explained_result";
 import { gComponentRegistry } from "core/global_registries";
-import { createLogger } from "core/logging";
 import { Camera } from "game/camera";
 import { Entity } from "game/entity";
 import { GameTime } from "game/time/game_time";
 import { MOD_SIGNALS } from "mods/mod_signals";
 import { SerializedGame } from "savegame/savegame_typedefs";
-const logger = createLogger("forceload/savser");
+import { forceLoadBypassLogger } from "..";
 
 export const SavegameSerializerExt = ({ $super, $old }) => ({
     /**
@@ -61,7 +60,7 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
             }
             if (seenUids.has(uid)) {
                 if (forceLoad) {
-                    logger.log(`Forceloading past "Duplicate uid ${uid}"`);
+                    forceLoadBypassLogger.log(`Forceloading past "Duplicate uid ${uid}"`);
                     root.savegame.getCurrentDump().entities.splice(root.savegame.getCurrentDump().entities.indexOf(entity));
                 } else return ExplainedResult.bad("Duplicate uid " + uid);
             }
@@ -79,7 +78,7 @@ export const SavegameSerializerExt = ({ $super, $old }) => ({
                 // Check component id is known
                 if (!componentClass) {
                     if (forceLoad) {
-                        logger.log(`Forceloading past "Unknown component id: ${componentId}"`);
+                        forceLoadBypassLogger.log(`Forceloading past "Unknown component id: ${componentId}"`);
                         continue;
                     }
                     return ExplainedResult.bad("Unknown component id: " + componentId);

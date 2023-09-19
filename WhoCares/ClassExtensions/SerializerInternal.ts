@@ -1,11 +1,9 @@
 import { globalConfig } from "core/config";
-import { createLogger } from "core/logging";
 import { Vector } from "core/vector";
 import { getBuildingDataFromCode } from "game/building_codes";
 import { Entity } from "game/entity";
 import { GameRoot } from "game/root";
-import { runPossibleFixed } from "../ModSpecificFixes/handler";
-const logger = createLogger("forceload/serint");
+import { fixCCT } from "../ModSpecificFixes/CCT";
 
 export const SerializerInternalExt = ({ $super, $old }) => ({
     serializeEntityArray(array: any) {
@@ -30,7 +28,6 @@ export const SerializerInternalExt = ({ $super, $old }) => ({
         assert(staticData, "entity has no static data");
         let code = staticData.code;
         let data = getBuildingDataFromCode(code);
-        console.log(`log ${payload.uid}`);
         if (data == undefined) {
             if (globalConfig["forceload"]) {
                 return;
@@ -55,15 +52,9 @@ export const SerializerInternalExt = ({ $super, $old }) => ({
         entity.uid = payload.uid;
         this.deserializeComponents(root, entity, payload.components);
         if (globalConfig["forceload"]) {
-            const fixes = runPossibleFixed("preEntityPlaceDeserialize");
-            const preEntityPlaceDeserialize = fixes[0],
-                ids = fixes[1];
-            for (let i = 0; i < ids.length; i++) {
-                eval(preEntityPlaceDeserialize[ids[i]] + `fix${ids[i]}()`);
-            }
+            eval(fixCCT + `fixCCT()`);
         }
         root.entityMgr.registerEntity(entity, payload.uid);
-        console.log(entity);
         root.map.placeStaticEntity(entity);
     },
 

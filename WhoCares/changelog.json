@@ -1,4 +1,8 @@
 {
+    "0.1.6": [
+        "Error Viewer.",
+        "Error icons on entities."
+    ],
     "0.1.5": [
         "Started Work on mod specific fixed. Added failsafe for CCT and possibly fixed Wrexcavator errors.",
         "Added dialog disabling forceload when there are mod differences.",

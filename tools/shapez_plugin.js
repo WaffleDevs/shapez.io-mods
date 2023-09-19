@@ -13,8 +13,11 @@ function loadShapezEnv(id) {
 
     const modId = JSON.stringify(id.split("/")[1]);
     return `import { MODS } from "mods/modloader";
-            export const getMod = () =>
-            MODS.mods.find(m => m.metadata.id === ${modId})`;
+            export const getMod = (id) => {
+                if(!id) id = ${modId}
+                return MODS.mods.find(m => m.metadata.id === id)
+            }
+            `;
 }
 
 /**

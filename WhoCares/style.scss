@@ -16,3 +16,41 @@
     }
 
 }
+
+
+#ingame_HUD_ErrorViewer {
+    position: absolute;
+    right: 10px;
+    margin: auto;
+    width: max-content;
+    height: 60%;
+    padding: 10px;
+    top: 50%;
+    bottom: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 200;
+
+    background-color: #4c505cf2;
+    color: #ffffffe0;
+    font-size: 75%;
+    border-radius: 0.5em;
+    overflow-y: scroll;
+}
+
+.WhoCaresError {
+    background-color: #3b3e46f2;
+    border-radius: 0.25em;
+    padding: 3px;
+}
+
+.WhoCaresError>button>div {
+    font-size: 150% !important;
+    width: max-content;
+}
+
+#errorViewerToggle {
+    filter: grayscale(1) !important;
+    padding: 0;
+}

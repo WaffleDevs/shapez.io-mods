@@ -8,21 +8,8 @@
 */
 
 import { globalConfig } from "core/config";
-import { createLogger } from "core/logging";
 import { BeltPath } from "game/belt_path";
-/**if (data[i].items) {
-                for (let x = data[i].items.length - 1; x >= 0; x--) {
-                    const item = data[i].items[x][1];
-                    try {
-                        itemResolverSingleton(this.root, item);
-                    } catch (e) {
-                        logger.log("Forceloader removing belt item.");
-                        data[i].items.splice(x, 1);
-                        anyError = true;
-                    }
-                }
-            } */
-const logger = createLogger("forceload/desSerPath");
+import { forceLoadBypassLogger } from "..";
 
 export function deserializePathsRep($original, [data]) {
     console.log(globalConfig["forceload"] + " BELT DESER");
@@ -32,11 +19,21 @@ export function deserializePathsRep($original, [data]) {
         }
 
         for (let i = 0; i < data.length; ++i) {
-            for (let i = 0; i < globalConfig["removedEntityUids"].length; ++i) {
-                console.log(globalConfig["removedEntityUids"][i]);
-                console.log(data[i].entityPath);
-                if (data[i].entityPath.includes(globalConfig["removedEntityUids"][i])) console.log(data[i]);
+            // for (let i = 0; i < globalConfig["removedEntityUids"].length; ++i) {
+            //     if (data[i].entityPath.includes(globalConfig["removedEntityUids"][i])) console.log(data[i]);
+            // }
+            for (let a = 0; a < data[i].entityPath.length; a++) {
+                console.log(a, data[i].entityPath[a]);
+                console.log(globalConfig["removedEntityUids"].includes(data[i].entityPath[a]), !globalConfig["root"].entityMgr.findByUid(data[i].entityPath[a], false));
+                if (globalConfig["removedEntityUids"].includes(data[i].entityPath[a]) || !globalConfig["root"].entityMgr.findByUid(data[i].entityPath[a], false)) {
+                    data[i].entityPath.splice(a, 1);
+                    a--;
+                }
             }
+            if (data[i].entityPath.length == 0) {
+                continue;
+            }
+            console.log(data[i]);
             const path = BeltPath.fromSerialized(this.root, data[i]);
             // If path is a string, that means its an error
             if (!(path instanceof BeltPath)) {
@@ -47,10 +44,10 @@ export function deserializePathsRep($original, [data]) {
 
         if (this.beltPaths.length === 0) {
             // Old savegames might not have paths yet
-            logger.warn("Recomputing belt paths (most likely the savegame is old or empty)");
+            forceLoadBypassLogger.warn("Recomputing belt paths (most likely the savegame is old or empty)");
             this.recomputeAllBeltPaths();
         } else {
-            logger.warn("Restored", this.beltPaths.length, "belt paths");
+            forceLoadBypassLogger.warn("Restored", this.beltPaths.length, "belt paths");
         }
     } else $original(data);
 }

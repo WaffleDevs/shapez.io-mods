@@ -1,8 +1,10 @@
 import { globalConfig } from "core/config";
 import { gItemRegistry } from "core/global_registries";
 import { Loader } from "core/loader";
+import { getMod } from "shapez-env";
 
 export function fixWrexcavator() {
+    if (!getMod("Wrexcavator")) return;
     const wreckItem = gItemRegistry.getById("wreck");
     const index = gItemRegistry.entries.indexOf(wreckItem);
 
