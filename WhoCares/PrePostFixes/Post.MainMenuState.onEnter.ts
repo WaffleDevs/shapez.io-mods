@@ -33,10 +33,11 @@ export function onEnterPost(payload) {
         );
         forceload.add(() => {
             // Save My Save
-            const dump = globalConfig["latestSavegame"];
+            let dump = globalConfig["latestSavegame"].currentData.dump;
             if (dump.hubGoals != undefined) {
                 for (const key of Object.keys(dump.hubGoals.storedShapes)) {
                     try {
+                        dump.hubGoals.storedShapes[key] = Math.round(dump.hubGoals.storedShapes[key]);
                         ShapeDefinition.fromShortKey(key);
                     } catch (e) {
                         forceLoadBypassLogger.log(`Forceloader removing errored shape ${key}.`);
@@ -44,10 +45,11 @@ export function onEnterPost(payload) {
                     }
                 }
             }
+            globalConfig["latestSavegame"].currentData.dump = dump;
             // End Save My Save
             globalConfig["forceload"] = true;
             this.moveToState("InGameState", {
-                savegame: dump,
+                savegame: globalConfig["latestSavegame"],
             });
         });
     } else {

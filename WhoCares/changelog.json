@@ -1,4 +1,8 @@
 {
+    "0.1.7": [
+        "Honestly don't know much.",
+        "Added a new fix. If you ever have a decimal number of items, it wont break anything anymore. Blame my emc mod for me fixing this..."
+    ],
     "0.1.6": [
         "Error Viewer.",
         "Error icons on entities."

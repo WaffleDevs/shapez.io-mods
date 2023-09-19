@@ -6,7 +6,7 @@
     "settings": {
         "quadShapeMulti": {
             "C": 1,
-            "R": 1,
+            "R": 1.2,
             "S": 1.5,
             "W": 2,
             "_": 2.5,

@@ -7,6 +7,8 @@ import { WireNetwork } from "game/systems/wire";
 import { ShapeBuyerComponent } from "./buildings/shapeTablet";
 import { emcForShape, hasEnoughEmc, hasEnoughEmcForShape, subtractASEmc } from "./emcManager";
 
+let timeSinceLastOut = 0;
+
 export class ShapeBuyerSystem extends GameSystemWithFilter {
     item;
     allEntities;
@@ -24,22 +26,28 @@ export class ShapeBuyerSystem extends GameSystemWithFilter {
     }
 
     update() {
+        const outputsPerSecond = globalConfig["root"].hubGoals.getBeltBaseSpeed() / 4;
+        if (Date.now() <= timeSinceLastOut + 1000 / outputsPerSecond) return;
+        timeSinceLastOut = Date.now();
+
         for (let i = 0; i < this.allEntities.length; ++i) {
             const entity = this.allEntities[i];
             const ejectorComp: ItemEjectorComponent = entity.components.ItemEjector;
 
+            const shopComp = entity.components.ShapeBuyer;
             const pinsComp = entity.components.WiredPins;
-            if (!pinsComp) {
-                continue;
-            }
+
             const pin = pinsComp.slots[0];
             const network: WireNetwork = pin.linkedNetwork;
+            let shape = shopComp.shape;
 
-            if (!network || !network.hasValue() || network.currentValue._type != "shape") {
+            if (network?.hasValue() && network.currentValue._type == "shape") {
+                shape = network.currentValue.definition.cachedHash;
+            }
+
+            if (!ShapeDefinition.isValidShortKey(shape) || !hasEnoughEmcForShape(shape)) {
                 continue;
             }
-            //@ts-expect-error
-            const shape = network.currentValue.definition.cachedHash;
 
             [0, 1, 2, 3].forEach((v) => {
                 if (hasEnoughEmcForShape(shape)) {

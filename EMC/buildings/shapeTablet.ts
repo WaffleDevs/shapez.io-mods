@@ -169,6 +169,7 @@ class MetaShapeTabletBuilding extends ModMetaBuilding {
     }
 }
 export class ShapeBuyerComponent extends Component {
+    shape;
     static getId() {
         return "ShapeBuyer";
     }

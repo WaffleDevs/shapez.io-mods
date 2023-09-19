@@ -3,8 +3,10 @@ import { HUDPinnedShapes } from "game/hud/parts/pinned_shapes";
 import { ShapeDefinition } from "game/shape_definition";
 import { Mod } from "mods/mod";
 
+export const emcShape = "------:RyCyCyCy:CwCwCwCw";
+
 export function hasEnoughEmc(amount) {
-    return globalConfig["root"].hubGoals.storedShapes[CURRENCY] >= amount;
+    return globalConfig["root"].hubGoals.storedShapes[emcShape] >= amount;
 }
 
 export function hasEnoughEmcForShape(shape: ShapeDefinition | String) {
@@ -32,16 +34,16 @@ export function emcForShape(shape: String) {
         }
     }
 
-    return emc * lW[layers.length - 1];
+    return Math.round(emc * lW[layers.length - 1]);
 }
 
 export function subtractEmc(amount) {
-    globalConfig["root"].hubGoals.storedShapes[CURRENCY] -= amount;
-    if (globalConfig["root"].hubGoals.storedShapes[CURRENCY] < 0) globalConfig["root"].hubGoals.storedShapes[CURRENCY] = 0;
+    globalConfig["root"].hubGoals.storedShapes[emcShape] -= amount;
+    if (globalConfig["root"].hubGoals.storedShapes[emcShape] < 0) globalConfig["root"].hubGoals.storedShapes[emcShape] = 0;
 }
 
 export function addEmc(amount) {
-    globalConfig["root"].hubGoals.storedShapes[CURRENCY] += amount;
+    globalConfig["root"].hubGoals.storedShapes[emcShape] += amount;
 }
 
 export function subtractASEmc(shape) {
@@ -52,13 +54,11 @@ export function addAsEmc(shape) {
     addEmc(emcForShape(shape));
 }
 
-const CURRENCY = "------:RyCyCyCy:CwCwCwCw";
-
 export function initEmcViewer(mod: Mod) {
     // Make sure the currency is always pinned
     mod.modInterface.runAfterMethod(HUDPinnedShapes, "rerenderFull", function () {
         this.internalPinShape({
-            key: CURRENCY,
+            key: emcShape,
             canUnpin: false,
             className: "emc",
         });

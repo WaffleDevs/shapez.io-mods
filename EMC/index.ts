@@ -17,6 +17,7 @@ import shapeBuyerBlueprint from "./shapeBuyerBlueprint.png";
 import shapeSellerBlueprint from "./shapeSellerBlueprint.png";
 //@ts-expect-error
 import shapeSellerIcon from "./shapeTabletIcon.png";
+import { HUDShapeBuyerEdit } from "./shopHud";
 
 export const RESOURCES = {
     "shapeBuyerBuilding.png": shapeBuyer,
@@ -44,6 +45,8 @@ export default class extends Mod {
         registerShapeTablet(this);
         initializeSavegameFunctions(this);
         initEmcViewer(this);
+
+        this.modInterface.registerHudElement("shapeBuyerEdit", HUDShapeBuyerEdit);
 
         this.modInterface.registerGameSystem({
             id: "shapeBuyer",
