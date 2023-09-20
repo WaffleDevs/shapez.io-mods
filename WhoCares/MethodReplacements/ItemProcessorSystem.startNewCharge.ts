@@ -1,3 +1,4 @@
+import { globalConfig } from "core/config";
 import { registerError } from "../ErrorViewer/errorViewer";
 export function startNewChargeRep($original, [entity]) {
     try {
@@ -44,6 +45,10 @@ export function startNewChargeRep($original, [entity]) {
         processorComp.inputCount = 0;
     } catch (e) {
         //forceLoadBypassLogger.log("Forceloading past startNewCharge error.");
-        registerError(e, entity);
+        if (!globalConfig["forceload"]) {
+            this.root.gameState.saveThenGoToState("MainMenuState", { loadError: e });
+            throw e;
+        }
+        registerError(e, entity, "Item Processor System");
     }
 }

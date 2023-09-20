@@ -14,7 +14,7 @@ export function initializeErrorViewer(WhoCares: Mod) {
     });
 }
 
-export function registerError(error: Error, entity: Entity) {
+export function registerError(error: Error, entity: Entity, context: String) {
     if (globalConfig.foundErrors[entity.uid]) return;
     globalConfig.foundErrors[entity.uid] = {
         error,
@@ -22,7 +22,7 @@ export function registerError(error: Error, entity: Entity) {
     };
     entity.addComponent(new ErrorSymbolComponent());
 
-    forceLoadBypassLogger.log(`Bypassing ${error.message}`);
+    forceLoadBypassLogger.log(`${context}: Bypassing ${error.message}`);
     setTimeout(() => {
         delete globalConfig.foundErrors[entity.uid];
     }, 500);

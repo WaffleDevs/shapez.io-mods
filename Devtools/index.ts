@@ -1,19 +1,5 @@
-import { clamp, formatItemsPerSecond } from "core/utils";
-import { Vector, enumDirection } from "core/vector";
-import { Component } from "game/component";
-import { ItemAcceptorComponent } from "game/components/item_acceptor";
-import { ItemEjectorComponent } from "game/components/item_ejector";
-import { enumItemProcessorTypes, ItemProcessorComponent } from "game/components/item_processor";
 import { GameSystem } from "game/game_system";
-import { GameSystemWithFilter } from "game/game_system_with_filter";
-import { MOD_ITEM_PROCESSOR_SPEEDS } from "game/hub_goals";
-import { defaultBuildingVariant } from "game/meta_building";
-import { TOP_RIGHT, BOTTOM_RIGHT, BOTTOM_LEFT, TOP_LEFT, ShapeDefinition } from "game/shape_definition";
-import { MOD_ITEM_PROCESSOR_HANDLERS } from "game/systems/item_processor";
 import { Mod } from "mods/mod";
-import { ModMetaBuilding } from "mods/mod_meta_building";
-import { types } from "savegame/serialization";
-import { T } from "translations";
 
 class UidSystem extends GameSystem {
     constructor(root) {

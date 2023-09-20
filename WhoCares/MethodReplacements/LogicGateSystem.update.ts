@@ -63,7 +63,7 @@ export function updateRep($original) {
             }
         } catch (error) {
             if (globalConfig["forceload"]) {
-                registerError(error, entity);
+                registerError(error, entity, "Logic Gate System");
             } else {
                 this.root.gameState.saveThenGoToState("MainMenuState", { loadError: error });
                 throw error;

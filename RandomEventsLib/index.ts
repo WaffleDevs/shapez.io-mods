@@ -1,11 +1,12 @@
 import { createLogger } from "core/logging";
 import { RandomNumberGenerator } from "core/rng";
-import { Mod } from "mods/mod";
-import { requireModExtras } from "../modUtils/me_utils";
-import { MODS } from "mods/modloader";
 import type { GameRoot } from "game/root";
+import { Mod } from "mods/mod";
+import { MODS } from "mods/modloader";
+import { requireModExtras } from "../modUtils/me_utils";
 import { RELModExtrasSettingsState } from "./RELModExtrasSettingsState";
-
+//@ts-expect-error
+import index from "./index.pug";
 // Todo: Some form of way to disable certain events
 // Maybe custom state that allows editing a settings file with events listed like modId_eventName
 
@@ -19,6 +20,8 @@ declare global {
     }
 }
 
+const ingameStates = ["ingame"];
+
 export default class extends Mod {
     stateEnterEvents: { [key: string]: any } = {};
     ingameRandomEvents: { [key: string]: any } = {};
@@ -31,8 +34,9 @@ export default class extends Mod {
     randomEventInterval = this.settings.randomEventInterval;
 
     override init() {
+        this.metadata.extra.readme = index;
+
         this.modInterface.registerCss(settingsCss);
-        console.log(this.modLoader.mods);
         if (!requireModExtras(this, true)) {
             return;
         }
@@ -40,9 +44,7 @@ export default class extends Mod {
             this.settings.seed = Date.now();
             this.saveSettings();
         }
-        this.seed = Math.floor(
-            (Date.now() * this.settings.seed) / (Math.random() * 100001000010000)
-        );
+        this.seed = Math.floor((Date.now() * this.settings.seed) / (Math.random() * 100001000010000));
         this.RNG.choiceDict = function (obj: Object) {
             const keys = Object.keys(obj);
             return this.choice(keys);
@@ -58,16 +60,16 @@ export default class extends Mod {
         let initFinished = false;
         this.signals.stateEntered.add((state) => {
             if (state.key === "PreloadState") {
-                window.REL = MODS.mods.find(
-                    (mod) => mod.metadata.id === this.metadata.id
-                );
+                window.REL = MODS.mods.find((mod) => mod.metadata.id === this.metadata.id);
                 this.modInterface.registerGameState(RELModExtrasSettingsState);
-            }
-            if (state.key === "MainMenuState") {
+            } else if (state.key === "MainMenuState") {
                 if (initFinished) return;
                 this.initStateEnterEvents();
                 this.initIngameRandomEvents();
                 initFinished = true;
+            } else if (!ingameStates.includes(state.key)) {
+                clearInterval(this.randomInterval);
+                this.randomInterval = undefined;
             }
         });
     }
@@ -76,21 +78,12 @@ export default class extends Mod {
         // ToDo: Add config updates here.
     }
 
-    registerStateEnterEvent(
-        eventName: string,
-        state: string,
-        func: Function,
-        modPrefix: string = ""
-    ) {
+    registerStateEnterEvent(eventName: string, state: string, func: Function, modPrefix: string = "") {
         eventName = `${modPrefix != "" ? `${modPrefix}:` : ""}${eventName}`;
 
-        if (!Object.keys(this.stateEnterEvents).includes(state))
-            this.stateEnterEvents[state] = {};
+        if (!Object.keys(this.stateEnterEvents).includes(state)) this.stateEnterEvents[state] = {};
 
-        if (this.stateEnterEvents[state][eventName] != undefined)
-            return new Error(
-                `There is already an SEE with name ${eventName} for the state ${state}`
-            );
+        if (this.stateEnterEvents[state][eventName] != undefined) return new Error(`There is already an SEE with name ${eventName} for the state ${state}`);
 
         logger.log(`Registering SEE: ${eventName} in ${state}.`);
 
@@ -100,56 +93,29 @@ export default class extends Mod {
 
     registerBulkStateEnterEvent(events: { [key: string]: any }, modPrefix: string = "") {
         for (const event in events) {
-            const eventName: string = `${modPrefix != "" ? `${modPrefix}:` : ""}${event}`;
-            const state: string = events[event].state;
-            const func: Function = events[event].function;
-
-            if (!Object.keys(this.stateEnterEvents).includes(state))
-                this.stateEnterEvents[state] = {};
-
-            if (this.stateEnterEvents[state][eventName] != undefined)
-                return new Error(
-                    `There is already an SEE with name ${eventName} for the state ${state}`
-                );
-
-            logger.log(`Registering SEE: ${eventName} in ${state}.`);
-
-            this.stateEnterEvents[state][eventName] = func;
+            this.registerStateEnterEvent(event, events[event].state, events[event].function, modPrefix);
         }
         return;
     }
 
     registerIngameRandomEvent(eventName: string, func: Function, modPrefix: string = "") {
         eventName = `${modPrefix != "" ? `${modPrefix}:` : ""}${eventName}`;
-        if (this.ingameRandomEvents[eventName] != undefined)
-            return new Error(`There is already an IRE with name ${eventName}`);
+        if (this.ingameRandomEvents[eventName] != undefined) return new Error(`There is already an IRE with name ${eventName}`);
 
         logger.log(`Registering IRE: ${eventName}.`);
         this.ingameRandomEvents[eventName] = func;
         return;
     }
 
-    registerBulkIngameRandomEvent(
-        events: { [key: string]: any },
-        modPrefix: string = ""
-    ) {
+    registerBulkIngameRandomEvent(events: { [key: string]: any }, modPrefix: string = "") {
         for (const event in events) {
-            const eventName: string = `${modPrefix != "" ? `${modPrefix}:` : ""}${event}`;
-            const func: Function = events[event];
-
-            if (this.ingameRandomEvents[eventName] != undefined)
-                return new Error(`There is already an IRE with name ${eventName}`);
-
-            logger.log(`Registering IRE: ${eventName}.`);
-            this.ingameRandomEvents[eventName] = func;
+            this.registerIngameRandomEvent(event, events[event], modPrefix);
         }
         return;
     }
 
     initStateEnterEvents() {
-        logger.log(
-            `Initializing State Enter Events with chance ${this.stateEnterEventChance}`
-        );
+        logger.log(`Initializing State Enter Events with chance ${this.stateEnterEventChance}`);
 
         this.signals.stateEntered.add((state) => {
             if (this.stateEnterEvents[state.key] == undefined) return;
@@ -177,13 +143,9 @@ export default class extends Mod {
     }
 
     initIngameRandomEvents() {
-        logger.log(
-            `Initializing Ingame Random Events with timer ${this.randomEventInterval}`
-        );
+        logger.log(`Initializing Ingame Random Events with timer ${this.randomEventInterval}`);
 
         this.signals.gameStarted.add((root: GameRoot) => {
-            console.log(root);
-
             clearInterval(this.randomInterval);
             this.randomInterval = undefined;
 

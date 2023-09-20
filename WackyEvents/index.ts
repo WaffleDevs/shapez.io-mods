@@ -1,8 +1,11 @@
 import type { GameRoot } from "game/root";
 import { Mod } from "mods/mod";
-
+//@ts-expect-error
+import index from "./index.pug";
 export default class RandomEvents extends Mod {
     override init() {
+        this.metadata.extra.readme = index;
+
         this.signals.stateEntered.add((state) => {
             if (state.key === "PreloadState") {
                 window.REL.registerStateEnterEvent(

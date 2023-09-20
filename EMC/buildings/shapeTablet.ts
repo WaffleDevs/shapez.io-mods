@@ -13,9 +13,10 @@ import { ShapeDefinition } from "game/shape_definition";
 import { MOD_ITEM_PROCESSOR_HANDLERS } from "game/systems/item_processor";
 import { Mod } from "mods/mod";
 import { ModMetaBuilding } from "mods/mod_meta_building";
+import { types } from "savegame/serialization";
 import { T } from "translations";
 import { RESOURCES } from "..";
-import { addAsEmc } from "../emcManager";
+import { addEmc, emcForShape } from "../emcManager";
 
 export function registerShapeTablet(mod: Mod) {
     //@ts-expect-error
@@ -23,6 +24,7 @@ export function registerShapeTablet(mod: Mod) {
     //@ts-expect-error
     MOD_ITEM_PROCESSOR_SPEEDS.shapeSeller = () => globalConfig["root"].hubGoals.getBeltBaseSpeed();
     MOD_ITEM_PROCESSOR_HANDLERS.shapeSeller = shapeSellerHandler;
+    mod.modInterface.registerComponent(ShapeBuyerComponent);
 
     mod.modInterface.registerNewBuilding({
         metaClass: MetaShapeTabletBuilding,
@@ -40,7 +42,8 @@ export function registerShapeTablet(mod: Mod) {
 function shapeSellerHandler(payload) {
     const shape = payload.items.get(0) || payload.items.get(1) || payload.items.get(2) || payload.items.get(3);
     const shapeDefinition: ShapeDefinition = shape.definition;
-    addAsEmc(shapeDefinition.cachedHash);
+    //addAsEmc(globalConfig["root"], shapeDefinition.cachedHash);
+    addEmc(globalConfig["root"], emcForShape(shapeDefinition.cachedHash, true));
 }
 
 class MetaShapeTabletBuilding extends ModMetaBuilding {
@@ -125,7 +128,7 @@ class MetaShapeTabletBuilding extends ModMetaBuilding {
 
             entity.components.ItemAcceptor.setSlots(slots);
             entity.components.ItemEjector.setSlots([]);
-
+            // @ts-expect-error
             if (entity.components.ShapeBuyerComponent) entity.removeComponent(ShapeBuyerComponent);
             if (!entity.components.ItemProcessor) {
                 entity.addComponent(
@@ -147,7 +150,7 @@ class MetaShapeTabletBuilding extends ModMetaBuilding {
             });
             entity.components.ItemEjector.setSlots(slots);
             entity.components.ItemAcceptor.setSlots([]);
-
+            // @ts-expect-error
             if (!entity.components.ShapeBuyerComponent) entity.addComponent(new ShapeBuyerComponent());
             if (entity.components.ItemProcessor) {
                 entity.removeComponent(ItemProcessorComponent);
@@ -172,5 +175,17 @@ export class ShapeBuyerComponent extends Component {
     shape;
     static getId() {
         return "ShapeBuyer";
+    }
+    static getSchema() {
+        // Here you define which properties should be saved to the savegame
+        // and get automatically restored
+        return {
+            shape: types.string,
+        };
+    }
+
+    constructor() {
+        super();
+        this.shape = "CuCuCuCu";
     }
 }

@@ -2,20 +2,21 @@ import { globalConfig } from "core/config";
 import { HUDPinnedShapes } from "game/hud/parts/pinned_shapes";
 import { ShapeDefinition } from "game/shape_definition";
 import { Mod } from "mods/mod";
+import { getMod } from "shapez-env";
 
 export const emcShape = "------:RyCyCyCy:CwCwCwCw";
 
-export function hasEnoughEmc(amount) {
-    return globalConfig["root"].hubGoals.storedShapes[emcShape] >= amount;
+export function hasEnoughEmc(root, amount) {
+    return root.hubGoals.storedShapes[emcShape] >= amount;
 }
 
-export function hasEnoughEmcForShape(shape: ShapeDefinition | String) {
-    //@ts-expect-error 1
+export function hasEnoughEmcForShape(root, shape: ShapeDefinition | String) {
+    //@ts-expect-error
     if (typeof shape != "string") shape = shape.cachedHash;
-    return hasEnoughEmc(emcForShape(shape as String));
+    return hasEnoughEmc(root, emcForShape(shape as String, false));
 }
-
-export function emcForShape(shape: String) {
+const isAStupidIdiotUsingCompactMachinesModLikeAnIdiot = getMod("compact");
+export function emcForShape(shape: String, input) {
     const weights = globalConfig["emcWeights"];
     const sW = weights.shapes;
     const cW = weights.colors;
@@ -30,28 +31,29 @@ export function emcForShape(shape: String) {
             const shape = sW[quad[0]] ? sW[quad[0]] : 1.5;
             const color = cW[quad[1]] ? cW[quad[1]] : 1.25;
 
-            emc += shape * color;
+            if (input) emc += shape * color;
+            else emc += Math.pow(shape * color, lW[layers.length - 1]);
         }
     }
-
-    return Math.round(emc * lW[layers.length - 1]);
+    if (isAStupidIdiotUsingCompactMachinesModLikeAnIdiot && input) return 1;
+    return Math.round(emc + 1);
 }
 
-export function subtractEmc(amount) {
-    globalConfig["root"].hubGoals.storedShapes[emcShape] -= amount;
-    if (globalConfig["root"].hubGoals.storedShapes[emcShape] < 0) globalConfig["root"].hubGoals.storedShapes[emcShape] = 0;
+export function subtractEmc(root, amount) {
+    root.hubGoals.storedShapes[emcShape] -= amount;
+    if (root.hubGoals.storedShapes[emcShape] < 0) root.hubGoals.storedShapes[emcShape] = 0;
 }
 
-export function addEmc(amount) {
-    globalConfig["root"].hubGoals.storedShapes[emcShape] += amount;
+export function addEmc(root, amount) {
+    root.hubGoals.storedShapes[emcShape] += amount;
 }
 
-export function subtractASEmc(shape) {
-    subtractEmc(emcForShape(shape));
+export function subtractASEmc(root, shape) {
+    subtractEmc(root, emcForShape(shape, false));
 }
 
-export function addAsEmc(shape) {
-    addEmc(emcForShape(shape));
+export function addAsEmc(root, shape) {
+    addEmc(root, emcForShape(shape, true));
 }
 
 export function initEmcViewer(mod: Mod) {
