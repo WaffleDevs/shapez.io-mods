@@ -16,14 +16,6 @@ export default class RandomEvents extends Mod {
                     },
                     "WackyEvents"
                 );
-                window.REL.registerStateEnterEvent(
-                    "CloseGaame",
-                    "MainMenuState",
-                    () => {
-                        this.app.platformWrapper.exitApp();
-                    },
-                    "WackyEvents"
-                );
 
                 const wackyIRE = {
                     Roar: () => {
