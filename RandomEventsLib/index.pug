@@ -2,8 +2,35 @@ block content
     h1.
         RandomEventsLib
     h2.
-        Latest: 1.0.0
+        Latest: 1.0.0    
+    h3.
+        Description 
     p.
-        WaffleDevs
+        Allows mods to add Random Events that can happen upon entering a state (Ex. Going to the main menu, Opening the settings.) or can happen randomly during gameplay.<br>
+        **Note: This mod doesn't do anything on it's own. You will need to download a mod using this library for it to do anything.**
+    h3.
+        For Modders<br>
     p.
-        A library allowing developers to add custom events to the game!
+        There is an API that allows easily adding new State Enter Events (SEE) and Ingame Random Events (IRE).<br><br>
+
+        To access it, get <code>window.REL</code> during the Preloader state.
+    blockquote.
+        <code>window.REL.registerStateEnterEvent(eventName: string, state: string, func: Function)</code> <br><br>
+        
+         Registers an SEE with name <code>eventName</code> that has a <code>X</code> chance to run <code>func</code> when <code>signals.stateEntered</code> runs for state <code>state</code>.<code>X</code> is determined by the mod's config entry, <code>stateEnterEventChance</code>. 
+    blockquote.
+        <code>window.REL.registerIngameRandomEvent(eventName: string, func: Function)</code> <br><br>
+        
+        Registers an IRE with name <code>eventName</code> that has a chance to run <code>func</code> every <code>X</code> seconds. <code>X</code> is determined by the mod's config entry, <code>randomEventInterval</code>.
+    p.
+        There is also a modified version <a href="https://github.com/tobspr-games/shapez.io/blob/master/src/js/core/rng.js"><code>src/js/core/rng.js</code></a> with the following methods:<br><br>
+    blockquote.
+        <code>window.REL.RNG.chance(chance: number)</code> <br><br>
+        
+        Returns true every <code>chance</code>% of times.
+    blockquote.
+        <code>window.REL.RNG.choiceDict(obj: Object)</code> <br><br>
+        
+        The Object version of <code>RandomNumberGenerator.choice(array: Array)</code>. Returns a random key from the given Object.
+    p.
+        The lib also allows for editing the <code>stateEnterEventChance</code> and <code>randomEventInterval</code> in case you want to mello out the experience or turn it to full hell.
