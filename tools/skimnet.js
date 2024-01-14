@@ -3,9 +3,11 @@
  */
 
 
-import { appendFile, appendFileSync, copyFileSync, existsSync, mkdir, mkdirSync, readFileSync, renameSync, writeFileSync } from 'fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+//import http from "http";
 import * as path from "path";
 import { expandBasicMetadata } from './metadata.js';
+
 /**
     * @typedef {{
     * name:string
@@ -47,12 +49,8 @@ export function writeNewRelease(files, id, metadata) {
     else {
         writeFileSync(path.join('Releases', id, 'files/index.pug'), `extends ../mod.pug
 block content
-    h1.
-        ${id}
     h2.
         Latest: ${metadata.version}
-    p.
-        ${metadata.author}
     p.
         ${metadata.description}`)
     }
@@ -78,7 +76,7 @@ export function versionMetaData(files, id, metadata) {
         }
     })
 
-    writeFileSync(path.join('Releases', id, 'files/versions.json'), JSON.stringify(changelogResult))
+    writeFileSync(path.join('Releases', id, 'files/versions.json'), JSON.stringify(changelogResult, null, 4))
 
 
     const modInfoResult = {
@@ -110,6 +108,7 @@ export default function skimnet() {
             const modInfo = JSON.parse(readFileSync(path.join(id, "mod.json"), { encoding: 'utf8', flag: 'r' }))
             const expanded = expandBasicMetadata(id, modInfo)
             writeNewRelease(files, id, expanded);
+
         }
     }
 }

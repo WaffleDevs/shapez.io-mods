@@ -1,5 +1,7 @@
 import { GameSystem } from "game/game_system";
 import { Mod } from "mods/mod";
+import { ModsState } from "states/mods";
+import { ModsStateExt } from "./ModsState";
 
 class UidSystem extends GameSystem {
     constructor(root) {
@@ -25,13 +27,17 @@ class UidSystem extends GameSystem {
                 context.fill();
 
                 context.textAlign = "center";
-                context.fillStyle = "red";
+                context.fillStyle = "black";
                 context.font = "7px GameFont";
                 context.fillText(entity.uid, center.x, center.y + 10);
             }
         }
     }
 }
+export let paths = [];
+export let pathToId = {};
+export let idToPath = {};
+export let disabledMods = {};
 
 export default class extends Mod {
     override init() {
@@ -40,6 +46,17 @@ export default class extends Mod {
             systemClass: UidSystem,
             before: "belt",
             drawHooks: ["staticAfter"],
+        });
+
+        this.modInterface.extendClass(ModsState, ModsStateExt);
+        const ipcPromise = ipcRenderer.invoke("get-mod-info");
+
+        ipcPromise.then((res) => {
+            paths = res.paths;
+            pathToId = res.pathToId;
+            idToPath = res.idToPath;
+            disabledMods = res.disabledMods;
+            console.log(paths, pathToId, idToPath, disabledMods);
         });
     }
 }

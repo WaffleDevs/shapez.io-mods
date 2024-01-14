@@ -34,6 +34,7 @@ export default class extends Mod {
     randomEventInterval = this.settings.randomEventInterval;
 
     override init() {
+        //@ts-expect-error
         this.metadata.extra.readme = index;
 
         this.modInterface.registerCss(settingsCss);

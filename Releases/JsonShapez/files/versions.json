@@ -2,7 +2,7 @@
     {
         "version": "1.0.0",
         "changelog": [
-            "Release"
+            "Made shape codes and json/array's interchangable"
         ]
     }
 ]

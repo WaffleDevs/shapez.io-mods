@@ -1,0 +1,7 @@
+{
+    "name": "Json Shapez",
+    "description": "Allows the usage of JSON along with Shape Codes",
+    "version": "1.0.0",
+    "affectsSavegame": true,
+    "settings": {}
+}
